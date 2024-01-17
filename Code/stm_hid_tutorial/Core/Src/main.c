@@ -45,6 +45,8 @@
 extern USBD_HandleTypeDef hUsbDeviceFS;
 uint8_t buffer[] = {0, 0 ,0};
 uint8_t zero[] = {0, 0, 0};
+uint8_t num = 0;
+uint8_t temp_num = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -102,7 +104,8 @@ int main(void)
   MX_GPIO_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-  buffer[2] = 0x1;
+//  buffer[2] = 0x1;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -112,13 +115,20 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  temp_num = num;
+	  buffer[(uint8_t) num / 8] |= 0x1 << (num % 8);
 	  if (HAL_GPIO_ReadPin(GPIOA, Button_Pin) == GPIO_PIN_SET) {
 		  USBD_HID_SendReport(&hUsbDeviceFS, buffer, sizeof(buffer));
 		  HAL_Delay(100);
+		  num++;
 	  }
 	  else {
 		  USBD_HID_SendReport(&hUsbDeviceFS, zero, sizeof(zero));
 		  HAL_Delay(100);
+	  }
+	  buffer[(uint8_t) temp_num / 8] &= ~(0x1 << (temp_num % 8));
+	  if (num > 16) {
+		  num = 0;
 	  }
   }
   /* USER CODE END 3 */

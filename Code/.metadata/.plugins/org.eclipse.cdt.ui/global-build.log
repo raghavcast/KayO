@@ -1,21 +1,21 @@
-13:16:33 **** Incremental Build of configuration Debug for project stm_hid_tutorial ****
+13:08:57 **** Build of configuration Debug for project stm_hid_tutorial ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "stm_hid_tutorial.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\stm_hid_tutorial\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm_hid_tutorial.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+arm-none-eabi-gcc -o "stm_hid_tutorial.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\stm_hid_tutorial\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm_hid_tutorial.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: stm_hid_tutorial.elf
  
 arm-none-eabi-size   stm_hid_tutorial.elf 
 arm-none-eabi-objdump -h -S  stm_hid_tutorial.elf  > "stm_hid_tutorial.list"
    text	   data	    bss	    dec	    hex	filename
-  30120	    320	   3576	  34016	   84e0	stm_hid_tutorial.elf
+  30252	    320	   3584	  34156	   856c	stm_hid_tutorial.elf
 Finished building: default.size.stdout
  
 Finished building: stm_hid_tutorial.list
  
-13:16:38 **** Incremental Build of configuration Debug for project stm_hid_tutorial ****
+13:09:15 **** Incremental Build of configuration Debug for project stm_hid_tutorial ****
 make -j16 all 
 arm-none-eabi-size   stm_hid_tutorial.elf 
    text	   data	    bss	    dec	    hex	filename
-  30120	    320	   3576	  34016	   84e0	stm_hid_tutorial.elf
+  30252	    320	   3584	  34156	   856c	stm_hid_tutorial.elf
 Finished building: default.size.stdout
  

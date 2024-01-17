@@ -1,10 +1,10 @@
-13:16:38 **** Incremental Build of configuration Debug for project stm_hid_tutorial ****
+13:09:15 **** Incremental Build of configuration Debug for project stm_hid_tutorial ****
 make -j16 all 
 arm-none-eabi-size   stm_hid_tutorial.elf 
    text	   data	    bss	    dec	    hex	filename
-  30120	    320	   3576	  34016	   84e0	stm_hid_tutorial.elf
+  30252	    320	   3584	  34156	   856c	stm_hid_tutorial.elf
 Finished building: default.size.stdout
  
 
-13:16:38 Build Finished. 0 errors, 0 warnings. (took 383ms)
+13:09:15 Build Finished. 0 errors, 0 warnings. (took 390ms)
 

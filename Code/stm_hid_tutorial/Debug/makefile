@@ -64,8 +64,8 @@ all: main-build
 main-build: stm_hid_tutorial.elf secondary-outputs
 
 # Tool invocations
-stm_hid_tutorial.elf stm_hid_tutorial.map: $(OBJS) $(USER_OBJS) C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring\ 2024\ECE\ 47700\stm_hid_tutorial\STM32F042K6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "stm_hid_tutorial.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\stm_hid_tutorial\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm_hid_tutorial.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+stm_hid_tutorial.elf stm_hid_tutorial.map: $(OBJS) $(USER_OBJS) C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring\ 2024\ECE\ 47700\Code\stm_hid_tutorial\STM32F042K6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "stm_hid_tutorial.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\stm_hid_tutorial\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm_hid_tutorial.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
