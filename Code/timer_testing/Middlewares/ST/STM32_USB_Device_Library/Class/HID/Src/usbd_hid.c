@@ -317,7 +317,6 @@ __ALIGN_BEGIN static uint8_t USBD_HID_DeviceQualifierDesc[USB_LEN_DEV_QUALIFIER_
 
 __ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_MOUSE_REPORT_DESC_SIZE]  __ALIGN_END =
 {
-
 		0x05, 0x01, // USAGE_PAGE (Generic Desktop)
 		0x09, 0x05, // USAGE (Game Pad)
 		0xA1, 0x01, // COLLECTION (Application)
@@ -335,7 +334,6 @@ __ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_MOUSE_REPORT_DESC_SIZE]  _
 			0x81, 0x07, // INPUT (Cnst,Var,Rel)
 		  0xC0, // END_COLLECTION
 		0xC0 // END_COLLECTION
-
 };
 
 /**
