@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;STM32F411_Blackpill_Serial_USB_CDC_Example/stm32serial.ioc&apos; to &apos;STM32F411_Blackpill_Serial_USB_CDC_Example.ioc&apos;" description="Rename resource &apos;stm32serial.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="stm32serial.ioc" name="STM32F411_Blackpill_Serial_USB_CDC_Example.ioc" stamp="1705533489216" updateReferences="true"/>
+</session>

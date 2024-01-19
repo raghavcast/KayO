@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="USBD_CUSTOM"/>
+		<item key="selection" value="HAL_TIM_Period"/>
 		<list key="findhistory">
+			<item value="HAL_TIM_Period"/>
 			<item value="USBD_CUSTOM"/>
 		</list>
 		<list key="replacehistory">
