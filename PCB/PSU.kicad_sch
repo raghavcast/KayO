@@ -7946,7 +7946,7 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "~{PGOOD}" (shape input) (at 335.28 44.45 0) (fields_autoplaced)
+  (global_label "~{PGOOD}" (shape output) (at 335.28 44.45 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 05becb80-a75c-42a9-a6ca-821d9107ed72)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 344.7362 44.45 0)
@@ -7963,7 +7963,7 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "BAT.OFF" (shape input) (at 36.83 100.33 180) (fields_autoplaced)
+  (global_label "BAT.OFF" (shape output) (at 36.83 100.33 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 106611d8-bd6e-45da-8b38-9a90ce00576a)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 26.4061 100.33 0)
@@ -7977,24 +7977,24 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "V_RAW" (shape input) (at 50.8 29.21 0) (fields_autoplaced)
+  (global_label "V_RAW" (shape bidirectional) (at 50.8 29.21 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 162a8af8-1967-4bd4-aa66-a4a31d0ab6cf)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 59.6514 29.21 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 60.7627 29.21 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Sayfalar Arası Referanslar" "${INTERSHEET_REFS}" (at 50.8 31.4008 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "TS" (shape input) (at 233.68 52.07 0) (fields_autoplaced)
+  (global_label "TS" (shape output) (at 233.68 52.07 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 18fdbfbb-7dc0-4a58-a6b3-e231674fc298)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 238.8423 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "V_USB" (shape input) (at 50.8 118.11 0) (fields_autoplaced)
+  (global_label "V_USB" (shape output) (at 50.8 118.11 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 1ba7566c-e956-4b48-8898-97b9b17a3858)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 59.6514 118.11 0)
@@ -8014,7 +8014,7 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "EN2" (shape input) (at 318.77 125.73 0) (fields_autoplaced)
+  (global_label "EN2" (shape output) (at 318.77 125.73 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 265b3f8f-e109-47e6-b42b-3aa81fc09a0c)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 325.4442 125.73 0)
@@ -8049,31 +8049,31 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "BAT.~{CE}" (shape input) (at 208.28 86.36 180) (fields_autoplaced)
+  (global_label "BAT.~{CE}" (shape output) (at 208.28 86.36 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 3431204c-5e52-4901-b671-92212567507e)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 198.9448 86.36 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "TMR" (shape input) (at 232.41 44.45 0) (fields_autoplaced)
+  (global_label "TMR" (shape output) (at 232.41 44.45 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 37849672-b96f-4833-987b-6891589775df)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 239.0842 44.45 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "I2C.SDA" (shape input) (at 168.91 53.34 0) (fields_autoplaced)
+  (global_label "I2C.SDA" (shape bidirectional) (at 168.91 53.34 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 396441c9-5bb0-496b-8296-53a588ab020b)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 179.1524 53.34 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 180.2637 53.34 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "I2C.SCL" (shape input) (at 168.91 50.8 0) (fields_autoplaced)
+  (global_label "I2C.SCL" (shape bidirectional) (at 168.91 50.8 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 3ef8ec08-6b11-4d26-a295-0ff36ea3e469)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 179.0919 50.8 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 180.2032 50.8 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
@@ -8087,7 +8087,7 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "ILIM" (shape input) (at 232.41 54.61 0) (fields_autoplaced)
+  (global_label "ILIM" (shape output) (at 232.41 54.61 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 48a45d8a-9f9f-46ae-afe9-7c955ba6ea6b)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 239.0843 54.61 0)
@@ -8101,21 +8101,21 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "BAT.GPOUT" (shape input) (at 168.91 55.88 0) (fields_autoplaced)
+  (global_label "BAT.GPOUT" (shape output) (at 168.91 55.88 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 509000b0-59f5-4dc5-9c5e-a8f15c0b4bd3)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 181.9948 55.88 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "EN1" (shape input) (at 271.78 127 0) (fields_autoplaced)
+  (global_label "EN1" (shape output) (at 271.78 127 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 518678c8-58a6-41ba-b30d-89c8eb0b849e)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 278.4542 127 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "~{CE}" (shape input) (at 222.25 121.92 0) (fields_autoplaced)
+  (global_label "~{CE}" (shape output) (at 222.25 121.92 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 5bf791f5-6a78-4c0f-b398-5f23b7f197eb)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 227.6542 121.92 0)
@@ -8150,10 +8150,10 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "BAT{OFF, ~{CE}, TMR, EN1, EN2, GPOUT}" (shape input) (at 364.49 232.41 180) (fields_autoplaced)
+  (global_label "BAT{OFF, ~{CE}, TMR, EN1, EN2, GPOUT}" (shape bidirectional) (at 364.49 232.41 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 7288bcfc-6be3-4147-96bd-cf85617765ed)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 325.4609 232.41 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 324.3496 232.41 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -8192,7 +8192,7 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "USB.Detect" (shape input) (at 133.35 187.96 0) (fields_autoplaced)
+  (global_label "USB.Detect" (shape output) (at 133.35 187.96 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 865a2bee-1572-494f-a54c-5e1dbde929a3)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 146.7372 187.96 0)
@@ -8206,10 +8206,10 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "USB{D+, D-, Detect}" (shape input) (at 347.98 228.6 180) (fields_autoplaced)
+  (global_label "USB{D+, D-, Detect}" (shape bidirectional) (at 347.98 228.6 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 8b578190-ca38-42e7-807b-3b355b3db0d6)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 324.6746 228.6 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 323.5633 228.6 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -8276,10 +8276,10 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "USB.D+" (shape input) (at 58.42 49.53 0) (fields_autoplaced)
+  (global_label "USB.D+" (shape bidirectional) (at 58.42 49.53 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid bfd38d33-643c-4cbc-be6c-a2dd95c81a46)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 68.6624 49.53 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 69.7737 49.53 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Sayfalar Arası Referanslar" "${INTERSHEET_REFS}" (at 58.42 51.7208 0)
@@ -8293,14 +8293,14 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "BAT.EN1" (shape input) (at 275.59 86.36 0) (fields_autoplaced)
+  (global_label "BAT.EN1" (shape output) (at 275.59 86.36 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c74b59ee-e40b-4dd5-999b-0f956de01523)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 286.1952 86.36 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "~{CHG}" (shape input) (at 335.28 30.48 0) (fields_autoplaced)
+  (global_label "~{CHG}" (shape output) (at 335.28 30.48 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid c7f9ded8-009f-4327-accb-12d4374afade)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 342.1357 30.48 0)
@@ -8314,10 +8314,10 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "USB.D-" (shape input) (at 58.42 44.45 0) (fields_autoplaced)
+  (global_label "USB.D-" (shape bidirectional) (at 58.42 44.45 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid d9317b2f-dfd3-4bf3-ad19-068201e9a8fe)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 68.6624 44.45 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 69.7737 44.45 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Sayfalar Arası Referanslar" "${INTERSHEET_REFS}" (at 58.42 46.6408 0)
@@ -8331,10 +8331,10 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "I2C{SCL, SDA}" (shape input) (at 347.98 240.03 180) (fields_autoplaced)
+  (global_label "I2C{SCL, SDA}" (shape bidirectional) (at 347.98 240.03 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid dc4b90f4-223c-4200-a811-75ed2970e702)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 331.569 240.03 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 330.4577 240.03 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -8366,14 +8366,14 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "BAT.EN2" (shape input) (at 322.58 85.09 0) (fields_autoplaced)
+  (global_label "BAT.EN2" (shape output) (at 322.58 85.09 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid ee10fe73-20b2-4041-b316-501117c44414)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 333.1852 85.09 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "ISET" (shape input) (at 232.41 57.15 0) (fields_autoplaced)
+  (global_label "ISET" (shape output) (at 232.41 57.15 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid eeac950c-338e-4313-b0ff-bd944348154b)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 239.3261 57.15 0)
@@ -8394,7 +8394,7 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "SYS.PWR" (shape input) (at 201.93 36.83 180) (fields_autoplaced)
+  (global_label "SYS.PWR" (shape output) (at 201.93 36.83 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid fe7dfed8-f866-41d8-967a-bf0a000dc331)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 190.841 36.83 0)
@@ -8402,15 +8402,15 @@
     )
   )
 
-  (hierarchical_label "USB{D+, D-, Detect}" (shape input) (at 356.87 228.6 0) (fields_autoplaced)
+  (hierarchical_label "USB{D+, D-, Detect}" (shape bidirectional) (at 356.87 228.6 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 46d6e87b-3730-42b4-a3b3-2e7790c2bec6)
   )
-  (hierarchical_label "BAT{OFF, ~{CE}, TMR, EN1, EN2, GPOUT}" (shape input) (at 363.22 236.22 180) (fields_autoplaced)
+  (hierarchical_label "BAT{OFF, ~{CE}, TMR, EN1, EN2, GPOUT}" (shape bidirectional) (at 363.22 236.22 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 76cdcb2f-75c3-484c-a7a6-93b51c768016)
   )
-  (hierarchical_label "I2C{SCL, SDA}" (shape input) (at 356.87 240.03 0) (fields_autoplaced)
+  (hierarchical_label "I2C{SCL, SDA}" (shape bidirectional) (at 356.87 240.03 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid b007cf52-41f3-4e09-9a7e-08b0c69a7e81)
   )
@@ -8430,8 +8430,8 @@
     (property "Datasheet" "~" (at 111.76 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid f4b05165-311f-4994-97a7-bdaf599e1c17))
     (pin "1" (uuid 87a53e45-a400-4f9e-8655-fecd52085708))
+    (pin "2" (uuid f4b05165-311f-4994-97a7-bdaf599e1c17))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -8456,8 +8456,8 @@
     (property "Datasheet" "~" (at 157.48 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 895f3e51-643d-4dcc-b6d8-8fb7187ebc62))
     (pin "1" (uuid cc4de6ae-0357-468e-9ae3-c55185400667))
+    (pin "2" (uuid 895f3e51-643d-4dcc-b6d8-8fb7187ebc62))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -8482,9 +8482,9 @@
     (property "Datasheet" "https://www.onsemi.com/pub/Collateral/BC818-D.pdf" (at 215.9 111.76 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
-    (pin "3" (uuid 7422c8ce-aa3d-4b48-b535-f44ece6e9f9c))
-    (pin "2" (uuid 37a0463b-341a-4a2c-99b5-bf6c88f1516b))
     (pin "1" (uuid 9d2d9889-0346-4e85-9cc0-2c248eee4117))
+    (pin "2" (uuid 37a0463b-341a-4a2c-99b5-bf6c88f1516b))
+    (pin "3" (uuid 7422c8ce-aa3d-4b48-b535-f44ece6e9f9c))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -8534,8 +8534,8 @@
     (property "Datasheet" "~" (at 77.47 260.35 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 34412eb5-1407-439f-97a7-1236d04ded46))
     (pin "1" (uuid 1e2f51d8-b0f3-4eaa-85b5-e29938e329f2))
+    (pin "2" (uuid 34412eb5-1407-439f-97a7-1236d04ded46))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -8560,8 +8560,8 @@
     (property "Datasheet" "~" (at 254 33.02 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 402043bf-b803-4983-97ae-76b78f0e8ea3))
     (pin "1" (uuid 779725ef-beea-4d84-9a6c-3a9df3efa4fd))
+    (pin "2" (uuid 402043bf-b803-4983-97ae-76b78f0e8ea3))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -8636,8 +8636,8 @@
     (property "Datasheet" "~" (at 124.46 242.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid cfa71b52-ed29-4ae2-b06c-49f7174decb5))
     (pin "1" (uuid 7e46546c-37c4-478d-8f7d-3de36561a284))
+    (pin "2" (uuid cfa71b52-ed29-4ae2-b06c-49f7174decb5))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -8815,10 +8815,10 @@
     (property "Datasheet" "~" (at 166.37 43.18 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "4" (uuid 96e71b01-ba1f-46c7-9043-08986b641625))
-    (pin "3" (uuid 2bd01461-36be-489d-b750-8ae8d69ccdc1))
     (pin "1" (uuid added5e1-a044-4054-ac52-93a61bbadf41))
     (pin "2" (uuid cbdf4cbd-dbb0-4a1c-b6f3-54c5a6f737af))
+    (pin "3" (uuid 2bd01461-36be-489d-b750-8ae8d69ccdc1))
+    (pin "4" (uuid 96e71b01-ba1f-46c7-9043-08986b641625))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -8879,21 +8879,21 @@
     (property "DESCRIPTION" "High Efficiency Single Inductor Buck-Boost Converter with 4A Switch 14-VSON -40 to 85" (at 101.6 252.73 0)
       (effects (font (size 1.27 1.27)) (justify bottom) hide)
     )
-    (pin "7" (uuid 8afd9a79-cfc1-466c-8dce-4a6417ff2ba0))
     (pin "1" (uuid 739e0e69-9244-47da-b256-beed924f1e68))
-    (pin "2" (uuid 550aeed9-c007-46b0-b8ba-ab2196cef562))
-    (pin "12" (uuid 21b58be1-e5d0-45c9-85e1-f0a2a17d7ce9))
-    (pin "6" (uuid d2abfa1e-dcaf-4fd5-ba7e-ecc442e50aeb))
-    (pin "11" (uuid 4130d306-3923-4adc-9dae-0ab74dc7f8e9))
-    (pin "14" (uuid 0ce5b59c-c644-4c44-bf6b-edd625f58a28))
     (pin "10" (uuid 462ac451-e13c-4caf-9c5f-b2ef9d333ae3))
+    (pin "11" (uuid 4130d306-3923-4adc-9dae-0ab74dc7f8e9))
+    (pin "12" (uuid 21b58be1-e5d0-45c9-85e1-f0a2a17d7ce9))
+    (pin "13" (uuid 9ce96588-ba4b-4240-b423-f167723c002a))
+    (pin "14" (uuid 0ce5b59c-c644-4c44-bf6b-edd625f58a28))
+    (pin "15" (uuid 1e4086a3-abf0-4d72-8130-f526c36b5efe))
+    (pin "2" (uuid 550aeed9-c007-46b0-b8ba-ab2196cef562))
     (pin "3" (uuid c91789d0-854d-46d6-b71c-d5eeb88e17ce))
     (pin "4" (uuid d65da15d-5900-49a3-8b62-920df1a2238f))
     (pin "5" (uuid ee237c17-7f4b-43dc-9775-e5ca2bc708ae))
-    (pin "13" (uuid 9ce96588-ba4b-4240-b423-f167723c002a))
-    (pin "15" (uuid 1e4086a3-abf0-4d72-8130-f526c36b5efe))
-    (pin "9" (uuid 0e25f11f-ae83-4894-a324-9a30104ce118))
+    (pin "6" (uuid d2abfa1e-dcaf-4fd5-ba7e-ecc442e50aeb))
+    (pin "7" (uuid 8afd9a79-cfc1-466c-8dce-4a6417ff2ba0))
     (pin "8" (uuid 1c0ddf76-a5ff-4f43-adff-d987fade94b9))
+    (pin "9" (uuid 0e25f11f-ae83-4894-a324-9a30104ce118))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -8919,21 +8919,21 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 8e200a62-63cc-4c5c-81f5-f141ae177e71))
-    (pin "4" (uuid 1bc17790-3d87-4ed2-9d0f-1cf47ecefa21))
-    (pin "12" (uuid 538b5211-c2f6-4af0-9bf3-6590987d2434))
-    (pin "6" (uuid fd0d6f66-006f-451f-94ac-aa66e112f58c))
     (pin "10" (uuid 709f3d4e-6a26-42ff-b7f0-aff95cd7ee5d))
-    (pin "8" (uuid 2b7b6eee-afe9-4600-b5c2-1011a341bb7c))
+    (pin "11" (uuid 84726ea4-bd0c-4f51-8762-120b67c35301))
+    (pin "12" (uuid 538b5211-c2f6-4af0-9bf3-6590987d2434))
     (pin "13" (uuid 05cf42b4-50ff-4cf5-96c4-8e4cda7ea52f))
     (pin "14" (uuid b86e1e4b-6097-47dc-83d5-8b5648e41989))
-    (pin "11" (uuid 84726ea4-bd0c-4f51-8762-120b67c35301))
-    (pin "16" (uuid 5f5efc06-a0fc-48fe-b781-9e3c497ebf86))
-    (pin "7" (uuid a16c1731-999c-4da6-ae05-9b4685451f76))
     (pin "15" (uuid 970238d7-7fa9-4e9b-abf9-e3d88288deaf))
-    (pin "3" (uuid 17c18ba0-a013-4ace-960e-df8606885b35))
+    (pin "16" (uuid 5f5efc06-a0fc-48fe-b781-9e3c497ebf86))
     (pin "17" (uuid 8f18f9e1-5182-4cc9-9cfa-79582a147f5b))
     (pin "2" (uuid 3748884a-3abe-4e88-bee0-d6159f1d5b4f))
+    (pin "3" (uuid 17c18ba0-a013-4ace-960e-df8606885b35))
+    (pin "4" (uuid 1bc17790-3d87-4ed2-9d0f-1cf47ecefa21))
     (pin "5" (uuid a6cca2b5-d594-4498-9cc5-ff0f0af0b0d3))
+    (pin "6" (uuid fd0d6f66-006f-451f-94ac-aa66e112f58c))
+    (pin "7" (uuid a16c1731-999c-4da6-ae05-9b4685451f76))
+    (pin "8" (uuid 2b7b6eee-afe9-4600-b5c2-1011a341bb7c))
     (pin "9" (uuid 72ec4628-d127-4602-b008-5a4dc1d58052))
     (instances
       (project "ECE477_PCBDesign"
@@ -8959,8 +8959,8 @@
     (property "Datasheet" "~" (at 62.23 237.49 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid d3738527-898d-406c-af1d-442939261e9c))
     (pin "1" (uuid 269eda22-a173-4320-832f-67a197a2ef3b))
+    (pin "2" (uuid d3738527-898d-406c-af1d-442939261e9c))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -8985,16 +8985,16 @@
     (property "Datasheet" "http://www.ti.com/lit/ds/symlink/tps63031.pdf" (at 124.46 104.14 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "10" (uuid b4c10bc4-a398-4da8-9c08-617894ca1d18))
-    (pin "5" (uuid 00586051-aa0b-4e1c-9d63-8b9441051a8a))
-    (pin "11" (uuid 11a5a9b3-e1d2-4b53-baf9-1baa642c9e25))
-    (pin "3" (uuid d8a4791b-9fc0-45ff-89ba-e88877096c3e))
-    (pin "7" (uuid e430e9cd-4636-44db-8958-f698abc55371))
     (pin "1" (uuid aacdec06-73e5-4aa3-bac5-549ca016c8e4))
-    (pin "4" (uuid 441c4027-4d44-49ca-acbc-f9621466118c))
-    (pin "8" (uuid 29d8f229-5f0f-4d92-ad4e-593e1acbc178))
-    (pin "6" (uuid 6b26fd2b-32b2-4c7d-9145-4b2c2e475759))
+    (pin "10" (uuid b4c10bc4-a398-4da8-9c08-617894ca1d18))
+    (pin "11" (uuid 11a5a9b3-e1d2-4b53-baf9-1baa642c9e25))
     (pin "2" (uuid 8c761b26-db7e-422f-90e3-cc9ccb6eb25b))
+    (pin "3" (uuid d8a4791b-9fc0-45ff-89ba-e88877096c3e))
+    (pin "4" (uuid 441c4027-4d44-49ca-acbc-f9621466118c))
+    (pin "5" (uuid 00586051-aa0b-4e1c-9d63-8b9441051a8a))
+    (pin "6" (uuid 6b26fd2b-32b2-4c7d-9145-4b2c2e475759))
+    (pin "7" (uuid e430e9cd-4636-44db-8958-f698abc55371))
+    (pin "8" (uuid 29d8f229-5f0f-4d92-ad4e-593e1acbc178))
     (pin "9" (uuid 3d41bfc9-3c95-4fe9-9052-94da0877771c))
     (instances
       (project "ECE477_PCBDesign"
@@ -9045,8 +9045,8 @@
     (property "Datasheet" "~" (at 318.77 58.42 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 20572917-7d26-48dd-92cc-e9e311732d9f))
     (pin "1" (uuid 94193b15-388a-4cb6-97bc-9d1d176f2de0))
+    (pin "2" (uuid 20572917-7d26-48dd-92cc-e9e311732d9f))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9122,8 +9122,8 @@
     (property "Datasheet" "~" (at 218.44 127 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 63491ab5-d352-4130-a32a-bd3c4b804d96))
     (pin "1" (uuid e7531363-b22e-4989-9e65-1e7c0bd8b1c9))
+    (pin "2" (uuid 63491ab5-d352-4130-a32a-bd3c4b804d96))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9148,8 +9148,8 @@
     (property "Datasheet" "~" (at 147.32 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 500223f6-c5b9-4ca3-a37d-ea8d55548da2))
     (pin "1" (uuid 730c5fce-04e9-4d05-ae64-5521a6677f51))
+    (pin "2" (uuid 500223f6-c5b9-4ca3-a37d-ea8d55548da2))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9282,9 +9282,9 @@
     (property "Datasheet" "https://www.onsemi.com/pub/Collateral/BC818-D.pdf" (at 265.43 116.84 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
-    (pin "3" (uuid 3c946e85-41f0-48a8-9c04-e436712ccd60))
-    (pin "2" (uuid b87c708a-8212-4e2f-99a8-c57d686d3602))
     (pin "1" (uuid a108eec4-a2c3-4c91-9aca-54025a61d68b))
+    (pin "2" (uuid b87c708a-8212-4e2f-99a8-c57d686d3602))
+    (pin "3" (uuid 3c946e85-41f0-48a8-9c04-e436712ccd60))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9309,8 +9309,8 @@
     (property "Datasheet" "~" (at 209.55 119.38 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 765aff24-19f1-498f-8c31-31bf300759a3))
     (pin "1" (uuid fb13898e-0659-4adb-a8b6-685b8e8c93c4))
+    (pin "2" (uuid 765aff24-19f1-498f-8c31-31bf300759a3))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9385,11 +9385,11 @@
     (property "Datasheet" "~" (at 43.18 100.33 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "3" (uuid 097ca86e-ba8b-4fb3-acd1-3bb385d46d18))
     (pin "1" (uuid cc8af4a9-9919-4495-b05f-db266f61fff6))
-    (pin "5" (uuid 72e4f17e-1815-4202-a5de-15e38072faf0))
-    (pin "4" (uuid edf51433-6494-4255-ae8b-95d04a95189f))
     (pin "2" (uuid bc699272-6f3d-48bb-948d-0f504f656349))
+    (pin "3" (uuid 097ca86e-ba8b-4fb3-acd1-3bb385d46d18))
+    (pin "4" (uuid edf51433-6494-4255-ae8b-95d04a95189f))
+    (pin "5" (uuid 72e4f17e-1815-4202-a5de-15e38072faf0))
     (pin "6" (uuid 50a478e8-4e87-42c6-8562-b9662e83fd11))
     (instances
       (project "ECE477_PCBDesign"
@@ -9487,8 +9487,8 @@
     (property "Datasheet" "~" (at 270.51 91.44 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid f25d4037-dfa6-4a9e-8f5d-cb7f1e3d5012))
     (pin "1" (uuid b3c93502-3a17-42c0-9335-7425b8ec976c))
+    (pin "2" (uuid f25d4037-dfa6-4a9e-8f5d-cb7f1e3d5012))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9570,8 +9570,8 @@
     (property "Datasheet" "~" (at 160.02 43.18 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid c15778de-690a-4699-8f0b-83fc4ce648d5))
     (pin "1" (uuid d628c7dd-fa67-410c-a059-1c1be0abefe0))
+    (pin "2" (uuid c15778de-690a-4699-8f0b-83fc4ce648d5))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9596,8 +9596,8 @@
     (property "Datasheet" "~" (at 146.05 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid c9b69c0f-33e0-438e-afd7-797cf881af28))
     (pin "1" (uuid cd053bff-210a-4bb6-ae0a-2323c968aa5c))
+    (pin "2" (uuid c9b69c0f-33e0-438e-afd7-797cf881af28))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9647,8 +9647,8 @@
     (property "Datasheet" "~" (at 154.94 242.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid c2180b10-1b18-4747-bef4-b049eb2d59c6))
     (pin "1" (uuid a4800f83-8dc7-4e9a-9889-40dd30aa0766))
+    (pin "2" (uuid c2180b10-1b18-4747-bef4-b049eb2d59c6))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9878,8 +9878,8 @@
     (property "Datasheet" "~" (at 166.37 242.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid ea97257f-49a5-4ae1-97eb-47130222077d))
     (pin "1" (uuid 0e321ad7-9856-4ac0-ade6-369952319773))
+    (pin "2" (uuid ea97257f-49a5-4ae1-97eb-47130222077d))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9904,8 +9904,8 @@
     (property "Datasheet" "~" (at 68.58 242.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid c2f835b1-96a1-49f8-b532-f027dff3ba84))
     (pin "1" (uuid efc28c52-f936-4bf0-be4f-0dabd44ff362))
+    (pin "2" (uuid c2f835b1-96a1-49f8-b532-f027dff3ba84))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9931,8 +9931,8 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid a8593f1b-94d7-4b57-b8a2-41cb5b94ad31))
-    (pin "3" (uuid d2240e22-fa90-4b39-96fa-b25e3b445dfb))
     (pin "2" (uuid c70aee10-76db-4716-83a5-aaf7ae6bb689))
+    (pin "3" (uuid d2240e22-fa90-4b39-96fa-b25e3b445dfb))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9957,8 +9957,8 @@
     (property "Datasheet" "~" (at 271.78 33.02 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 6df59c72-9758-4933-ac89-1ece3d0726bb))
     (pin "1" (uuid 35bac8ef-f12f-4184-9c07-3110412ac733))
+    (pin "2" (uuid 6df59c72-9758-4933-ac89-1ece3d0726bb))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -9983,8 +9983,8 @@
     (property "Datasheet" "~" (at 318.77 30.48 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 22d458dd-b199-49ba-8f76-302edfbd43a5))
     (pin "1" (uuid 835808d5-b342-4f7c-afd7-849789e2b0f0))
+    (pin "2" (uuid 22d458dd-b199-49ba-8f76-302edfbd43a5))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -10009,8 +10009,8 @@
     (property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" (at 140.97 177.8 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 025ecdec-34c2-4eba-8557-965aefbc5539))
     (pin "1" (uuid ab4cba07-3b81-42f1-9b46-e06ecd93d8a6))
+    (pin "2" (uuid 025ecdec-34c2-4eba-8557-965aefbc5539))
     (pin "3" (uuid 044e7ac3-30d2-4d42-a986-f1b6a3ca6610))
     (instances
       (project "ECE477_PCBDesign"
@@ -10246,8 +10246,8 @@
     (property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" (at 229.87 111.76 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 51c7cbff-4b6b-4b15-b278-3d2968418637))
     (pin "1" (uuid 9353f3b8-c793-4b78-bdab-74d428bb91b5))
+    (pin "2" (uuid 51c7cbff-4b6b-4b15-b278-3d2968418637))
     (pin "3" (uuid 84f8835d-7f90-4359-a528-c5ad9c557ce2))
     (instances
       (project "ECE477_PCBDesign"
@@ -10374,8 +10374,8 @@
     (property "Datasheet" "~" (at 120.65 123.19 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 6519a42b-dd9d-44e8-a4fb-c707f64db9f9))
     (pin "1" (uuid 1c0788ee-91e6-484c-bf7d-7f5b15ff25a4))
+    (pin "2" (uuid 6519a42b-dd9d-44e8-a4fb-c707f64db9f9))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -10425,8 +10425,8 @@
     (property "Datasheet" "~" (at 317.5 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid d069aae9-3d32-42c3-82c3-1afa88c3a3f1))
     (pin "1" (uuid 121d493c-0c2c-403b-955a-5ee2f030629e))
+    (pin "2" (uuid d069aae9-3d32-42c3-82c3-1afa88c3a3f1))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -10476,8 +10476,8 @@
     (property "Datasheet" "~" (at 369.57 116.84 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 244eaf50-16c7-4680-a5f3-7e0b7bd5c4a4))
     (pin "1" (uuid 20fdd1a5-2582-49d8-8dee-edb6731d1b15))
+    (pin "2" (uuid 244eaf50-16c7-4680-a5f3-7e0b7bd5c4a4))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -10678,11 +10678,11 @@
     (property "Datasheet" "~" (at 43.18 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "3" (uuid 1dba8cbb-6fdd-40f3-b253-53e7ef989e29))
     (pin "1" (uuid 1928d672-2a29-4101-8fd4-ae494ced01ce))
-    (pin "5" (uuid 72e4f17e-1815-4202-a5de-15e38072faf1))
-    (pin "4" (uuid edf51433-6494-4255-ae8b-95d04a9518a0))
     (pin "2" (uuid 24b8416b-6f92-48c9-a81f-5aa29e71c143))
+    (pin "3" (uuid 1dba8cbb-6fdd-40f3-b253-53e7ef989e29))
+    (pin "4" (uuid edf51433-6494-4255-ae8b-95d04a9518a0))
+    (pin "5" (uuid 72e4f17e-1815-4202-a5de-15e38072faf1))
     (pin "6" (uuid 50a478e8-4e87-42c6-8562-b9662e83fd12))
     (instances
       (project "ECE477_PCBDesign"
@@ -10708,8 +10708,8 @@
     (property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" (at 279.4 116.84 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 8cec71b0-1056-4755-ab6b-2232e9d2c699))
     (pin "1" (uuid 7068c718-fee9-4646-ba63-e36a9440183e))
+    (pin "2" (uuid 8cec71b0-1056-4755-ab6b-2232e9d2c699))
     (pin "3" (uuid a538fe17-3bd4-4433-a565-810a64288c57))
     (instances
       (project "ECE477_PCBDesign"
@@ -10735,8 +10735,8 @@
     (property "Datasheet" "~" (at 80.01 242.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 5df42a52-ba83-429e-b0ec-f3d4430b1e8a))
     (pin "1" (uuid 07b13ce1-75d1-4343-bf1f-d69e72edfaca))
+    (pin "2" (uuid 5df42a52-ba83-429e-b0ec-f3d4430b1e8a))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -10868,8 +10868,8 @@
     (property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" (at 326.39 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 857202a0-282a-4bee-bad3-a1fa2d7c5609))
     (pin "1" (uuid 563c2db2-a996-402d-8d39-771d5f94ab53))
+    (pin "2" (uuid 857202a0-282a-4bee-bad3-a1fa2d7c5609))
     (pin "3" (uuid 26ff1785-be8c-46d0-a7f7-85100eff14f4))
     (instances
       (project "ECE477_PCBDesign"
@@ -10895,8 +10895,8 @@
     (property "Datasheet" "~" (at 129.54 247.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 46fbb9b9-5375-4ff1-a50f-b3691c7185d9))
     (pin "1" (uuid 95651c31-ed1b-4ad4-9117-0bad4f3cd1fc))
+    (pin "2" (uuid 46fbb9b9-5375-4ff1-a50f-b3691c7185d9))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -11035,8 +11035,8 @@
     (property "Datasheet" "~" (at 314.96 130.81 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 44e4e455-148a-4e65-9d29-3330b891543c))
     (pin "1" (uuid 14e73676-3038-4bc8-9c30-17b12cadb8a4))
+    (pin "2" (uuid 44e4e455-148a-4e65-9d29-3330b891543c))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -11086,8 +11086,8 @@
     (property "Datasheet" "~" (at 318.77 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid ae85e4e2-7706-4c28-ba70-2e860718b980))
     (pin "1" (uuid 242fa008-a4d4-4e90-8a13-1c4bbdd55800))
+    (pin "2" (uuid ae85e4e2-7706-4c28-ba70-2e860718b980))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -11138,8 +11138,8 @@
     (property "Datasheet" "~" (at 128.27 194.31 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 394281ff-ed4f-425a-addc-791172848681))
     (pin "1" (uuid b00b6b80-877b-4441-989c-3f89c855e700))
+    (pin "2" (uuid 394281ff-ed4f-425a-addc-791172848681))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -11222,8 +11222,8 @@
     (property "Datasheet" "~" (at 134.62 242.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 0d399564-34b0-4d03-b201-7d94768faf34))
     (pin "1" (uuid 3003ba64-0d19-4360-aea6-925539b18840))
+    (pin "2" (uuid 0d399564-34b0-4d03-b201-7d94768faf34))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -11401,8 +11401,8 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (pin "1" (uuid d03c1070-1333-48f3-a261-26ca1a6b8b43))
-    (pin "3" (uuid cde66775-45c4-4ecb-80e4-935a8becf3bf))
     (pin "2" (uuid f5dbb2ae-aa9e-4e5b-aebf-f273420100fd))
+    (pin "3" (uuid cde66775-45c4-4ecb-80e4-935a8becf3bf))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -11427,9 +11427,9 @@
     (property "Datasheet" "https://www.onsemi.com/pub/Collateral/BC818-D.pdf" (at 367.03 105.41 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
-    (pin "3" (uuid 446b8d88-717f-44e1-b050-6a87d44fec8b))
-    (pin "2" (uuid f72be1a5-cb32-4bf0-918f-7497a86a0305))
     (pin "1" (uuid d2801b7d-93b8-456b-8f8f-4eaecea21b26))
+    (pin "2" (uuid f72be1a5-cb32-4bf0-918f-7497a86a0305))
+    (pin "3" (uuid 446b8d88-717f-44e1-b050-6a87d44fec8b))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -11454,8 +11454,8 @@
     (property "Datasheet" "https://diotec.com/tl_files/diotec/files/pdf/datasheets/bzx84c2v4.pdf" (at 381 105.41 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 6f852b38-97c4-441e-95ad-24b7d66930ca))
     (pin "1" (uuid 6068dc13-8a77-4e76-be5e-1641e09e4b2c))
+    (pin "2" (uuid 6f852b38-97c4-441e-95ad-24b7d66930ca))
     (pin "3" (uuid b05b7244-dea8-4ce6-a452-5061c29b0c57))
     (instances
       (project "ECE477_PCBDesign"
@@ -11481,19 +11481,19 @@
     (property "Datasheet" "http://www.ti.com/lit/ds/symlink/bq27441-g1.pdf" (at 130.81 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "4" (uuid 0eac42be-57e0-4d32-9c90-6669ceaa1e85))
-    (pin "12" (uuid 9983944c-d9bf-48d3-a852-de8929a9910d))
-    (pin "8" (uuid 3ba943f1-c08f-46f7-90aa-0ea429f00f0f))
     (pin "1" (uuid 691a08f5-c46a-4970-9594-640373572b45))
     (pin "10" (uuid 2a218561-fdbf-4aa6-a8da-24c043b0faa5))
-    (pin "3" (uuid 783f81c3-26e9-4059-a8a7-077f2b8618ae))
-    (pin "5" (uuid c0c9202b-b7d5-4ffc-868b-1dfc07dabd53))
     (pin "11" (uuid 41653b0b-6a18-4a13-b097-e0d1569232e2))
+    (pin "12" (uuid 9983944c-d9bf-48d3-a852-de8929a9910d))
     (pin "13" (uuid e7e18a66-90fb-4cd0-b651-c8ab82c04412))
-    (pin "6" (uuid a972e18b-cd08-46b8-bbcc-92227e3fb791))
     (pin "2" (uuid 82a34433-d6b6-4f2d-9768-6efc872511f9))
-    (pin "9" (uuid 4c9111ef-617a-4f30-bbf5-e0e7f809528e))
+    (pin "3" (uuid 783f81c3-26e9-4059-a8a7-077f2b8618ae))
+    (pin "4" (uuid 0eac42be-57e0-4d32-9c90-6669ceaa1e85))
+    (pin "5" (uuid c0c9202b-b7d5-4ffc-868b-1dfc07dabd53))
+    (pin "6" (uuid a972e18b-cd08-46b8-bbcc-92227e3fb791))
     (pin "7" (uuid 76e331dd-0a3c-4e56-8542-c4e8ed60f6f0))
+    (pin "8" (uuid 3ba943f1-c08f-46f7-90aa-0ea429f00f0f))
+    (pin "9" (uuid 4c9111ef-617a-4f30-bbf5-e0e7f809528e))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -11645,9 +11645,9 @@
     (property "Datasheet" "https://www.onsemi.com/pub/Collateral/BC818-D.pdf" (at 312.42 115.57 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
-    (pin "3" (uuid 4a8ddb91-4e63-4969-9d77-0ffc575f2bcf))
-    (pin "2" (uuid 476f2966-f541-4079-9dad-42fb5d35e5fd))
     (pin "1" (uuid e40cc7d6-71c1-4c8a-a012-42c03b564827))
+    (pin "2" (uuid 476f2966-f541-4079-9dad-42fb5d35e5fd))
+    (pin "3" (uuid 4a8ddb91-4e63-4969-9d77-0ffc575f2bcf))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -11672,8 +11672,8 @@
     (property "Datasheet" "~" (at 53.34 97.79 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 44795415-35cd-45c0-b4dc-bd75ad6a7508))
     (pin "1" (uuid 6f713d37-8225-47d1-a5c9-9414313793e8))
+    (pin "2" (uuid 44795415-35cd-45c0-b4dc-bd75ad6a7508))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -11774,8 +11774,8 @@
     (property "Datasheet" "~" (at 172.72 237.49 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 9bc28589-9a53-421e-bd01-ee15e1b2cae2))
     (pin "1" (uuid 930e13b8-3ffb-4677-8494-718bb49a004c))
+    (pin "2" (uuid 9bc28589-9a53-421e-bd01-ee15e1b2cae2))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
@@ -11832,8 +11832,8 @@
     (property "Datasheet" "~" (at 267.97 132.08 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "2" (uuid 3a0d64f0-95f3-4784-9bd0-1e9bf24ed2b5))
     (pin "1" (uuid 5c10ccad-fc34-4926-9b82-cefb3865a217))
+    (pin "2" (uuid 3a0d64f0-95f3-4784-9bd0-1e9bf24ed2b5))
     (instances
       (project "ECE477_PCBDesign"
         (path "/a3f06f97-9851-42dd-ac9b-8261120cb59a/4212322d-ee02-4242-a9f3-2e93d990ec8a"
