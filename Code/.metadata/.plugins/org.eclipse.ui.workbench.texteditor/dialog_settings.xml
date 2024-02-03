@@ -6,9 +6,14 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="printf"/>
+		<item key="selection" value="buffer"/>
 		<list key="findhistory">
+			<item value="buffer"/>
 			<item value="myprintf"/>
+			<item value="SD_CS_GPIO_Port"/>
+			<item value="f_read"/>
+			<item value="f_mount"/>
+			<item value="CS"/>
 			<item value="huart1"/>
 			<item value="HAL_TIM_Period"/>
 			<item value="USBD_CUSTOM"/>

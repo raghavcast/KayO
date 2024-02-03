@@ -1,0 +1,10 @@
+17:17:45 **** Build of configuration Debug for project SD_LCD_integration ****
+make -j16 all 
+arm-none-eabi-size   SD_LCD_integration.elf 
+   text	   data	    bss	    dec	    hex	filename
+  36300	    152	   2528	  38980	   9844	SD_LCD_integration.elf
+Finished building: default.size.stdout
+ 
+
+17:17:46 Build Finished. 0 errors, 0 warnings. (took 721ms)
+

@@ -1,4 +1,4 @@
-12:46:16 **** Build of configuration Debug for project hid_f4 ****
+13:46:45 **** Build of configuration Debug for project hid_f4 ****
 make -j16 all 
 arm-none-eabi-size   hid_f4.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size   hid_f4.elf
 Finished building: default.size.stdout
  
 
-12:46:16 Build Finished. 0 errors, 0 warnings. (took 464ms)
+13:46:45 Build Finished. 0 errors, 0 warnings. (took 536ms)
 

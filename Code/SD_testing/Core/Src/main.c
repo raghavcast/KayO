@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include <string.h>
+#include <stdarg.h>
 
 /* USER CODE END Includes */
 
@@ -143,52 +144,52 @@ int main(void)
 
   printf("SD card stats:\r\n%10lu KiB total drive space.\r\n%10lu KiB available.\r\n", total_sectors / 2, free_sectors / 2);
 
-  //Now let's try to open file "test.txt"
-  fres = f_open(&fil, "test.txt", FA_READ);
-  if (fres != FR_OK) {
-	printf("f_open error (%i)\r\n", fres);
-	while(1);
-  }
-  printf("I was able to open 'test.txt' for reading!\r\n");
-
-  //Read 30 bytes from "test.txt" on the SD card
-  BYTE readBuf[30];
-
-  //We can either use f_read OR f_gets to get data out of files
-  //f_gets is a wrapper on f_read that does some string formatting for us
-  TCHAR* rres = f_gets((TCHAR*)readBuf, 30, &fil);
-  if(rres != 0) {
-	printf("Read string from 'test.txt' contents: %s\r\n", readBuf);
-  } else {
-	printf("f_gets error (%i)\r\n", fres);
-  }
-
-  //Be a tidy kiwi - don't forget to close your file!
-  f_close(&fil);
-
-  //Now let's try and write a file "write.txt"
-  fres = f_open(&fil, "write.txt", FA_WRITE | FA_OPEN_ALWAYS | FA_CREATE_ALWAYS);
-  if(fres == FR_OK) {
-	printf("I was able to open 'write.txt' for writing\r\n");
-  } else {
-	printf("f_open error (%i)\r\n", fres);
-  }
-
-  //Copy in a string
-  strncpy((char*)readBuf, "a new file is made!", 19);
-  UINT bytesWrote;
-  fres = f_write(&fil, readBuf, 19, &bytesWrote);
-  if(fres == FR_OK) {
-	printf("Wrote %i bytes to 'write.txt'!\r\n", bytesWrote);
-  } else {
-	printf("f_write error (%i)\r\n", fres);
-  }
-
-  //Be a tidy kiwi - don't forget to close your file!
-  f_close(&fil);
-
-  //We're done, so de-mount the drive
-  f_mount(NULL, "", 0);
+//  //Now let's try to open file "test.txt"
+//  fres = f_open(&fil, "test.txt", FA_READ);
+//  if (fres != FR_OK) {
+//	printf("f_open error (%i)\r\n", fres);
+//	while(1);
+//  }
+//  printf("I was able to open 'test.txt' for reading!\r\n");
+//
+//  //Read 30 bytes from "test.txt" on the SD card
+//  BYTE readBuf[30];
+//
+//  //We can either use f_read OR f_gets to get data out of files
+//  //f_gets is a wrapper on f_read that does some string formatting for us
+//  TCHAR* rres = f_gets((TCHAR*)readBuf, 30, &fil);
+//  if(rres != 0) {
+//	printf("Read string from 'test.txt' contents: %s\r\n", readBuf);
+//  } else {
+//	printf("f_gets error (%i)\r\n", fres);
+//  }
+//
+//  //Be a tidy kiwi - don't forget to close your file!
+//  f_close(&fil);
+//
+//  //Now let's try and write a file "write.txt"
+//  fres = f_open(&fil, "write.txt", FA_WRITE | FA_OPEN_ALWAYS | FA_CREATE_ALWAYS);
+//  if(fres == FR_OK) {
+//	printf("I was able to open 'write.txt' for writing\r\n");
+//  } else {
+//	printf("f_open error (%i)\r\n", fres);
+//  }
+//
+//  //Copy in a string
+//  strncpy((char*)readBuf, "a new file is made!", 20);
+//  UINT bytesWrote;
+//  fres = f_write(&fil, readBuf, 19, &bytesWrote);
+//  if(fres == FR_OK) {
+//	printf("Wrote %i bytes to 'write.txt'!\r\n", bytesWrote);
+//  } else {
+//	printf("f_write error (%i)\r\n", fres);
+//  }
+//
+//  //Be a tidy kiwi - don't forget to close your file!
+//  f_close(&fil);
+//
+//  //We're done, so de-mount the drive
+//  f_mount(NULL, "", 0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -219,15 +220,14 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = 16;
-  RCC_OscInitStruct.PLL.PLLN = 336;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
-  RCC_OscInitStruct.PLL.PLLQ = 4;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = 4;
+  RCC_OscInitStruct.PLL.PLLN = 72;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = 3;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -271,7 +271,7 @@ static void MX_SPI2_Init(void)
   hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi2.Init.NSS = SPI_NSS_SOFT;
-  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;
+  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -338,7 +338,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(SD_CS_GPIO_Port, SD_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(SD_CS_GPIO_Port, SD_CS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -353,11 +353,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : SD_Detect_Pin */
+  GPIO_InitStruct.Pin = SD_Detect_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(SD_Detect_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pin : SD_CS_Pin */
   GPIO_InitStruct.Pin = SD_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(SD_CS_GPIO_Port, &GPIO_InitStruct);
 
 }

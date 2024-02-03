@@ -13038,52 +13038,52 @@ static HAL_StatusTypeDef USB_CoreReset(USB_OTG_GlobalTypeDef *USBx)
  8004f9c:	00030d40 	.word	0x00030d40
 
 08004fa0 <USBD_HID_Init>:
-  * @param  pdev: device instance
-  * @param  cfgidx: Configuration index
-  * @retval status
-  */
-static uint8_t USBD_HID_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
-{
+  0x95, 0x02,        /*   Report Count (2)                     */
+  0xB1, 0x22,        /*   Feature (Data,Var,Abs,NoWrp)         */
+  0x75, 0x06,        /*   Report Size (6)                      */
+  0x95, 0x01,        /*   Report Count (1)                     */
+  0xB1, 0x01,        /*   Feature (Const,Array,Abs,NoWrp)      */
+  0xC0               /* End Collection                         */
  8004fa0:	b580      	push	{r7, lr}
  8004fa2:	b084      	sub	sp, #16
  8004fa4:	af00      	add	r7, sp, #0
  8004fa6:	6078      	str	r0, [r7, #4]
  8004fa8:	460b      	mov	r3, r1
  8004faa:	70fb      	strb	r3, [r7, #3]
-  UNUSED(cfgidx);
+};
 
-  USBD_HID_HandleTypeDef *hhid;
+static uint8_t HIDInEpAdd = HID_EPIN_ADDR;
 
-  hhid = (USBD_HID_HandleTypeDef *)USBD_malloc(sizeof(USBD_HID_HandleTypeDef));
+/**
  8004fac:	2010      	movs	r0, #16
  8004fae:	f002 f911 	bl	80071d4 <USBD_static_malloc>
  8004fb2:	60f8      	str	r0, [r7, #12]
-
-  if (hhid == NULL)
+  * @}
+  */
  8004fb4:	68fb      	ldr	r3, [r7, #12]
  8004fb6:	2b00      	cmp	r3, #0
  8004fb8:	d109      	bne.n	8004fce <USBD_HID_Init+0x2e>
-  {
-    pdev->pClassDataCmsit[pdev->classId] = NULL;
+
+/** @defgroup USBD_HID_Private_Functions
  8004fba:	687b      	ldr	r3, [r7, #4]
  8004fbc:	f8d3 22d4 	ldr.w	r2, [r3, #724]	; 0x2d4
  8004fc0:	687b      	ldr	r3, [r7, #4]
  8004fc2:	32b0      	adds	r2, #176	; 0xb0
  8004fc4:	2100      	movs	r1, #0
  8004fc6:	f843 1022 	str.w	r1, [r3, r2, lsl #2]
-    return (uint8_t)USBD_EMEM;
+  * @{
  8004fca:	2302      	movs	r3, #2
  8004fcc:	e048      	b.n	8005060 <USBD_HID_Init+0xc0>
-  }
+  */
 
-  pdev->pClassDataCmsit[pdev->classId] = (void *)hhid;
+/**
  8004fce:	687b      	ldr	r3, [r7, #4]
  8004fd0:	f8d3 22d4 	ldr.w	r2, [r3, #724]	; 0x2d4
  8004fd4:	687b      	ldr	r3, [r7, #4]
  8004fd6:	32b0      	adds	r2, #176	; 0xb0
  8004fd8:	68f9      	ldr	r1, [r7, #12]
  8004fda:	f843 1022 	str.w	r1, [r3, r2, lsl #2]
-  pdev->pClassData = pdev->pClassDataCmsit[pdev->classId];
+  * @brief  USBD_HID_Init
  8004fde:	687b      	ldr	r3, [r7, #4]
  8004fe0:	f8d3 22d4 	ldr.w	r2, [r3, #724]	; 0x2d4
  8004fe4:	687b      	ldr	r3, [r7, #4]
@@ -13091,18 +13091,18 @@ static uint8_t USBD_HID_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
  8004fe8:	f853 2022 	ldr.w	r2, [r3, r2, lsl #2]
  8004fec:	687b      	ldr	r3, [r7, #4]
  8004fee:	f8c3 22bc 	str.w	r2, [r3, #700]	; 0x2bc
-#ifdef USE_USBD_COMPOSITE
-  /* Get the Endpoints addresses allocated for this class instance */
-  HIDInEpAdd  = USBD_CoreGetEPAdd(pdev, USBD_EP_IN, USBD_EP_TYPE_INTR);
-#endif /* USE_USBD_COMPOSITE */
-
-  if (pdev->dev_speed == USBD_SPEED_HIGH)
+  * @param  pdev: device instance
+  * @param  cfgidx: Configuration index
+  * @retval status
+  */
+static uint8_t USBD_HID_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
+{
  8004ff2:	687b      	ldr	r3, [r7, #4]
  8004ff4:	7c1b      	ldrb	r3, [r3, #16]
  8004ff6:	2b00      	cmp	r3, #0
  8004ff8:	d10d      	bne.n	8005016 <USBD_HID_Init+0x76>
-  {
-    pdev->ep_in[HIDInEpAdd & 0xFU].bInterval = HID_HS_BINTERVAL;
+  UNUSED(cfgidx);
+
  8004ffa:	4b1b      	ldr	r3, [pc, #108]	; (8005068 <USBD_HID_Init+0xc8>)
  8004ffc:	781b      	ldrb	r3, [r3, #0]
  8004ffe:	f003 020f 	and.w	r2, r3, #15
@@ -13116,10 +13116,10 @@ static uint8_t USBD_HID_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
  8005010:	2207      	movs	r2, #7
  8005012:	801a      	strh	r2, [r3, #0]
  8005014:	e00c      	b.n	8005030 <USBD_HID_Init+0x90>
-  }
-  else   /* LOW and FULL-speed endpoints */
-  {
-    pdev->ep_in[HIDInEpAdd & 0xFU].bInterval = HID_FS_BINTERVAL;
+  USBD_HID_HandleTypeDef *hhid;
+
+  hhid = (USBD_HID_HandleTypeDef *)USBD_malloc(sizeof(USBD_HID_HandleTypeDef));
+
  8005016:	4b14      	ldr	r3, [pc, #80]	; (8005068 <USBD_HID_Init+0xc8>)
  8005018:	781b      	ldrb	r3, [r3, #0]
  800501a:	f003 020f 	and.w	r2, r3, #15
@@ -13132,17 +13132,17 @@ static uint8_t USBD_HID_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
  800502a:	3326      	adds	r3, #38	; 0x26
  800502c:	220a      	movs	r2, #10
  800502e:	801a      	strh	r2, [r3, #0]
-  }
-
-  /* Open EP IN */
-  (void)USBD_LL_OpenEP(pdev, HIDInEpAdd, USBD_EP_TYPE_INTR, HID_EPIN_SIZE);
+  if (hhid == NULL)
+  {
+    pdev->pClassDataCmsit[pdev->classId] = NULL;
+    return (uint8_t)USBD_EMEM;
  8005030:	4b0d      	ldr	r3, [pc, #52]	; (8005068 <USBD_HID_Init+0xc8>)
  8005032:	7819      	ldrb	r1, [r3, #0]
  8005034:	2304      	movs	r3, #4
  8005036:	2203      	movs	r2, #3
  8005038:	6878      	ldr	r0, [r7, #4]
  800503a:	f001 ffba 	bl	8006fb2 <USBD_LL_OpenEP>
-  pdev->ep_in[HIDInEpAdd & 0xFU].is_used = 1U;
+  }
  800503e:	4b0a      	ldr	r3, [pc, #40]	; (8005068 <USBD_HID_Init+0xc8>)
  8005040:	781b      	ldrb	r3, [r3, #0]
  8005042:	f003 020f 	and.w	r2, r3, #15
@@ -13156,14 +13156,14 @@ static uint8_t USBD_HID_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
  8005054:	2201      	movs	r2, #1
  8005056:	801a      	strh	r2, [r3, #0]
 
-  hhid->state = HID_IDLE;
+  pdev->pClassDataCmsit[pdev->classId] = (void *)hhid;
  8005058:	68fb      	ldr	r3, [r7, #12]
  800505a:	2200      	movs	r2, #0
  800505c:	731a      	strb	r2, [r3, #12]
+  pdev->pClassData = pdev->pClassDataCmsit[pdev->classId];
 
-  return (uint8_t)USBD_OK;
  800505e:	2300      	movs	r3, #0
-}
+#ifdef USE_USBD_COMPOSITE
  8005060:	4618      	mov	r0, r3
  8005062:	3710      	adds	r7, #16
  8005064:	46bd      	mov	sp, r7
@@ -13171,30 +13171,30 @@ static uint8_t USBD_HID_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
  8005068:	200000a0 	.word	0x200000a0
 
 0800506c <USBD_HID_DeInit>:
-  * @param  pdev: device instance
-  * @param  cfgidx: Configuration index
-  * @retval status
-  */
-static uint8_t USBD_HID_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
-{
+  if (pdev->dev_speed == USBD_SPEED_HIGH)
+  {
+    pdev->ep_in[HIDInEpAdd & 0xFU].bInterval = HID_HS_BINTERVAL;
+  }
+  else   /* LOW and FULL-speed endpoints */
+  {
  800506c:	b580      	push	{r7, lr}
  800506e:	b082      	sub	sp, #8
  8005070:	af00      	add	r7, sp, #0
  8005072:	6078      	str	r0, [r7, #4]
  8005074:	460b      	mov	r3, r1
  8005076:	70fb      	strb	r3, [r7, #3]
-  /* Get the Endpoints addresses allocated for this class instance */
-  HIDInEpAdd  = USBD_CoreGetEPAdd(pdev, USBD_EP_IN, USBD_EP_TYPE_INTR);
-#endif /* USE_USBD_COMPOSITE */
+  /* Open EP IN */
+  (void)USBD_LL_OpenEP(pdev, HIDInEpAdd, USBD_EP_TYPE_INTR, HID_EPIN_SIZE);
+  pdev->ep_in[HIDInEpAdd & 0xFU].is_used = 1U;
 
-  /* Close HID EPs */
-  (void)USBD_LL_CloseEP(pdev, HIDInEpAdd);
+  hhid->state = HID_IDLE;
+
  8005078:	4b1f      	ldr	r3, [pc, #124]	; (80050f8 <USBD_HID_DeInit+0x8c>)
  800507a:	781b      	ldrb	r3, [r3, #0]
  800507c:	4619      	mov	r1, r3
  800507e:	6878      	ldr	r0, [r7, #4]
  8005080:	f001 ffbd 	bl	8006ffe <USBD_LL_CloseEP>
-  pdev->ep_in[HIDInEpAdd & 0xFU].is_used = 0U;
+  return (uint8_t)USBD_OK;
  8005084:	4b1c      	ldr	r3, [pc, #112]	; (80050f8 <USBD_HID_DeInit+0x8c>)
  8005086:	781b      	ldrb	r3, [r3, #0]
  8005088:	f003 020f 	and.w	r2, r3, #15
@@ -13207,7 +13207,7 @@ static uint8_t USBD_HID_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
  8005098:	3324      	adds	r3, #36	; 0x24
  800509a:	2200      	movs	r2, #0
  800509c:	801a      	strh	r2, [r3, #0]
-  pdev->ep_in[HIDInEpAdd & 0xFU].bInterval = 0U;
+}
  800509e:	4b16      	ldr	r3, [pc, #88]	; (80050f8 <USBD_HID_DeInit+0x8c>)
  80050a0:	781b      	ldrb	r3, [r3, #0]
  80050a2:	f003 020f 	and.w	r2, r3, #15
@@ -13221,8 +13221,8 @@ static uint8_t USBD_HID_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
  80050b4:	2200      	movs	r2, #0
  80050b6:	801a      	strh	r2, [r3, #0]
 
-  /* Free allocated memory */
-  if (pdev->pClassDataCmsit[pdev->classId] != NULL)
+/**
+  * @brief  USBD_HID_DeInit
  80050b8:	687b      	ldr	r3, [r7, #4]
  80050ba:	f8d3 22d4 	ldr.w	r2, [r3, #724]	; 0x2d4
  80050be:	687b      	ldr	r3, [r7, #4]
@@ -13230,8 +13230,8 @@ static uint8_t USBD_HID_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
  80050c2:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
  80050c6:	2b00      	cmp	r3, #0
  80050c8:	d011      	beq.n	80050ee <USBD_HID_DeInit+0x82>
-  {
-    (void)USBD_free(pdev->pClassDataCmsit[pdev->classId]);
+  *         DeInitialize the HID layer
+  * @param  pdev: device instance
  80050ca:	687b      	ldr	r3, [r7, #4]
  80050cc:	f8d3 22d4 	ldr.w	r2, [r3, #724]	; 0x2d4
  80050d0:	687b      	ldr	r3, [r7, #4]
@@ -13239,18 +13239,18 @@ static uint8_t USBD_HID_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
  80050d4:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
  80050d8:	4618      	mov	r0, r3
  80050da:	f002 f889 	bl	80071f0 <USBD_static_free>
-    pdev->pClassDataCmsit[pdev->classId] = NULL;
+  * @param  cfgidx: Configuration index
  80050de:	687b      	ldr	r3, [r7, #4]
  80050e0:	f8d3 22d4 	ldr.w	r2, [r3, #724]	; 0x2d4
  80050e4:	687b      	ldr	r3, [r7, #4]
  80050e6:	32b0      	adds	r2, #176	; 0xb0
  80050e8:	2100      	movs	r1, #0
  80050ea:	f843 1022 	str.w	r1, [r3, r2, lsl #2]
-  }
-
-  return (uint8_t)USBD_OK;
+  * @retval status
+  */
+static uint8_t USBD_HID_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
  80050ee:	2300      	movs	r3, #0
-}
+{
  80050f0:	4618      	mov	r0, r3
  80050f2:	3708      	adds	r7, #8
  80050f4:	46bd      	mov	sp, r7
@@ -13258,44 +13258,44 @@ static uint8_t USBD_HID_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
  80050f8:	200000a0 	.word	0x200000a0
 
 080050fc <USBD_HID_Setup>:
-  * @param  pdev: instance
-  * @param  req: usb requests
-  * @retval status
-  */
-static uint8_t USBD_HID_Setup(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
-{
+  HIDInEpAdd  = USBD_CoreGetEPAdd(pdev, USBD_EP_IN, USBD_EP_TYPE_INTR);
+#endif /* USE_USBD_COMPOSITE */
+
+  /* Close HID EPs */
+  (void)USBD_LL_CloseEP(pdev, HIDInEpAdd);
+  pdev->ep_in[HIDInEpAdd & 0xFU].is_used = 0U;
  80050fc:	b580      	push	{r7, lr}
  80050fe:	b086      	sub	sp, #24
  8005100:	af00      	add	r7, sp, #0
  8005102:	6078      	str	r0, [r7, #4]
  8005104:	6039      	str	r1, [r7, #0]
-  USBD_HID_HandleTypeDef *hhid = (USBD_HID_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
+  pdev->ep_in[HIDInEpAdd & 0xFU].bInterval = 0U;
  8005106:	687b      	ldr	r3, [r7, #4]
  8005108:	f8d3 22d4 	ldr.w	r2, [r3, #724]	; 0x2d4
  800510c:	687b      	ldr	r3, [r7, #4]
  800510e:	32b0      	adds	r2, #176	; 0xb0
  8005110:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
  8005114:	60fb      	str	r3, [r7, #12]
-  USBD_StatusTypeDef ret = USBD_OK;
+
  8005116:	2300      	movs	r3, #0
  8005118:	75fb      	strb	r3, [r7, #23]
-  uint16_t len;
-  uint8_t *pbuf;
-  uint16_t status_info = 0U;
+  /* Free allocated memory */
+  if (pdev->pClassDataCmsit[pdev->classId] != NULL)
+  {
  800511a:	2300      	movs	r3, #0
  800511c:	817b      	strh	r3, [r7, #10]
-
-  if (hhid == NULL)
+    (void)USBD_free(pdev->pClassDataCmsit[pdev->classId]);
+    pdev->pClassDataCmsit[pdev->classId] = NULL;
  800511e:	68fb      	ldr	r3, [r7, #12]
  8005120:	2b00      	cmp	r3, #0
  8005122:	d101      	bne.n	8005128 <USBD_HID_Setup+0x2c>
-  {
-    return (uint8_t)USBD_FAIL;
- 8005124:	2303      	movs	r3, #3
- 8005126:	e0e8      	b.n	80052fa <USBD_HID_Setup+0x1fe>
   }
 
-  switch (req->bmRequest & USB_REQ_TYPE_MASK)
+ 8005124:	2303      	movs	r3, #3
+ 8005126:	e0e8      	b.n	80052fa <USBD_HID_Setup+0x1fe>
+  return (uint8_t)USBD_OK;
+}
+
  8005128:	683b      	ldr	r3, [r7, #0]
  800512a:	781b      	ldrb	r3, [r3, #0]
  800512c:	f003 0360 	and.w	r3, r3, #96	; 0x60
@@ -13303,9 +13303,9 @@ static uint8_t USBD_HID_Setup(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *re
  8005132:	d046      	beq.n	80051c2 <USBD_HID_Setup+0xc6>
  8005134:	2b20      	cmp	r3, #32
  8005136:	f040 80d8 	bne.w	80052ea <USBD_HID_Setup+0x1ee>
-  {
-    case USB_REQ_TYPE_CLASS :
-      switch (req->bRequest)
+/**
+  * @brief  USBD_HID_Setup
+  *         Handle the HID specific requests
  800513a:	683b      	ldr	r3, [r7, #0]
  800513c:	785b      	ldrb	r3, [r3, #1]
  800513e:	3b02      	subs	r3, #2
@@ -13324,30 +13324,30 @@ static uint8_t USBD_HID_Setup(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *re
  8005168:	080051b3 	.word	0x080051b3
  800516c:	08005191 	.word	0x08005191
  8005170:	08005175 	.word	0x08005175
-      {
-        case HID_REQ_SET_PROTOCOL:
-          hhid->Protocol = (uint8_t)(req->wValue);
+  * @param  pdev: instance
+  * @param  req: usb requests
+  * @retval status
  8005174:	683b      	ldr	r3, [r7, #0]
  8005176:	885b      	ldrh	r3, [r3, #2]
  8005178:	b2db      	uxtb	r3, r3
  800517a:	461a      	mov	r2, r3
  800517c:	68fb      	ldr	r3, [r7, #12]
  800517e:	601a      	str	r2, [r3, #0]
-          break;
+  */
  8005180:	e01e      	b.n	80051c0 <USBD_HID_Setup+0xc4>
-
-        case HID_REQ_GET_PROTOCOL:
-          (void)USBD_CtlSendData(pdev, (uint8_t *)&hhid->Protocol, 1U);
+static uint8_t USBD_HID_Setup(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
+{
+  USBD_HID_HandleTypeDef *hhid = (USBD_HID_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
  8005182:	68fb      	ldr	r3, [r7, #12]
  8005184:	2201      	movs	r2, #1
  8005186:	4619      	mov	r1, r3
  8005188:	6878      	ldr	r0, [r7, #4]
  800518a:	f001 fbd5 	bl	8006938 <USBD_CtlSendData>
-          break;
+  USBD_StatusTypeDef ret = USBD_OK;
  800518e:	e017      	b.n	80051c0 <USBD_HID_Setup+0xc4>
-
-        case HID_REQ_SET_IDLE:
-          hhid->IdleState = (uint8_t)(req->wValue >> 8);
+  uint16_t len;
+  uint8_t *pbuf;
+  uint16_t status_info = 0U;
  8005190:	683b      	ldr	r3, [r7, #0]
  8005192:	885b      	ldrh	r3, [r3, #2]
  8005194:	0a1b      	lsrs	r3, r3, #8
@@ -13356,35 +13356,35 @@ static uint8_t USBD_HID_Setup(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *re
  800519a:	461a      	mov	r2, r3
  800519c:	68fb      	ldr	r3, [r7, #12]
  800519e:	605a      	str	r2, [r3, #4]
-          break;
- 80051a0:	e00e      	b.n	80051c0 <USBD_HID_Setup+0xc4>
 
-        case HID_REQ_GET_IDLE:
-          (void)USBD_CtlSendData(pdev, (uint8_t *)&hhid->IdleState, 1U);
+ 80051a0:	e00e      	b.n	80051c0 <USBD_HID_Setup+0xc4>
+  if (hhid == NULL)
+  {
+    return (uint8_t)USBD_FAIL;
  80051a2:	68fb      	ldr	r3, [r7, #12]
  80051a4:	3304      	adds	r3, #4
  80051a6:	2201      	movs	r2, #1
  80051a8:	4619      	mov	r1, r3
  80051aa:	6878      	ldr	r0, [r7, #4]
  80051ac:	f001 fbc4 	bl	8006938 <USBD_CtlSendData>
-          break;
+  }
  80051b0:	e006      	b.n	80051c0 <USBD_HID_Setup+0xc4>
 
-        default:
-          USBD_CtlError(pdev, req);
+  switch (req->bmRequest & USB_REQ_TYPE_MASK)
+  {
  80051b2:	6839      	ldr	r1, [r7, #0]
  80051b4:	6878      	ldr	r0, [r7, #4]
  80051b6:	f001 fb4e 	bl	8006856 <USBD_CtlError>
-          ret = USBD_FAIL;
+    case USB_REQ_TYPE_CLASS :
  80051ba:	2303      	movs	r3, #3
  80051bc:	75fb      	strb	r3, [r7, #23]
-          break;
- 80051be:	bf00      	nop
-      }
-      break;
- 80051c0:	e09a      	b.n	80052f8 <USBD_HID_Setup+0x1fc>
-    case USB_REQ_TYPE_STANDARD:
       switch (req->bRequest)
+ 80051be:	bf00      	nop
+      {
+        case HID_REQ_SET_PROTOCOL:
+ 80051c0:	e09a      	b.n	80052f8 <USBD_HID_Setup+0x1fc>
+          hhid->Protocol = (uint8_t)(req->wValue);
+          break;
  80051c2:	683b      	ldr	r3, [r7, #0]
  80051c4:	785b      	ldrb	r3, [r3, #1]
  80051c6:	2b0b      	cmp	r3, #11
@@ -13404,71 +13404,71 @@ static uint8_t USBD_HID_Setup(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *re
  80051f8:	080052d9 	.word	0x080052d9
  80051fc:	08005287 	.word	0x08005287
  8005200:	080052b1 	.word	0x080052b1
-      {
-        case USB_REQ_GET_STATUS:
-          if (pdev->dev_state == USBD_STATE_CONFIGURED)
+
+        case HID_REQ_GET_PROTOCOL:
+          (void)USBD_CtlSendData(pdev, (uint8_t *)&hhid->Protocol, 1U);
  8005204:	687b      	ldr	r3, [r7, #4]
  8005206:	f893 329c 	ldrb.w	r3, [r3, #668]	; 0x29c
  800520a:	b2db      	uxtb	r3, r3
  800520c:	2b03      	cmp	r3, #3
  800520e:	d107      	bne.n	8005220 <USBD_HID_Setup+0x124>
-          {
-            (void)USBD_CtlSendData(pdev, (uint8_t *)&status_info, 2U);
+          break;
+
  8005210:	f107 030a 	add.w	r3, r7, #10
  8005214:	2202      	movs	r2, #2
  8005216:	4619      	mov	r1, r3
  8005218:	6878      	ldr	r0, [r7, #4]
  800521a:	f001 fb8d 	bl	8006938 <USBD_CtlSendData>
-          else
-          {
-            USBD_CtlError(pdev, req);
-            ret = USBD_FAIL;
-          }
+          hhid->IdleState = (uint8_t)(req->wValue >> 8);
+          break;
+
+        case HID_REQ_GET_IDLE:
+          (void)USBD_CtlSendData(pdev, (uint8_t *)&hhid->IdleState, 1U);
           break;
  800521e:	e063      	b.n	80052e8 <USBD_HID_Setup+0x1ec>
-            USBD_CtlError(pdev, req);
+
  8005220:	6839      	ldr	r1, [r7, #0]
  8005222:	6878      	ldr	r0, [r7, #4]
  8005224:	f001 fb17 	bl	8006856 <USBD_CtlError>
-            ret = USBD_FAIL;
+        case HID_REQ_GET_IDLE:
  8005228:	2303      	movs	r3, #3
  800522a:	75fb      	strb	r3, [r7, #23]
           break;
  800522c:	e05c      	b.n	80052e8 <USBD_HID_Setup+0x1ec>
 
-        case USB_REQ_GET_DESCRIPTOR:
-          if ((req->wValue >> 8) == HID_REPORT_DESC)
+        default:
+          USBD_CtlError(pdev, req);
  800522e:	683b      	ldr	r3, [r7, #0]
  8005230:	885b      	ldrh	r3, [r3, #2]
  8005232:	0a1b      	lsrs	r3, r3, #8
  8005234:	b29b      	uxth	r3, r3
  8005236:	2b22      	cmp	r3, #34	; 0x22
  8005238:	d108      	bne.n	800524c <USBD_HID_Setup+0x150>
-          {
-            len = MIN(HID_MOUSE_REPORT_DESC_SIZE, req->wLength);
+          ret = USBD_FAIL;
+          break;
  800523a:	683b      	ldr	r3, [r7, #0]
  800523c:	88db      	ldrh	r3, [r3, #6]
  800523e:	2b20      	cmp	r3, #32
  8005240:	bf28      	it	cs
  8005242:	2320      	movcs	r3, #32
  8005244:	82bb      	strh	r3, [r7, #20]
-            pbuf = HID_MOUSE_ReportDesc;
+      }
  8005246:	4b2f      	ldr	r3, [pc, #188]	; (8005304 <USBD_HID_Setup+0x208>)
  8005248:	613b      	str	r3, [r7, #16]
  800524a:	e015      	b.n	8005278 <USBD_HID_Setup+0x17c>
-          }
-          else if ((req->wValue >> 8) == HID_DESCRIPTOR_TYPE)
+      break;
+    case USB_REQ_TYPE_STANDARD:
  800524c:	683b      	ldr	r3, [r7, #0]
  800524e:	885b      	ldrh	r3, [r3, #2]
  8005250:	0a1b      	lsrs	r3, r3, #8
  8005252:	b29b      	uxth	r3, r3
  8005254:	2b21      	cmp	r3, #33	; 0x21
  8005256:	d108      	bne.n	800526a <USBD_HID_Setup+0x16e>
-          {
-            pbuf = USBD_HID_Desc;
+      switch (req->bRequest)
+      {
  8005258:	4b2b      	ldr	r3, [pc, #172]	; (8005308 <USBD_HID_Setup+0x20c>)
  800525a:	613b      	str	r3, [r7, #16]
-            len = MIN(USB_HID_DESC_SIZ, req->wLength);
+        case USB_REQ_GET_STATUS:
  800525c:	683b      	ldr	r3, [r7, #0]
  800525e:	88db      	ldrh	r3, [r3, #6]
  8005260:	2b09      	cmp	r3, #9
@@ -13476,126 +13476,126 @@ static uint8_t USBD_HID_Setup(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *re
  8005264:	2309      	movcs	r3, #9
  8005266:	82bb      	strh	r3, [r7, #20]
  8005268:	e006      	b.n	8005278 <USBD_HID_Setup+0x17c>
-          }
-          else
+          if (pdev->dev_state == USBD_STATE_CONFIGURED)
           {
-            USBD_CtlError(pdev, req);
+            (void)USBD_CtlSendData(pdev, (uint8_t *)&status_info, 2U);
+          }
  800526a:	6839      	ldr	r1, [r7, #0]
  800526c:	6878      	ldr	r0, [r7, #4]
  800526e:	f001 faf2 	bl	8006856 <USBD_CtlError>
-            ret = USBD_FAIL;
+          else
  8005272:	2303      	movs	r3, #3
  8005274:	75fb      	strb	r3, [r7, #23]
-            break;
+          {
  8005276:	e037      	b.n	80052e8 <USBD_HID_Setup+0x1ec>
-          }
-          (void)USBD_CtlSendData(pdev, pbuf, len);
+            USBD_CtlError(pdev, req);
+            ret = USBD_FAIL;
  8005278:	8abb      	ldrh	r3, [r7, #20]
  800527a:	461a      	mov	r2, r3
  800527c:	6939      	ldr	r1, [r7, #16]
  800527e:	6878      	ldr	r0, [r7, #4]
  8005280:	f001 fb5a 	bl	8006938 <USBD_CtlSendData>
-          break;
+          }
  8005284:	e030      	b.n	80052e8 <USBD_HID_Setup+0x1ec>
+          break;
 
-        case USB_REQ_GET_INTERFACE :
-          if (pdev->dev_state == USBD_STATE_CONFIGURED)
+        case USB_REQ_GET_DESCRIPTOR:
  8005286:	687b      	ldr	r3, [r7, #4]
  8005288:	f893 329c 	ldrb.w	r3, [r3, #668]	; 0x29c
  800528c:	b2db      	uxtb	r3, r3
  800528e:	2b03      	cmp	r3, #3
  8005290:	d107      	bne.n	80052a2 <USBD_HID_Setup+0x1a6>
+          if ((req->wValue >> 8) == HID_REPORT_DESC)
           {
-            (void)USBD_CtlSendData(pdev, (uint8_t *)&hhid->AltSetting, 1U);
  8005292:	68fb      	ldr	r3, [r7, #12]
  8005294:	3308      	adds	r3, #8
  8005296:	2201      	movs	r2, #1
  8005298:	4619      	mov	r1, r3
  800529a:	6878      	ldr	r0, [r7, #4]
  800529c:	f001 fb4c 	bl	8006938 <USBD_CtlSendData>
-          else
-          {
-            USBD_CtlError(pdev, req);
-            ret = USBD_FAIL;
+            pbuf = HID_MOUSE_ReportDesc;
           }
-          break;
+          else if ((req->wValue >> 8) == HID_DESCRIPTOR_TYPE)
+          {
+            pbuf = USBD_HID_Desc;
+            len = MIN(USB_HID_DESC_SIZ, req->wLength);
  80052a0:	e022      	b.n	80052e8 <USBD_HID_Setup+0x1ec>
-            USBD_CtlError(pdev, req);
+          else if ((req->wValue >> 8) == HID_DESCRIPTOR_TYPE)
  80052a2:	6839      	ldr	r1, [r7, #0]
  80052a4:	6878      	ldr	r0, [r7, #4]
  80052a6:	f001 fad6 	bl	8006856 <USBD_CtlError>
-            ret = USBD_FAIL;
+          {
  80052aa:	2303      	movs	r3, #3
  80052ac:	75fb      	strb	r3, [r7, #23]
-          break;
+            len = MIN(USB_HID_DESC_SIZ, req->wLength);
  80052ae:	e01b      	b.n	80052e8 <USBD_HID_Setup+0x1ec>
-
-        case USB_REQ_SET_INTERFACE:
-          if (pdev->dev_state == USBD_STATE_CONFIGURED)
+          }
+          else
+          {
  80052b0:	687b      	ldr	r3, [r7, #4]
  80052b2:	f893 329c 	ldrb.w	r3, [r3, #668]	; 0x29c
  80052b6:	b2db      	uxtb	r3, r3
  80052b8:	2b03      	cmp	r3, #3
  80052ba:	d106      	bne.n	80052ca <USBD_HID_Setup+0x1ce>
-          {
-            hhid->AltSetting = (uint8_t)(req->wValue);
+            USBD_CtlError(pdev, req);
+            ret = USBD_FAIL;
  80052bc:	683b      	ldr	r3, [r7, #0]
  80052be:	885b      	ldrh	r3, [r3, #2]
  80052c0:	b2db      	uxtb	r3, r3
  80052c2:	461a      	mov	r2, r3
  80052c4:	68fb      	ldr	r3, [r7, #12]
  80052c6:	609a      	str	r2, [r3, #8]
-          else
-          {
-            USBD_CtlError(pdev, req);
-            ret = USBD_FAIL;
           }
+          (void)USBD_CtlSendData(pdev, pbuf, len);
           break;
+
+        case USB_REQ_GET_INTERFACE :
+          if (pdev->dev_state == USBD_STATE_CONFIGURED)
  80052c8:	e00e      	b.n	80052e8 <USBD_HID_Setup+0x1ec>
-            USBD_CtlError(pdev, req);
+          break;
  80052ca:	6839      	ldr	r1, [r7, #0]
  80052cc:	6878      	ldr	r0, [r7, #4]
  80052ce:	f001 fac2 	bl	8006856 <USBD_CtlError>
-            ret = USBD_FAIL;
+
  80052d2:	2303      	movs	r3, #3
  80052d4:	75fb      	strb	r3, [r7, #23]
-          break;
+          if (pdev->dev_state == USBD_STATE_CONFIGURED)
  80052d6:	e007      	b.n	80052e8 <USBD_HID_Setup+0x1ec>
-
-        case USB_REQ_CLEAR_FEATURE:
-          break;
-
-        default:
-          USBD_CtlError(pdev, req);
+          {
+            (void)USBD_CtlSendData(pdev, (uint8_t *)&hhid->AltSetting, 1U);
+          }
+          else
+          {
+            USBD_CtlError(pdev, req);
  80052d8:	6839      	ldr	r1, [r7, #0]
  80052da:	6878      	ldr	r0, [r7, #4]
  80052dc:	f001 fabb 	bl	8006856 <USBD_CtlError>
-          ret = USBD_FAIL;
+            ret = USBD_FAIL;
  80052e0:	2303      	movs	r3, #3
  80052e2:	75fb      	strb	r3, [r7, #23]
-          break;
+          }
  80052e4:	e000      	b.n	80052e8 <USBD_HID_Setup+0x1ec>
-          break;
+          }
  80052e6:	bf00      	nop
-      }
-      break;
- 80052e8:	e006      	b.n	80052f8 <USBD_HID_Setup+0x1fc>
+          break;
 
-    default:
-      USBD_CtlError(pdev, req);
+ 80052e8:	e006      	b.n	80052f8 <USBD_HID_Setup+0x1fc>
+        case USB_REQ_SET_INTERFACE:
+          if (pdev->dev_state == USBD_STATE_CONFIGURED)
+          {
  80052ea:	6839      	ldr	r1, [r7, #0]
  80052ec:	6878      	ldr	r0, [r7, #4]
  80052ee:	f001 fab2 	bl	8006856 <USBD_CtlError>
-      ret = USBD_FAIL;
+            hhid->AltSetting = (uint8_t)(req->wValue);
  80052f2:	2303      	movs	r3, #3
  80052f4:	75fb      	strb	r3, [r7, #23]
-      break;
+          }
  80052f6:	bf00      	nop
-  }
-
-  return (uint8_t)ret;
+          else
+          {
+            USBD_CtlError(pdev, req);
  80052f8:	7dfb      	ldrb	r3, [r7, #23]
-}
+            ret = USBD_FAIL;
  80052fa:	4618      	mov	r0, r3
  80052fc:	3718      	adds	r7, #24
  80052fe:	46bd      	mov	sp, r7
@@ -13605,12 +13605,12 @@ static uint8_t USBD_HID_Setup(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *re
  8005308:	20000068 	.word	0x20000068
 
 0800530c <USBD_HID_SendReport>:
-  * @param  pdev: device instance
-  * @param  buff: pointer to report
-  * @retval status
-  */
-uint8_t USBD_HID_SendReport(USBD_HandleTypeDef *pdev, uint8_t *report, uint16_t len)
-{
+          break;
+
+        default:
+          USBD_CtlError(pdev, req);
+          ret = USBD_FAIL;
+          break;
  800530c:	b580      	push	{r7, lr}
  800530e:	b086      	sub	sp, #24
  8005310:	af00      	add	r7, sp, #0
@@ -13618,57 +13618,57 @@ uint8_t USBD_HID_SendReport(USBD_HandleTypeDef *pdev, uint8_t *report, uint16_t 
  8005314:	60b9      	str	r1, [r7, #8]
  8005316:	4613      	mov	r3, r2
  8005318:	80fb      	strh	r3, [r7, #6]
-  USBD_HID_HandleTypeDef *hhid = (USBD_HID_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
+      }
  800531a:	68fb      	ldr	r3, [r7, #12]
  800531c:	f8d3 22d4 	ldr.w	r2, [r3, #724]	; 0x2d4
  8005320:	68fb      	ldr	r3, [r7, #12]
  8005322:	32b0      	adds	r2, #176	; 0xb0
  8005324:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
  8005328:	617b      	str	r3, [r7, #20]
+      break;
 
-  if (hhid == NULL)
  800532a:	697b      	ldr	r3, [r7, #20]
  800532c:	2b00      	cmp	r3, #0
  800532e:	d101      	bne.n	8005334 <USBD_HID_SendReport+0x28>
-  {
-    return (uint8_t)USBD_FAIL;
+    default:
+      USBD_CtlError(pdev, req);
  8005330:	2303      	movs	r3, #3
  8005332:	e014      	b.n	800535e <USBD_HID_SendReport+0x52>
-#ifdef USE_USBD_COMPOSITE
-  /* Get the Endpoints addresses allocated for this class instance */
-  HIDInEpAdd = USBD_CoreGetEPAdd(pdev, USBD_EP_IN, USBD_EP_TYPE_INTR);
-#endif /* USE_USBD_COMPOSITE */
+  }
 
-  if (pdev->dev_state == USBD_STATE_CONFIGURED)
+  return (uint8_t)ret;
+}
+
+/**
  8005334:	68fb      	ldr	r3, [r7, #12]
  8005336:	f893 329c 	ldrb.w	r3, [r3, #668]	; 0x29c
  800533a:	b2db      	uxtb	r3, r3
  800533c:	2b03      	cmp	r3, #3
  800533e:	d10d      	bne.n	800535c <USBD_HID_SendReport+0x50>
-  {
-    if (hhid->state == HID_IDLE)
+  * @brief  USBD_HID_SendReport
+  *         Send HID Report
  8005340:	697b      	ldr	r3, [r7, #20]
  8005342:	7b1b      	ldrb	r3, [r3, #12]
  8005344:	2b00      	cmp	r3, #0
  8005346:	d109      	bne.n	800535c <USBD_HID_SendReport+0x50>
-    {
-      hhid->state = HID_BUSY;
+  * @param  pdev: device instance
+  * @param  buff: pointer to report
  8005348:	697b      	ldr	r3, [r7, #20]
  800534a:	2201      	movs	r2, #1
  800534c:	731a      	strb	r2, [r3, #12]
-      (void)USBD_LL_Transmit(pdev, HIDInEpAdd, report, len);
+  * @retval status
  800534e:	4b06      	ldr	r3, [pc, #24]	; (8005368 <USBD_HID_SendReport+0x5c>)
  8005350:	7819      	ldrb	r1, [r3, #0]
  8005352:	88fb      	ldrh	r3, [r7, #6]
  8005354:	68ba      	ldr	r2, [r7, #8]
  8005356:	68f8      	ldr	r0, [r7, #12]
  8005358:	f001 fef9 	bl	800714e <USBD_LL_Transmit>
-    }
-  }
-
-  return (uint8_t)USBD_OK;
+  */
+uint8_t USBD_HID_SendReport(USBD_HandleTypeDef *pdev, uint8_t *report, uint16_t len)
+{
+  USBD_HID_HandleTypeDef *hhid = (USBD_HID_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
  800535c:	2300      	movs	r3, #0
-}
+
  800535e:	4618      	mov	r0, r3
  8005360:	3718      	adds	r7, #24
  8005362:	46bd      	mov	sp, r7
@@ -13677,38 +13677,38 @@ uint8_t USBD_HID_SendReport(USBD_HandleTypeDef *pdev, uint8_t *report, uint16_t 
  8005368:	200000a0 	.word	0x200000a0
 
 0800536c <USBD_HID_GetFSCfgDesc>:
-  * @param  speed : current device speed
-  * @param  length : pointer data length
-  * @retval pointer to descriptor buffer
-  */
-static uint8_t *USBD_HID_GetFSCfgDesc(uint16_t *length)
-{
+  if (pdev->dev_speed == USBD_SPEED_HIGH)
+  {
+    /* Sets the data transfer polling interval for high speed transfers.
+     Values between 1..16 are allowed. Values correspond to interval
+     of 2 ^ (bInterval-1). This option (8 ms, corresponds to HID_HS_BINTERVAL */
+    polling_interval = (((1U << (HID_HS_BINTERVAL - 1U))) / 8U);
  800536c:	b580      	push	{r7, lr}
  800536e:	b084      	sub	sp, #16
  8005370:	af00      	add	r7, sp, #0
  8005372:	6078      	str	r0, [r7, #4]
-  USBD_EpDescTypeDef *pEpDesc = USBD_GetEpDesc(USBD_HID_CfgDesc, HID_EPIN_ADDR);
+  }
  8005374:	2181      	movs	r1, #129	; 0x81
  8005376:	4809      	ldr	r0, [pc, #36]	; (800539c <USBD_HID_GetFSCfgDesc+0x30>)
  8005378:	f000 fc35 	bl	8005be6 <USBD_GetEpDesc>
  800537c:	60f8      	str	r0, [r7, #12]
-
-  if (pEpDesc != NULL)
+  else   /* LOW and FULL-speed endpoints */
+  {
  800537e:	68fb      	ldr	r3, [r7, #12]
  8005380:	2b00      	cmp	r3, #0
  8005382:	d002      	beq.n	800538a <USBD_HID_GetFSCfgDesc+0x1e>
-  {
-    pEpDesc->bInterval = HID_FS_BINTERVAL;
+    /* Sets the data transfer polling interval for low and full
+    speed transfers */
  8005384:	68fb      	ldr	r3, [r7, #12]
  8005386:	220a      	movs	r2, #10
  8005388:	719a      	strb	r2, [r3, #6]
+    polling_interval =  HID_FS_BINTERVAL;
   }
 
-  *length = (uint16_t)sizeof(USBD_HID_CfgDesc);
  800538a:	687b      	ldr	r3, [r7, #4]
  800538c:	2222      	movs	r2, #34	; 0x22
  800538e:	801a      	strh	r2, [r3, #0]
-  return USBD_HID_CfgDesc;
+  return ((uint32_t)(polling_interval));
  8005390:	4b02      	ldr	r3, [pc, #8]	; (800539c <USBD_HID_GetFSCfgDesc+0x30>)
 }
  8005392:	4618      	mov	r0, r3
@@ -13719,40 +13719,40 @@ static uint8_t *USBD_HID_GetFSCfgDesc(uint16_t *length)
  800539c:	20000044 	.word	0x20000044
 
 080053a0 <USBD_HID_GetHSCfgDesc>:
+  *         return FS configuration descriptor
   * @param  speed : current device speed
   * @param  length : pointer data length
   * @retval pointer to descriptor buffer
   */
-static uint8_t *USBD_HID_GetHSCfgDesc(uint16_t *length)
-{
+static uint8_t *USBD_HID_GetFSCfgDesc(uint16_t *length)
  80053a0:	b580      	push	{r7, lr}
  80053a2:	b084      	sub	sp, #16
  80053a4:	af00      	add	r7, sp, #0
  80053a6:	6078      	str	r0, [r7, #4]
-  USBD_EpDescTypeDef *pEpDesc = USBD_GetEpDesc(USBD_HID_CfgDesc, HID_EPIN_ADDR);
+{
  80053a8:	2181      	movs	r1, #129	; 0x81
  80053aa:	4809      	ldr	r0, [pc, #36]	; (80053d0 <USBD_HID_GetHSCfgDesc+0x30>)
  80053ac:	f000 fc1b 	bl	8005be6 <USBD_GetEpDesc>
  80053b0:	60f8      	str	r0, [r7, #12]
+  USBD_EpDescTypeDef *pEpDesc = USBD_GetEpDesc(USBD_HID_CfgDesc, HID_EPIN_ADDR);
 
-  if (pEpDesc != NULL)
  80053b2:	68fb      	ldr	r3, [r7, #12]
  80053b4:	2b00      	cmp	r3, #0
  80053b6:	d002      	beq.n	80053be <USBD_HID_GetHSCfgDesc+0x1e>
+  if (pEpDesc != NULL)
   {
-    pEpDesc->bInterval = HID_HS_BINTERVAL;
  80053b8:	68fb      	ldr	r3, [r7, #12]
  80053ba:	2207      	movs	r2, #7
  80053bc:	719a      	strb	r2, [r3, #6]
+    pEpDesc->bInterval = HID_FS_BINTERVAL;
   }
 
-  *length = (uint16_t)sizeof(USBD_HID_CfgDesc);
  80053be:	687b      	ldr	r3, [r7, #4]
  80053c0:	2222      	movs	r2, #34	; 0x22
  80053c2:	801a      	strh	r2, [r3, #0]
-  return USBD_HID_CfgDesc;
+  *length = (uint16_t)sizeof(USBD_HID_CfgDesc);
  80053c4:	4b02      	ldr	r3, [pc, #8]	; (80053d0 <USBD_HID_GetHSCfgDesc+0x30>)
-}
+  return USBD_HID_CfgDesc;
  80053c6:	4618      	mov	r0, r3
  80053c8:	3710      	adds	r7, #16
  80053ca:	46bd      	mov	sp, r7
@@ -13761,40 +13761,40 @@ static uint8_t *USBD_HID_GetHSCfgDesc(uint16_t *length)
  80053d0:	20000044 	.word	0x20000044
 
 080053d4 <USBD_HID_GetOtherSpeedCfgDesc>:
+  *         return HS configuration descriptor
   * @param  speed : current device speed
   * @param  length : pointer data length
   * @retval pointer to descriptor buffer
   */
-static uint8_t *USBD_HID_GetOtherSpeedCfgDesc(uint16_t *length)
-{
+static uint8_t *USBD_HID_GetHSCfgDesc(uint16_t *length)
  80053d4:	b580      	push	{r7, lr}
  80053d6:	b084      	sub	sp, #16
  80053d8:	af00      	add	r7, sp, #0
  80053da:	6078      	str	r0, [r7, #4]
-  USBD_EpDescTypeDef *pEpDesc = USBD_GetEpDesc(USBD_HID_CfgDesc, HID_EPIN_ADDR);
+{
  80053dc:	2181      	movs	r1, #129	; 0x81
  80053de:	4809      	ldr	r0, [pc, #36]	; (8005404 <USBD_HID_GetOtherSpeedCfgDesc+0x30>)
  80053e0:	f000 fc01 	bl	8005be6 <USBD_GetEpDesc>
  80053e4:	60f8      	str	r0, [r7, #12]
+  USBD_EpDescTypeDef *pEpDesc = USBD_GetEpDesc(USBD_HID_CfgDesc, HID_EPIN_ADDR);
 
-  if (pEpDesc != NULL)
  80053e6:	68fb      	ldr	r3, [r7, #12]
  80053e8:	2b00      	cmp	r3, #0
  80053ea:	d002      	beq.n	80053f2 <USBD_HID_GetOtherSpeedCfgDesc+0x1e>
+  if (pEpDesc != NULL)
   {
-    pEpDesc->bInterval = HID_FS_BINTERVAL;
  80053ec:	68fb      	ldr	r3, [r7, #12]
  80053ee:	220a      	movs	r2, #10
  80053f0:	719a      	strb	r2, [r3, #6]
+    pEpDesc->bInterval = HID_HS_BINTERVAL;
   }
 
-  *length = (uint16_t)sizeof(USBD_HID_CfgDesc);
  80053f2:	687b      	ldr	r3, [r7, #4]
  80053f4:	2222      	movs	r2, #34	; 0x22
  80053f6:	801a      	strh	r2, [r3, #0]
-  return USBD_HID_CfgDesc;
+  *length = (uint16_t)sizeof(USBD_HID_CfgDesc);
  80053f8:	4b02      	ldr	r3, [pc, #8]	; (8005404 <USBD_HID_GetOtherSpeedCfgDesc+0x30>)
-}
+  return USBD_HID_CfgDesc;
  80053fa:	4618      	mov	r0, r3
  80053fc:	3710      	adds	r7, #16
  80053fe:	46bd      	mov	sp, r7
@@ -13803,11 +13803,11 @@ static uint8_t *USBD_HID_GetOtherSpeedCfgDesc(uint16_t *length)
  8005404:	20000044 	.word	0x20000044
 
 08005408 <USBD_HID_DataIn>:
-  * @param  pdev: device instance
-  * @param  epnum: endpoint index
-  * @retval status
+  * @param  speed : current device speed
+  * @param  length : pointer data length
+  * @retval pointer to descriptor buffer
   */
-static uint8_t USBD_HID_DataIn(USBD_HandleTypeDef *pdev, uint8_t epnum)
+static uint8_t *USBD_HID_GetOtherSpeedCfgDesc(uint16_t *length)
 {
  8005408:	b480      	push	{r7}
  800540a:	b083      	sub	sp, #12
@@ -13815,10 +13815,10 @@ static uint8_t USBD_HID_DataIn(USBD_HandleTypeDef *pdev, uint8_t epnum)
  800540e:	6078      	str	r0, [r7, #4]
  8005410:	460b      	mov	r3, r1
  8005412:	70fb      	strb	r3, [r7, #3]
-  UNUSED(epnum);
-  /* Ensure that the FIFO is empty before a new transfer, this condition could
-  be caused by  a new transfer before the end of the previous transfer */
-  ((USBD_HID_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId])->state = HID_IDLE;
+  USBD_EpDescTypeDef *pEpDesc = USBD_GetEpDesc(USBD_HID_CfgDesc, HID_EPIN_ADDR);
+
+  if (pEpDesc != NULL)
+  {
  8005414:	687b      	ldr	r3, [r7, #4]
  8005416:	f8d3 22d4 	ldr.w	r2, [r3, #724]	; 0x2d4
  800541a:	687b      	ldr	r3, [r7, #4]
@@ -13826,10 +13826,10 @@ static uint8_t USBD_HID_DataIn(USBD_HandleTypeDef *pdev, uint8_t epnum)
  800541e:	f853 3022 	ldr.w	r3, [r3, r2, lsl #2]
  8005422:	2200      	movs	r2, #0
  8005424:	731a      	strb	r2, [r3, #12]
-
-  return (uint8_t)USBD_OK;
+    pEpDesc->bInterval = HID_FS_BINTERVAL;
+  }
  8005426:	2300      	movs	r3, #0
-}
+
  8005428:	4618      	mov	r0, r3
  800542a:	370c      	adds	r7, #12
  800542c:	46bd      	mov	sp, r7
@@ -13837,24 +13837,24 @@ static uint8_t USBD_HID_DataIn(USBD_HandleTypeDef *pdev, uint8_t epnum)
  8005432:	4770      	bx	lr
 
 08005434 <USBD_HID_GetDeviceQualifierDesc>:
-  *         return Device Qualifier descriptor
-  * @param  length : pointer data length
-  * @retval pointer to descriptor buffer
-  */
-static uint8_t *USBD_HID_GetDeviceQualifierDesc(uint16_t *length)
-{
+
+/**
+  * @brief  USBD_HID_DataIn
+  *         handle data IN Stage
+  * @param  pdev: device instance
+  * @param  epnum: endpoint index
  8005434:	b480      	push	{r7}
  8005436:	b083      	sub	sp, #12
  8005438:	af00      	add	r7, sp, #0
  800543a:	6078      	str	r0, [r7, #4]
-  *length = (uint16_t)sizeof(USBD_HID_DeviceQualifierDesc);
+  * @retval status
  800543c:	687b      	ldr	r3, [r7, #4]
  800543e:	220a      	movs	r2, #10
  8005440:	801a      	strh	r2, [r3, #0]
-
-  return USBD_HID_DeviceQualifierDesc;
+  */
+static uint8_t USBD_HID_DataIn(USBD_HandleTypeDef *pdev, uint8_t epnum)
  8005442:	4b03      	ldr	r3, [pc, #12]	; (8005450 <USBD_HID_GetDeviceQualifierDesc+0x1c>)
-}
+{
  8005444:	4618      	mov	r0, r3
  8005446:	370c      	adds	r7, #12
  8005448:	46bd      	mov	sp, r7

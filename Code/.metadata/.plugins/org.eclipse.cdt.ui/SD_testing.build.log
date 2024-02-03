@@ -1,10 +1,10 @@
-20:07:05 **** Incremental Build of configuration Debug for project SD_testing ****
+13:53:34 **** Build of configuration Debug for project SD_testing ****
 make -j16 all 
 arm-none-eabi-size   SD_testing.elf 
    text	   data	    bss	    dec	    hex	filename
-  29576	    144	   1816	  31536	   7b30	SD_testing.elf
+  21748	    144	   1816	  23708	   5c9c	SD_testing.elf
 Finished building: default.size.stdout
  
 
-20:07:05 Build Finished. 0 errors, 0 warnings. (took 294ms)
+13:53:34 Build Finished. 0 errors, 0 warnings. (took 362ms)
 

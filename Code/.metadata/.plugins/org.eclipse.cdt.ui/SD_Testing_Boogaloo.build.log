@@ -1,0 +1,10 @@
+17:49:06 **** Incremental Build of configuration Debug for project SD_Testing_Boogaloo ****
+make -j16 all 
+arm-none-eabi-size   SD_Testing_Boogaloo.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29596	    144	   1816	  31556	   7b44	SD_Testing_Boogaloo.elf
+Finished building: default.size.stdout
+ 
+
+17:49:06 Build Finished. 0 errors, 0 warnings. (took 295ms)
+

@@ -1,0 +1,10 @@
+14:12:33 **** Incremental Build of configuration Debug for project STM32 io mapping ****
+make -j16 all 
+arm-none-eabi-size   STM32\ io\ mapping.elf 
+   text	   data	    bss	    dec	    hex	filename
+  33164	    312	   4624	  38100	   94d4	STM32 io mapping.elf
+Finished building: default.size.stdout
+ 
+
+14:12:33 Build Finished. 0 errors, 0 warnings. (took 416ms)
+
