@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "ECE477_PartsLibrary")(type "KiCad")(uri "${KIPRJMOD}/ECE477_PartsLibrary.pretty")(options "")(descr ""))
+)
