@@ -1,4 +1,4 @@
-17:17:45 **** Build of configuration Debug for project SD_LCD_integration ****
+20:53:58 **** Incremental Build of configuration Debug for project SD_LCD_integration ****
 make -j16 all 
 arm-none-eabi-size   SD_LCD_integration.elf 
    text	   data	    bss	    dec	    hex	filename
@@ -6,5 +6,5 @@ arm-none-eabi-size   SD_LCD_integration.elf
 Finished building: default.size.stdout
  
 
-17:17:46 Build Finished. 0 errors, 0 warnings. (took 721ms)
+20:53:58 Build Finished. 0 errors, 0 warnings. (took 376ms)
 
