@@ -1,25 +1,10 @@
-18:10:02 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+13:33:58 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
- 
 arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
    text	   data	    bss	    dec	    hex	filename
   67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
 Finished building: default.size.stdout
  
-Finished building: SD_LCD_Buttons_testing.list
- 
 
-18:10:03 Build Finished. 0 errors, 1 warnings. (took 1s.216ms)
+13:33:58 Build Finished. 0 errors, 0 warnings. (took 428ms)
 

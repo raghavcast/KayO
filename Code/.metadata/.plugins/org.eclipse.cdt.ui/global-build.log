@@ -1,328 +1,170 @@
-18:23:45 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+20:17:10 **** Incremental Build of configuration Debug for project blutoot_testing ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f0xx_hal_msp.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f0xx_hal_msp.d" -MT"Core/Src/stm32f0xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f0xx_it.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f0xx_it.d" -MT"Core/Src/stm32f0xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_it.o"
+arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: blutoot_testing.elf
  
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
+arm-none-eabi-size   blutoot_testing.elf 
+arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
    text	   data	    bss	    dec	    hex	filename
-  67480	    404	   5812	  73696	  11fe0	SD_LCD_Buttons_testing.elf
+   8404	     28	   1844	  10276	   2824	blutoot_testing.elf
 Finished building: default.size.stdout
  
-Finished building: SD_LCD_Buttons_testing.list
+Finished building: blutoot_testing.list
  
-18:24:52 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+20:17:13 **** Incremental Build of configuration Debug for project blutoot_testing ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
- 
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
+arm-none-eabi-size   blutoot_testing.elf 
    text	   data	    bss	    dec	    hex	filename
-  67476	    404	   5812	  73692	  11fdc	SD_LCD_Buttons_testing.elf
+   8404	     28	   1844	  10276	   2824	blutoot_testing.elf
 Finished building: default.size.stdout
  
-Finished building: SD_LCD_Buttons_testing.list
- 
-18:30:36 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+20:24:21 **** Incremental Build of configuration Debug for project blutoot_testing ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-../Core/Src/main.c: In function 'clean_buffer':
-../Core/Src/main.c:735:19: error: subscripted value is neither array nor pointer nor vector
-  735 |  cleaned_buffer[2][0] = buffer[2][0];
-      |                   ^
-../Core/Src/main.c:735:34: error: subscripted value is neither array nor pointer nor vector
-  735 |  cleaned_buffer[2][0] = buffer[2][0];
-      |                                  ^
-make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
-"make -j16 all" terminated with exit code 2. Build might be incomplete.
-18:31:04 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: blutoot_testing.elf
  
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
+arm-none-eabi-size   blutoot_testing.elf 
+arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
    text	   data	    bss	    dec	    hex	filename
-  67588	    404	   5812	  73804	  1204c	SD_LCD_Buttons_testing.elf
+   8440	     28	   1844	  10312	   2848	blutoot_testing.elf
 Finished building: default.size.stdout
  
-Finished building: SD_LCD_Buttons_testing.list
+Finished building: blutoot_testing.list
  
-18:31:45 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+20:38:15 **** Incremental Build of configuration Debug for project blutoot_testing ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: blutoot_testing.elf
  
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
+arm-none-eabi-size   blutoot_testing.elf 
+arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
    text	   data	    bss	    dec	    hex	filename
-  67592	    404	   5812	  73808	  12050	SD_LCD_Buttons_testing.elf
+   7932	     20	   1844	   9796	   2644	blutoot_testing.elf
 Finished building: default.size.stdout
  
-Finished building: SD_LCD_Buttons_testing.list
+Finished building: blutoot_testing.list
  
-18:32:34 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+20:38:37 **** Incremental Build of configuration Debug for project blutoot_testing ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: blutoot_testing.elf
  
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
+arm-none-eabi-size   blutoot_testing.elf 
+arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
    text	   data	    bss	    dec	    hex	filename
-  67576	    404	   5812	  73792	  12040	SD_LCD_Buttons_testing.elf
+   8440	     28	   1844	  10312	   2848	blutoot_testing.elf
 Finished building: default.size.stdout
  
-Finished building: SD_LCD_Buttons_testing.list
+Finished building: blutoot_testing.list
  
-18:34:13 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+20:39:12 **** Incremental Build of configuration Debug for project blutoot_testing ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: blutoot_testing.elf
  
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
+arm-none-eabi-size   blutoot_testing.elf 
+arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
    text	   data	    bss	    dec	    hex	filename
-  67576	    404	   5812	  73792	  12040	SD_LCD_Buttons_testing.elf
+   7932	     20	   1844	   9796	   2644	blutoot_testing.elf
 Finished building: default.size.stdout
  
-Finished building: SD_LCD_Buttons_testing.list
+Finished building: blutoot_testing.list
  
-18:38:18 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+20:58:19 **** Incremental Build of configuration Debug for project blutoot_testing ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: blutoot_testing.elf
  
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
+arm-none-eabi-size   blutoot_testing.elf 
+arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
    text	   data	    bss	    dec	    hex	filename
-  67660	    404	   5812	  73876	  12094	SD_LCD_Buttons_testing.elf
+   8440	     28	   1844	  10312	   2848	blutoot_testing.elf
 Finished building: default.size.stdout
  
-Finished building: SD_LCD_Buttons_testing.list
+Finished building: blutoot_testing.list
  
-18:40:20 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+21:05:35 **** Incremental Build of configuration Debug for project blutoot_testing ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: blutoot_testing.elf
  
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
+arm-none-eabi-size   blutoot_testing.elf 
+arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
    text	   data	    bss	    dec	    hex	filename
-  67720	    404	   5812	  73936	  120d0	SD_LCD_Buttons_testing.elf
+   8448	     28	   1844	  10320	   2850	blutoot_testing.elf
 Finished building: default.size.stdout
  
-Finished building: SD_LCD_Buttons_testing.list
+Finished building: blutoot_testing.list
  
-18:43:59 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+13:00:31 **** Build of configuration Debug for project SD_LCD_Buttons_testing ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-../Core/Src/main.c: In function 'clean_buffer':
-../Core/Src/main.c:744:3: warning: implicit declaration of function 'print'; did you mean 'printf'? [-Wimplicit-function-declaration]
-  744 |   print("[0], %X, [1], %X, ", cleaned_buffer[0], cleaned_buffer[1]);
-      |   ^~~~~
-      |   printf
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-c:\st\stm32cubeide_1.11.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.100.202210260954\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/main.o: in function `clean_buffer':
-C:/Users/ragha.000/OneDrive/Desktop/Purdue/Spring 2024/ECE 47700/Code/SD_LCD_Buttons_testing/Debug/../Core/Src/main.c:744: undefined reference to `print'
-collect2.exe: error: ld returned 1 exit status
-make: *** [makefile:72: SD_LCD_Buttons_testing.elf] Error 1
-"make -j16 all" terminated with exit code 2. Build might be incomplete.
-18:44:13 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
- 
 arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
-   text	   data	    bss	    dec	    hex	filename
-  67760	    404	   5812	  73976	  120f8	SD_LCD_Buttons_testing.elf
-Finished building: default.size.stdout
- 
-Finished building: SD_LCD_Buttons_testing.list
- 
-18:47:10 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
- 
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
-   text	   data	    bss	    dec	    hex	filename
-  67768	    404	   5812	  73984	  12100	SD_LCD_Buttons_testing.elf
-Finished building: default.size.stdout
- 
-Finished building: SD_LCD_Buttons_testing.list
- 
-18:48:08 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
- 
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
-   text	   data	    bss	    dec	    hex	filename
-  67664	    404	   5812	  73880	  12098	SD_LCD_Buttons_testing.elf
-Finished building: default.size.stdout
- 
-Finished building: SD_LCD_Buttons_testing.list
- 
-18:07:33 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
- 
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
    text	   data	    bss	    dec	    hex	filename
   67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
 Finished building: default.size.stdout
  
-Finished building: SD_LCD_Buttons_testing.list
- 
-18:10:02 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+13:04:53 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/Third_Party/FatFs/src -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c:67: warning: "MIN" redefined
-   67 | #define MIN(a, b) (((a)<(b))?(a): (b))
-      | 
-In file included from ../USB_DEVICE/App/usb_device.h:32,
-                 from ../Core/Src/main.c:22:
-../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:440: note: this is the location of the previous definition
-  440 | #define MIN(a, b)  (((a) < (b)) ? (a) : (b))
-      | 
-arm-none-eabi-gcc -o "SD_LCD_Buttons_testing.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_Buttons_testing\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_Buttons_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: SD_LCD_Buttons_testing.elf
- 
 arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-arm-none-eabi-objdump -h -S  SD_LCD_Buttons_testing.elf  > "SD_LCD_Buttons_testing.list"
    text	   data	    bss	    dec	    hex	filename
   67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
 Finished building: default.size.stdout
  
-Finished building: SD_LCD_Buttons_testing.list
+13:07:30 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+make -j16 all 
+arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
+   text	   data	    bss	    dec	    hex	filename
+  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
+Finished building: default.size.stdout
+ 
+13:08:28 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+make -j16 all 
+arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
+   text	   data	    bss	    dec	    hex	filename
+  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
+Finished building: default.size.stdout
+ 
+13:29:13 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+make -j16 all 
+arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
+   text	   data	    bss	    dec	    hex	filename
+  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
+Finished building: default.size.stdout
+ 
+13:31:52 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+make -j16 all 
+arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
+   text	   data	    bss	    dec	    hex	filename
+  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
+Finished building: default.size.stdout
+ 
+13:33:58 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+make -j16 all 
+arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
+   text	   data	    bss	    dec	    hex	filename
+  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
+Finished building: default.size.stdout
+ 
+13:36:42 **** Build of configuration Debug for project LCD_TESTING ****
+make -j16 all 
+arm-none-eabi-size   LCD_TESTING.elf 
+   text	   data	    bss	    dec	    hex	filename
+  80504	     44	   1724	  82272	  14160	LCD_TESTING.elf
+Finished building: default.size.stdout
+ 
+13:37:07 **** Build of configuration Debug for project SD_LCD_integration ****
+make -j16 all 
+arm-none-eabi-size   SD_LCD_integration.elf 
+   text	   data	    bss	    dec	    hex	filename
+  36300	    152	   2528	  38980	   9844	SD_LCD_integration.elf
+Finished building: default.size.stdout
  
