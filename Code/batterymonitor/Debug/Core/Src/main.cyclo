@@ -8,8 +8,8 @@
 ../Core/Src/main.c:116:10:BQ27441_deviceType	2
 ../Core/Src/main.c:131:6:BQ27441_init	3
 ../Core/Src/main.c:150:5:main	5
-../Core/Src/main.c:247:6:SystemClock_Config	4
-../Core/Src/main.c:290:13:MX_I2C1_Init	4
-../Core/Src/main.c:338:13:MX_USART2_UART_Init	2
-../Core/Src/main.c:373:13:MX_GPIO_Init	1
-../Core/Src/main.c:401:6:Error_Handler	1
+../Core/Src/main.c:248:6:SystemClock_Config	4
+../Core/Src/main.c:291:13:MX_I2C1_Init	4
+../Core/Src/main.c:339:13:MX_USART2_UART_Init	2
+../Core/Src/main.c:374:13:MX_GPIO_Init	1
+../Core/Src/main.c:402:6:Error_Handler	1

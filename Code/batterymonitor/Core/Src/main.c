@@ -52,8 +52,8 @@ I2C_HandleTypeDef hi2c1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-uint8_t RX_Buffer [1] ;
-static BQ27441_ctx_t ctx = {0};
+//uint8_t RX_Buffer [1] ;
+//static BQ27441_ctx_t ctx = {0}; //this not needed
 BQ27441_ctx_t BQ27441 = {
             .BQ27441_i2c_address = BQ27441_I2C_ADDRESS,
             .read_reg = BQ27441_i2cReadBytes,
@@ -82,18 +82,41 @@ PUTCHAR_PROTOTYPE
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+/*
+ 	function writes to slave.
+ 	returns HAL_OK if write successful
+ 	uint16_t memAddress: memory address within the BQ27441 where the data should start being written.
+	uint8_t *pData: pointer to the array of data bytes that are to be written to the device.
+	uint16_t Size:  number of bytes to write.
+*/
 HAL_StatusTypeDef BQ27441_i2cWriteBytes(uint16_t memAddress, uint8_t *pData, uint16_t Size) {
     return HAL_I2C_Mem_Write(&hi2c1, BQ27441_I2C_ADDRESS << 1, memAddress, I2C_MEMADD_SIZE_8BIT, pData, Size, HAL_MAX_DELAY);
 }
+/*
+ 	function read from slave.
+ 	returns HAL_OK if read successful
+	uint16_t memAddress: memory address within the BQ27441 from which the data should start being read.
+	uint8_t *pData: pointer to the buffer where the read data will be stored.
+	uint16_t Size: number of bytes to read.
+*/
 HAL_StatusTypeDef BQ27441_i2cReadBytes(uint16_t memAddress, uint8_t *pData, uint16_t Size) {
     return HAL_I2C_Mem_Read(&hi2c1, BQ27441_I2C_ADDRESS << 1, memAddress, I2C_MEMADD_SIZE_8BIT, pData, Size, HAL_MAX_DELAY);
 }
+/*
+	function uses BQ27441_i2cReadBytes to read strictly two bytes of data
+	returns a combined 16 bit word.
+	uint16_t subAddress: The sub-address or register address within the BQ27441 device from which the 16-bit word will be read.
+*/
 uint16_t BQ27441_readWord(uint16_t subAddress) {
     uint8_t data[2];
     BQ27441_i2cReadBytes(subAddress, data, 2);
     return ((uint16_t) data[1] << 8) | data[0];
 }
-
+/*
+	function gets FILTERED/UNFILTERED SoC using BQ27441_readWord
+	returns 16 bit SoC value.
+	soc_measure type: enumeration value that specifies filtered or unfiltered SoC value should be read. (filtered is basically smoothed out value<-datasheet said so)
+*/
 uint16_t BQ27441_soc(soc_measure type) {
     //type = FILTERED;
     uint16_t socRet = 0;
@@ -107,13 +130,25 @@ uint16_t BQ27441_soc(soc_measure type) {
     }
     return socRet;
 }
+/*
+	function gets Voltage using BQ27441_readWord
+	returns 16 bit voltage value.
+*/
 uint16_t BQ27441_voltage(void) {
     return BQ27441_readWord(BQ27441_COMMAND_VOLTAGE);
 }
+/*
+	function gets power using BQ27441_readWord
+	returns 16 bit power value.
+*/
 int16_t BQ27441_power(void) {
     return (int16_t) BQ27441_readWord(BQ27441_COMMAND_AVG_POWER);
 }
+
 uint16_t BQ27441_deviceType(void) {
+	// command sent to slave to tell it master wants to know devicetype
+	// 0xFF to get right 8 bits of BQ27441_CONTROL_DEVICE_TYPE
+	// >>8 to get left 8 bits, discarding right 8 bits of BQ27441_CONTROL_DEVICE_TYPE
     uint8_t command[2] = {BQ27441_CONTROL_DEVICE_TYPE & 0xFF, BQ27441_CONTROL_DEVICE_TYPE >> 8};
     uint8_t data[2];
     uint16_t deviceType = 0;
@@ -127,14 +162,13 @@ uint16_t BQ27441_deviceType(void) {
     }
     return deviceType;
 }
-
+// function to initialize battery, check if device type matches
 bool BQ27441_init(BQ27441_ctx_t *dev) {
     if (dev == NULL)
         return false;
-
-    ctx.read_reg = dev->read_reg;
-    ctx.write_reg = dev->write_reg;
-    ctx.BQ27441_i2c_address = dev->BQ27441_i2c_address;
+//    ctx.read_reg = dev->read_reg;
+//    ctx.write_reg = dev->write_reg;
+//    ctx.BQ27441_i2c_address = dev->BQ27441_i2c_address;
 
     if (BQ27441_deviceType() == BQ27441_DEVICE_ID) {
         return true;
@@ -174,26 +208,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-//  printf("Attempting to read device type...\n\r");
-//  uint16_t deviceType = BQ27441_deviceType();
-//  printf("Device Type: 0x%04X\n\r", deviceType);
-//  printf("before init\n\r");
-//  BQ27441_init(&BQ27441);
-//  printf("after init\n\r");
-//  printf("Scanning I2C bus...\r\n");
-//  fflush(stdout);
-//  HAL_StatusTypeDef res;
-//  uint8_t receiveBuffer[1];
-//  for(uint16_t i = 0; i < 128; i++) {
-//      res = HAL_I2C_Master_Receive(&hi2c1, (uint16_t)i << 1, receiveBuffer, sizeof(receiveBuffer), HAL_MAX_DELAY);
-//      if(res == HAL_OK) {
-//          printf("Device found at address 0x%02X\r\n", i);
-//          fflush(stdout);
-//      } else {
-//          printf("HAL status: %d at 0x%02X\r\n", res, i);
-//          fflush(stdout);
-//      }
-//  }
+  // below chunk is pretty self explanetory ://
 	printf("Starting I2C device scan...\r\n");
 	HAL_StatusTypeDef res;
 	uint8_t receiveBuffer[1];
@@ -216,16 +231,17 @@ int main(void)
   }
   if (BQ27441_init(&BQ27441)) {
 	  printf("BQ27441 initialization successful.\r\n");
+	  uint16_t socValue = BQ27441_soc(FILTERED);
+	    printf("State of Charge: %u%%\n", socValue);
+	    uint16_t voltage = BQ27441_voltage();
+	    printf("Voltage: %umV\r\n", voltage);
+	    uint16_t power = BQ27441_power();
+	    printf("Power: %umAh\r\n", power);
   } else {
 	  printf("BQ27441 initialization failed.\r\n");
   }
 
-  uint16_t socValue = BQ27441_soc(FILTERED);
-  printf("State of Charge: %u%%\n", socValue);
-  uint16_t voltage = BQ27441_voltage();
-  printf("Voltage: %umV\r\n", voltage);
-  uint16_t power = BQ27441_power();
-  printf("Power: %umAh\r\n", power);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  12 .comment      00000043  00000000  00000000  0002009c  2**0
                   CONTENTS, READONLY
- 13 .debug_info   0000b5ea  00000000  00000000  000200df  2**0
+ 13 .debug_info   0000b5f8  00000000  00000000  000200df  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00001ad7  00000000  00000000  0002b6c9  2**0
+ 14 .debug_abbrev 00001ad7  00000000  00000000  0002b6d7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00000a18  00000000  00000000  0002d1a0  2**3
+ 15 .debug_aranges 00000a18  00000000  00000000  0002d1b0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 000007d8  00000000  00000000  0002dbb8  2**0
+ 16 .debug_rnglists 000007d8  00000000  00000000  0002dbc8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00019392  00000000  00000000  0002e390  2**0
+ 17 .debug_macro  00019392  00000000  00000000  0002e3a0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0000d8a2  00000000  00000000  00047722  2**0
+ 18 .debug_line   0000d8a4  00000000  00000000  00047732  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    0008cf30  00000000  00000000  00054fc4  2**0
+ 19 .debug_str    0008cf30  00000000  00000000  00054fd6  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  00002b00  00000000  00000000  000e1ef4  2**2
+ 20 .debug_frame  00002b00  00000000  00000000  000e1f08  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000007e  00000000  00000000  000e49f4  2**0
+ 21 .debug_line_str 0000007e  00000000  00000000  000e4a08  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -719,59 +719,58 @@ int main(void)
  800050a:	0018      	movs	r0, r3
  800050c:	f7ff ff6c 	bl	80003e8 <BQ27441_init>
  8000510:	1e03      	subs	r3, r0, #0
- 8000512:	d004      	beq.n	800051e <main+0xe6>
+ 8000512:	d02c      	beq.n	800056e <main+0x136>
 	  printf("BQ27441 initialization successful.\r\n");
  8000514:	4b21      	ldr	r3, [pc, #132]	; (800059c <main+0x164>)
  8000516:	0018      	movs	r0, r3
  8000518:	f003 fa14 	bl	8003944 <puts>
- 800051c:	e003      	b.n	8000526 <main+0xee>
+	  uint16_t socValue = BQ27441_soc(FILTERED);
+ 800051c:	250a      	movs	r5, #10
+ 800051e:	197c      	adds	r4, r7, r5
+ 8000520:	2000      	movs	r0, #0
+ 8000522:	f7ff fefa 	bl	800031a <BQ27441_soc>
+ 8000526:	0003      	movs	r3, r0
+ 8000528:	8023      	strh	r3, [r4, #0]
+	    printf("State of Charge: %u%%\n", socValue);
+ 800052a:	197b      	adds	r3, r7, r5
+ 800052c:	881a      	ldrh	r2, [r3, #0]
+ 800052e:	4b1c      	ldr	r3, [pc, #112]	; (80005a0 <main+0x168>)
+ 8000530:	0011      	movs	r1, r2
+ 8000532:	0018      	movs	r0, r3
+ 8000534:	f003 f9a0 	bl	8003878 <iprintf>
+	    uint16_t voltage = BQ27441_voltage();
+ 8000538:	2508      	movs	r5, #8
+ 800053a:	197c      	adds	r4, r7, r5
+ 800053c:	f7ff ff15 	bl	800036a <BQ27441_voltage>
+ 8000540:	0003      	movs	r3, r0
+ 8000542:	8023      	strh	r3, [r4, #0]
+	    printf("Voltage: %umV\r\n", voltage);
+ 8000544:	197b      	adds	r3, r7, r5
+ 8000546:	881a      	ldrh	r2, [r3, #0]
+ 8000548:	4b16      	ldr	r3, [pc, #88]	; (80005a4 <main+0x16c>)
+ 800054a:	0011      	movs	r1, r2
+ 800054c:	0018      	movs	r0, r3
+ 800054e:	f003 f993 	bl	8003878 <iprintf>
+	    uint16_t power = BQ27441_power();
+ 8000552:	f7ff ff13 	bl	800037c <BQ27441_power>
+ 8000556:	0003      	movs	r3, r0
+ 8000558:	001a      	movs	r2, r3
+ 800055a:	1dbb      	adds	r3, r7, #6
+ 800055c:	801a      	strh	r2, [r3, #0]
+	    printf("Power: %umAh\r\n", power);
+ 800055e:	1dbb      	adds	r3, r7, #6
+ 8000560:	881a      	ldrh	r2, [r3, #0]
+ 8000562:	4b11      	ldr	r3, [pc, #68]	; (80005a8 <main+0x170>)
+ 8000564:	0011      	movs	r1, r2
+ 8000566:	0018      	movs	r0, r3
+ 8000568:	f003 f986 	bl	8003878 <iprintf>
+ 800056c:	e003      	b.n	8000576 <main+0x13e>
   } else {
 	  printf("BQ27441 initialization failed.\r\n");
- 800051e:	4b20      	ldr	r3, [pc, #128]	; (80005a0 <main+0x168>)
- 8000520:	0018      	movs	r0, r3
- 8000522:	f003 fa0f 	bl	8003944 <puts>
-  }
-
-  uint16_t socValue = BQ27441_soc(FILTERED);
- 8000526:	250a      	movs	r5, #10
- 8000528:	197c      	adds	r4, r7, r5
- 800052a:	2000      	movs	r0, #0
- 800052c:	f7ff fef5 	bl	800031a <BQ27441_soc>
- 8000530:	0003      	movs	r3, r0
- 8000532:	8023      	strh	r3, [r4, #0]
-  printf("State of Charge: %u%%\n", socValue);
- 8000534:	197b      	adds	r3, r7, r5
- 8000536:	881a      	ldrh	r2, [r3, #0]
- 8000538:	4b1a      	ldr	r3, [pc, #104]	; (80005a4 <main+0x16c>)
- 800053a:	0011      	movs	r1, r2
- 800053c:	0018      	movs	r0, r3
- 800053e:	f003 f99b 	bl	8003878 <iprintf>
-  uint16_t voltage = BQ27441_voltage();
- 8000542:	2508      	movs	r5, #8
- 8000544:	197c      	adds	r4, r7, r5
- 8000546:	f7ff ff10 	bl	800036a <BQ27441_voltage>
- 800054a:	0003      	movs	r3, r0
- 800054c:	8023      	strh	r3, [r4, #0]
-  printf("Voltage: %umV\r\n", voltage);
- 800054e:	197b      	adds	r3, r7, r5
- 8000550:	881a      	ldrh	r2, [r3, #0]
- 8000552:	4b15      	ldr	r3, [pc, #84]	; (80005a8 <main+0x170>)
- 8000554:	0011      	movs	r1, r2
- 8000556:	0018      	movs	r0, r3
- 8000558:	f003 f98e 	bl	8003878 <iprintf>
-  uint16_t power = BQ27441_power();
- 800055c:	f7ff ff0e 	bl	800037c <BQ27441_power>
- 8000560:	0003      	movs	r3, r0
- 8000562:	001a      	movs	r2, r3
- 8000564:	1dbb      	adds	r3, r7, #6
- 8000566:	801a      	strh	r2, [r3, #0]
-  printf("Power: %umAh\r\n", power);
- 8000568:	1dbb      	adds	r3, r7, #6
- 800056a:	881a      	ldrh	r2, [r3, #0]
- 800056c:	4b0f      	ldr	r3, [pc, #60]	; (80005ac <main+0x174>)
- 800056e:	0011      	movs	r1, r2
+ 800056e:	4b0f      	ldr	r3, [pc, #60]	; (80005ac <main+0x174>)
  8000570:	0018      	movs	r0, r3
- 8000572:	f003 f981 	bl	8003878 <iprintf>
+ 8000572:	f003 f9e7 	bl	8003944 <puts>
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -789,9 +788,9 @@ int main(void)
  8000598:	20000000 	.word	0x20000000
  800059c:	080045ec 	.word	0x080045ec
  80005a0:	08004610 	.word	0x08004610
- 80005a4:	08004630 	.word	0x08004630
- 80005a8:	08004648 	.word	0x08004648
- 80005ac:	08004658 	.word	0x08004658
+ 80005a4:	08004628 	.word	0x08004628
+ 80005a8:	08004638 	.word	0x08004638
+ 80005ac:	08004648 	.word	0x08004648
 
 080005b0 <SystemClock_Config>:
 /**
