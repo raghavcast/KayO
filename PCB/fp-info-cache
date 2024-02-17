@@ -1,4 +1,4 @@
-22668845175432189
+22673968538989288
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -55055,6 +55055,13 @@ One digit LED 7 segment SA39-11 SC39-11 SA39-12 SC39-12
 10
 10
 ECE477_PartsLibrary
+AMPHENOL_10118192-0002LF
+
+
+0
+11
+6
+ECE477_PartsLibrary
 CONN10_302-S101_OST
 
 302-S101 
@@ -55068,6 +55075,13 @@ S2B-PH-K-SLFSN
 0
 2
 2
+ECE477_PartsLibrary
+CUI_UJC-HP-G-5-SMT-TR
+
+
+0
+10
+10
 ECE477_PartsLibrary
 ECE477_BATBabySitter
 
@@ -55083,6 +55097,13 @@ GCT_MEM2080-00-128-00-A_REVA
 14
 14
 ECE477_PartsLibrary
+GCT_USB3076-XX-X_REVC5
+
+
+0
+11
+11
+ECE477_PartsLibrary
 GCT_USB4105-GF-A
 
 
@@ -55094,8 +55115,8 @@ IC_TPS63021DSJR
 
 
 0
-30
-30
+21
+21
 ECE477_PartsLibrary
 IND_IHLP-2020CZ
 
