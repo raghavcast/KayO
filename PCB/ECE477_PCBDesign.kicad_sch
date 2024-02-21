@@ -4,6 +4,13 @@
 
   (paper "A3")
 
+  (title_block
+    (title "Hierarchical Sheet")
+    (date "2024-02-21")
+    (rev "2")
+    (company "ECE477 - Team 4: KayO")
+  )
+
   (lib_symbols
   )
 

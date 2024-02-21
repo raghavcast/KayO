@@ -2,7 +2,14 @@
 
   (uuid 78b98651-7591-47c9-9b9b-f5ad4767ecbd)
 
-  (paper "A4")
+  (paper "A3")
+
+  (title_block
+    (title "Buttons")
+    (date "2024-02-21")
+    (rev "2")
+    (company "ECE477 - Team 4: KayO")
+  )
 
   (lib_symbols
     (symbol "Device:D_Schottky" (pin_numbers hide) (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
@@ -492,7 +499,7 @@
     (stroke (width 0) (type default))
     (uuid 59a777bb-2b92-4ba7-85d8-854d03978561)
   )
-  (bus (pts (xy 228.6 143.51) (xy 232.41 143.51))
+  (bus (pts (xy 352.425 230.505) (xy 356.235 230.505))
     (stroke (width 0) (type default))
     (uuid 5d78ded0-717c-4204-ab4a-4138045d593f)
   )
@@ -806,7 +813,7 @@
     (uuid feced5dc-f891-4e3d-9c2f-68e1001aa423)
   )
 
-  (rectangle (start 184.15 135.89) (end 281.94 162.56)
+  (rectangle (start 307.975 222.885) (end 405.765 249.555)
     (stroke (width 0) (type default))
     (fill (type none))
     (uuid 05f48888-ed8d-4b7c-889b-568cc9e5b44a)
@@ -821,7 +828,7 @@
     (effects (font (face "KiCad Font") (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
     (uuid 4504f407-6554-45a4-9968-9d8f32873484)
   )
-  (text "Schematic Labels" (at 185.42 134.62 0)
+  (text "Schematic Labels" (at 309.245 221.615 0)
     (effects (font (face "KiCad Font") (size 1.27 1.27) (thickness 0.254) bold) (justify left bottom))
     (uuid 6a68bd6b-8e65-4aa5-8ec8-bfbfadb537c4)
   )
@@ -847,10 +854,10 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "KEY{COL[0..3], ROW[0..3], B17, B18}" (shape bidirectional) (at 228.6 143.51 180) (fields_autoplaced)
+  (global_label "KEY{COL[0..3], ROW[0..3], B17, B18}" (shape bidirectional) (at 352.425 230.505 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 569b2181-144d-4f72-a98e-72c6ad45d69f)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 188.8828 143.51 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 312.7078 230.505 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -904,7 +911,7 @@
     )
   )
 
-  (hierarchical_label "KEY{COL[0..3], ROW[0..3], B17, B18}" (shape bidirectional) (at 232.41 143.51 0) (fields_autoplaced)
+  (hierarchical_label "KEY{COL[0..3], ROW[0..3], B17, B18}" (shape bidirectional) (at 356.235 230.505 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 5d4a1f53-c0f2-45ac-9db3-5a30eb2548f3)
   )

@@ -55,10 +55,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "clearance|121032742|96625000|fffe2cb1-5f6d-4df6-9bb0-f994811aa3b8|ebb6dcb6-9f9d-42f0-acd1-683090acc323",
-        "clearance|136445716|97650000|bf624685-51a6-447a-a55f-2bb21de5f8be|91b944ba-c1c6-4b80-9067-fd5ade67ed57"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -114,7 +111,7 @@
       },
       "rules": {
         "max_error": 0.005,
-        "min_clearance": 0.127,
+        "min_clearance": 0.175,
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.0,
         "min_hole_clearance": 0.254,
@@ -177,6 +174,8 @@
       "track_widths": [
         0.0,
         0.127,
+        0.178,
+        0.203,
         0.254,
         0.508
       ],
@@ -188,6 +187,10 @@
         {
           "diameter": 0.5,
           "drill": 0.3
+        },
+        {
+          "diameter": 0.6,
+          "drill": 0.4
         },
         {
           "diameter": 0.7,
@@ -430,7 +433,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.127,
+        "clearance": 0.175,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -440,7 +443,7 @@
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.127,
+        "track_width": 0.203,
         "via_diameter": 0.5,
         "via_drill": 0.3,
         "wire_width": 6
@@ -515,7 +518,7 @@
       "workbook_filename": ""
     },
     "page_layout_descr_file": "",
-    "plot_directory": "",
+    "plot_directory": "C:/Users/tonym/Downloads/",
     "spice_adjust_passive_values": false,
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
