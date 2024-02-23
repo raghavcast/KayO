@@ -43,7 +43,8 @@ UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+uint8_t data[8] = {0xFD, 0x06, 0x00, 0x00, 0x00, 0x00, 0x55, 0xAA};
+uint8_t zero[8] = {0xFD, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -123,6 +124,10 @@ int main(void)
 //	  HAL_UART_Transmit(&huart1, end_mes, sizeof(end_mes), HAL_MAX_DELAY);
 //	  HAL_UART_Transmit(&huart2, end_mes, sizeof(end_mes), HAL_MAX_DELAY);
 //	  HAL_Delay(2000);
+	  HAL_UART_Transmit(&huart1, data, sizeof(data), HAL_MAX_DELAY);
+	  HAL_Delay(1000);
+	  HAL_UART_Transmit(&huart1, zero, sizeof(zero), HAL_MAX_DELAY);
+	  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
@@ -189,8 +194,8 @@ static void MX_USART1_UART_Init(void)
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
-  huart1.Init.Mode = UART_MODE_TX_RX;
-  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.Mode = UART_MODE_TX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_RTS_CTS;
   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
   huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
   huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;

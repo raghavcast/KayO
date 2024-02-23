@@ -1,170 +1,161 @@
-20:17:10 **** Incremental Build of configuration Debug for project blutoot_testing ****
+16:48:35 **** Incremental Build of configuration Debug for project blutoot_butt ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Core/Src/stm32f0xx_hal_msp.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f0xx_hal_msp.d" -MT"Core/Src/stm32f0xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_hal_msp.o"
-arm-none-eabi-gcc "../Core/Src/stm32f0xx_it.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f0xx_it.d" -MT"Core/Src/stm32f0xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_it.o"
-arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: blutoot_testing.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "blutoot_butt.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_butt\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_butt.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: blutoot_butt.elf
  
-arm-none-eabi-size   blutoot_testing.elf 
-arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
+arm-none-eabi-size   blutoot_butt.elf 
+arm-none-eabi-objdump -h -S  blutoot_butt.elf  > "blutoot_butt.list"
    text	   data	    bss	    dec	    hex	filename
-   8404	     28	   1844	  10276	   2824	blutoot_testing.elf
+  11628	     28	   1860	  13516	   34cc	blutoot_butt.elf
 Finished building: default.size.stdout
  
-Finished building: blutoot_testing.list
+Finished building: blutoot_butt.list
  
-20:17:13 **** Incremental Build of configuration Debug for project blutoot_testing ****
+16:48:38 **** Incremental Build of configuration Debug for project blutoot_butt ****
 make -j16 all 
-arm-none-eabi-size   blutoot_testing.elf 
+arm-none-eabi-size   blutoot_butt.elf 
    text	   data	    bss	    dec	    hex	filename
-   8404	     28	   1844	  10276	   2824	blutoot_testing.elf
+  11628	     28	   1860	  13516	   34cc	blutoot_butt.elf
 Finished building: default.size.stdout
  
-20:24:21 **** Incremental Build of configuration Debug for project blutoot_testing ****
+16:50:12 **** Incremental Build of configuration Debug for project blutoot_butt ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: blutoot_testing.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "blutoot_butt.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_butt\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_butt.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: blutoot_butt.elf
  
-arm-none-eabi-size   blutoot_testing.elf 
-arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
+arm-none-eabi-size   blutoot_butt.elf 
+arm-none-eabi-objdump -h -S  blutoot_butt.elf  > "blutoot_butt.list"
    text	   data	    bss	    dec	    hex	filename
-   8440	     28	   1844	  10312	   2848	blutoot_testing.elf
+  11652	     28	   1860	  13540	   34e4	blutoot_butt.elf
 Finished building: default.size.stdout
  
-Finished building: blutoot_testing.list
+Finished building: blutoot_butt.list
  
-20:38:15 **** Incremental Build of configuration Debug for project blutoot_testing ****
+17:09:55 **** Incremental Build of configuration Debug for project blutoot_butt ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: blutoot_testing.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "blutoot_butt.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_butt\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_butt.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: blutoot_butt.elf
  
-arm-none-eabi-size   blutoot_testing.elf 
-arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
+arm-none-eabi-size   blutoot_butt.elf 
+arm-none-eabi-objdump -h -S  blutoot_butt.elf  > "blutoot_butt.list"
    text	   data	    bss	    dec	    hex	filename
-   7932	     20	   1844	   9796	   2644	blutoot_testing.elf
+  11672	     28	   1860	  13560	   34f8	blutoot_butt.elf
 Finished building: default.size.stdout
  
-Finished building: blutoot_testing.list
+Finished building: blutoot_butt.list
  
-20:38:37 **** Incremental Build of configuration Debug for project blutoot_testing ****
+17:39:03 **** Incremental Build of configuration Debug for project blutoot_butt ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: blutoot_testing.elf
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "blutoot_butt.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_butt\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_butt.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: blutoot_butt.elf
  
-arm-none-eabi-size   blutoot_testing.elf 
-arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
+arm-none-eabi-size   blutoot_butt.elf 
+arm-none-eabi-objdump -h -S  blutoot_butt.elf  > "blutoot_butt.list"
    text	   data	    bss	    dec	    hex	filename
-   8440	     28	   1844	  10312	   2848	blutoot_testing.elf
+  11672	     28	   1860	  13560	   34f8	blutoot_butt.elf
 Finished building: default.size.stdout
  
-Finished building: blutoot_testing.list
+Finished building: blutoot_butt.list
  
-20:39:12 **** Incremental Build of configuration Debug for project blutoot_testing ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: blutoot_testing.elf
- 
-arm-none-eabi-size   blutoot_testing.elf 
-arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
-   text	   data	    bss	    dec	    hex	filename
-   7932	     20	   1844	   9796	   2644	blutoot_testing.elf
-Finished building: default.size.stdout
- 
-Finished building: blutoot_testing.list
- 
-20:58:19 **** Incremental Build of configuration Debug for project blutoot_testing ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: blutoot_testing.elf
- 
-arm-none-eabi-size   blutoot_testing.elf 
-arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
-   text	   data	    bss	    dec	    hex	filename
-   8440	     28	   1844	  10312	   2848	blutoot_testing.elf
-Finished building: default.size.stdout
- 
-Finished building: blutoot_testing.list
- 
-21:05:35 **** Incremental Build of configuration Debug for project blutoot_testing ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "blutoot_testing.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\blutoot_testing\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="blutoot_testing.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: blutoot_testing.elf
- 
-arm-none-eabi-size   blutoot_testing.elf 
-arm-none-eabi-objdump -h -S  blutoot_testing.elf  > "blutoot_testing.list"
-   text	   data	    bss	    dec	    hex	filename
-   8448	     28	   1844	  10320	   2850	blutoot_testing.elf
-Finished building: default.size.stdout
- 
-Finished building: blutoot_testing.list
- 
-13:00:31 **** Build of configuration Debug for project SD_LCD_Buttons_testing ****
+18:36:02 **** Build of configuration Debug for project SD_LCD_Buttons_testing ****
 make -j16 all 
 arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
    text	   data	    bss	    dec	    hex	filename
-  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
+  74464	    412	   5900	  80776	  13b88	SD_LCD_Buttons_testing.elf
 Finished building: default.size.stdout
  
-13:04:53 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+18:56:25 **** Incremental Build of configuration Debug for project blutoot_butt ****
+make -j16 all 
+arm-none-eabi-size   blutoot_butt.elf 
+   text	   data	    bss	    dec	    hex	filename
+  11672	     28	   1860	  13560	   34f8	blutoot_butt.elf
+Finished building: default.size.stdout
+ 
+19:02:14 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
 make -j16 all 
 arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
    text	   data	    bss	    dec	    hex	filename
-  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
+  74464	    412	   5900	  80776	  13b88	SD_LCD_Buttons_testing.elf
 Finished building: default.size.stdout
  
-13:07:30 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+15:36:45 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
 make -j16 all 
 arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
    text	   data	    bss	    dec	    hex	filename
-  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
+  74464	    412	   5900	  80776	  13b88	SD_LCD_Buttons_testing.elf
 Finished building: default.size.stdout
  
-13:08:28 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
-make -j16 all 
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-   text	   data	    bss	    dec	    hex	filename
-  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
-Finished building: default.size.stdout
- 
-13:29:13 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
-make -j16 all 
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-   text	   data	    bss	    dec	    hex	filename
-  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
-Finished building: default.size.stdout
- 
-13:31:52 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
-make -j16 all 
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-   text	   data	    bss	    dec	    hex	filename
-  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
-Finished building: default.size.stdout
- 
-13:33:58 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
-make -j16 all 
-arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
-   text	   data	    bss	    dec	    hex	filename
-  67652	    404	   5812	  73868	  1208c	SD_LCD_Buttons_testing.elf
-Finished building: default.size.stdout
- 
-13:36:42 **** Build of configuration Debug for project LCD_TESTING ****
+15:40:51 **** Build of configuration Debug for project LCD_TESTING ****
 make -j16 all 
 arm-none-eabi-size   LCD_TESTING.elf 
    text	   data	    bss	    dec	    hex	filename
   80504	     44	   1724	  82272	  14160	LCD_TESTING.elf
 Finished building: default.size.stdout
  
-13:37:07 **** Build of configuration Debug for project SD_LCD_integration ****
+15:41:11 **** Build of configuration Debug for project SD_LCD_integration ****
 make -j16 all 
 arm-none-eabi-size   SD_LCD_integration.elf 
    text	   data	    bss	    dec	    hex	filename
   36300	    152	   2528	  38980	   9844	SD_LCD_integration.elf
+Finished building: default.size.stdout
+ 
+15:50:03 **** Incremental Build of configuration Debug for project LCD_TESTING ****
+make -j16 all 
+arm-none-eabi-size   LCD_TESTING.elf 
+   text	   data	    bss	    dec	    hex	filename
+  80504	     44	   1724	  82272	  14160	LCD_TESTING.elf
+Finished building: default.size.stdout
+ 
+15:50:46 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+make -j16 all 
+arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
+   text	   data	    bss	    dec	    hex	filename
+  74464	    412	   5900	  80776	  13b88	SD_LCD_Buttons_testing.elf
+Finished building: default.size.stdout
+ 
+15:52:40 **** Incremental Build of configuration Debug for project LCD_TESTING ****
+make -j16 all 
+arm-none-eabi-size   LCD_TESTING.elf 
+   text	   data	    bss	    dec	    hex	filename
+  80504	     44	   1724	  82272	  14160	LCD_TESTING.elf
+Finished building: default.size.stdout
+ 
+15:53:00 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+make -j16 all 
+arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
+   text	   data	    bss	    dec	    hex	filename
+  74464	    412	   5900	  80776	  13b88	SD_LCD_Buttons_testing.elf
+Finished building: default.size.stdout
+ 
+15:53:24 **** Incremental Build of configuration Debug for project LCD_TESTING ****
+make -j16 all 
+arm-none-eabi-size   LCD_TESTING.elf 
+   text	   data	    bss	    dec	    hex	filename
+  80504	     44	   1724	  82272	  14160	LCD_TESTING.elf
+Finished building: default.size.stdout
+ 
+15:53:58 **** Incremental Build of configuration Debug for project SD_LCD_integration ****
+make -j16 all 
+arm-none-eabi-size   SD_LCD_integration.elf 
+   text	   data	    bss	    dec	    hex	filename
+  36300	    152	   2528	  38980	   9844	SD_LCD_integration.elf
+Finished building: default.size.stdout
+ 
+15:55:02 **** Incremental Build of configuration Debug for project SD_LCD_Buttons_testing ****
+make -j16 all 
+arm-none-eabi-size   SD_LCD_Buttons_testing.elf 
+   text	   data	    bss	    dec	    hex	filename
+  74464	    412	   5900	  80776	  13b88	SD_LCD_Buttons_testing.elf
+Finished building: default.size.stdout
+ 
+15:56:35 **** Incremental Build of configuration Debug for project LCD_TESTING ****
+make -j16 all 
+arm-none-eabi-size   LCD_TESTING.elf 
+   text	   data	    bss	    dec	    hex	filename
+  80504	     44	   1724	  82272	  14160	LCD_TESTING.elf
 Finished building: default.size.stdout
  

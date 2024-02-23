@@ -1,0 +1,14 @@
+../Core/Src/main.c:71:5:__io_putchar	16	static
+../Core/Src/main.c:87:5:main	8	static
+../Core/Src/main.c:135:6:SystemClock_Config	88	static
+../Core/Src/main.c:181:13:MX_TIM2_Init	32	static
+../Core/Src/main.c:226:13:MX_TIM3_Init	32	static
+../Core/Src/main.c:271:13:MX_USART1_UART_Init	8	static
+../Core/Src/main.c:304:13:MX_USART2_UART_Init	8	static
+../Core/Src/main.c:337:13:MX_GPIO_Init	48	static
+../Core/Src/main.c:388:6:buttons_init	4	static
+../Core/Src/main.c:393:6:drive_column	4	static
+../Core/Src/main.c:399:9:read_rows	4	static
+../Core/Src/main.c:403:6:clean_buffer	4	static
+../Core/Src/main.c:409:6:HAL_TIM_PeriodElapsedCallback	32	static
+../Core/Src/main.c:430:6:Error_Handler	4	static,ignoring_inline_asm

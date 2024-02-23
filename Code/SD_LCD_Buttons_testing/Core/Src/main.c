@@ -29,6 +29,8 @@
 #include <string.h>
 #include "fonts.h"
 #include "integer.h"
+#include "battbaby.h"
+#include "BQ27441_Definitions.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -68,6 +70,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c3;
+
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
 
@@ -128,8 +132,14 @@ uint32_t colorreq;
 }BmpHeader;
 
 // Battery monitor variables
-volatile int bat_percent = 10;  // May not need to be volatile
+BQ27441_ctx_t BQ27441 = {
+            .BQ27441_i2c_address = BQ27441_I2C_ADDRESS,
+            .read_reg = BQ27441_i2cReadBytes,
+            .write_reg = BQ27441_i2cWriteBytes,
+};
+
 int bat_charging = 0;
+int16_t charge = 0;
 
 // USB variables
 extern USBD_HandleTypeDef hUsbDeviceFS;
@@ -146,6 +156,7 @@ static void MX_SPI2_Init(void);
 static void MX_SPI3_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_I2C3_Init(void);
 /* USER CODE BEGIN PFP */
 void dispBat(void);
 void buttons_init(void);
@@ -247,6 +258,97 @@ int displayImage(const char*fname, uint32_t startx, uint32_t starty) {
 	    return 0;
 }
 
+// Battery monitor related
+HAL_StatusTypeDef BQ27441_i2cWriteBytes(uint16_t memAddress, uint8_t *pData, uint16_t Size) {
+    return HAL_I2C_Mem_Write(&hi2c3, BQ27441_I2C_ADDRESS << 1, memAddress, I2C_MEMADD_SIZE_8BIT, pData, Size, HAL_MAX_DELAY);
+}
+
+HAL_StatusTypeDef BQ27441_i2cReadBytes(uint16_t memAddress, uint8_t *pData, uint16_t Size) {
+    return HAL_I2C_Mem_Read(&hi2c3, BQ27441_I2C_ADDRESS << 1, memAddress, I2C_MEMADD_SIZE_8BIT, pData, Size, HAL_MAX_DELAY);
+}
+
+uint16_t BQ27441_readWord(uint16_t subAddress) {
+    uint8_t data[2];
+    BQ27441_i2cReadBytes(subAddress, data, 2);
+    return ((uint16_t) data[1] << 8) | data[0];
+}
+
+uint16_t BQ27441_soc(soc_measure type) {
+    //type = FILTERED;
+    uint16_t socRet = 0;
+    switch (type) {
+        case FILTERED:
+            socRet = BQ27441_readWord(BQ27441_COMMAND_SOC);
+            break;
+        case UNFILTERED:
+            socRet = BQ27441_readWord(BQ27441_COMMAND_SOC_UNFL);
+            break;
+    }
+    return socRet;
+}
+
+uint16_t BQ27441_voltage(void) {
+    return BQ27441_readWord(BQ27441_COMMAND_VOLTAGE);
+}
+
+int16_t BQ27441_power(void) {
+    return (int16_t) BQ27441_readWord(BQ27441_COMMAND_AVG_POWER);
+}
+
+uint16_t BQ27441_deviceType(void) {
+	// command sent to slave to tell it master wants to know devicetype
+	// 0xFF to get right 8 bits of BQ27441_CONTROL_DEVICE_TYPE
+	// >>8 to get left 8 bits, discarding right 8 bits of BQ27441_CONTROL_DEVICE_TYPE
+    uint8_t command[2] = {BQ27441_CONTROL_DEVICE_TYPE & 0xFF, BQ27441_CONTROL_DEVICE_TYPE >> 8};
+    uint8_t data[2];
+    uint16_t deviceType = 0;
+
+    BQ27441_i2cWriteBytes(BQ27441_COMMAND_CONTROL, command, sizeof(command)); //write command to slave
+
+    HAL_Delay(10); //delay to ensure device is ready
+
+    if (BQ27441_i2cReadBytes(BQ27441_COMMAND_CONTROL, data, sizeof(data)) == HAL_OK) { //read device type from control register
+        deviceType = (data[1] << 8) | data[0];
+    }
+    return deviceType;
+}
+
+bool BQ27441_init(BQ27441_ctx_t *dev) {
+    if (dev == NULL)
+        return false;
+//    ctx.read_reg = dev->read_reg;
+//    ctx.write_reg = dev->write_reg;
+//    ctx.BQ27441_i2c_address = dev->BQ27441_i2c_address;
+
+    if (BQ27441_deviceType() == BQ27441_DEVICE_ID) {
+        return true;
+    } else
+        return false;
+}
+
+void Bat_init(BQ27441_ctx_t * dev) {
+	BQ27441_init(dev);
+	charge = BQ27441_soc(FILTERED);
+	HAL_GPIO_WritePin(BAT_CE_GPIO_Port, BAT_CE_Pin, GPIO_PIN_SET);
+	if (bat_charging && charge < 99) {
+		HAL_GPIO_WritePin(BAT_CE_GPIO_Port, BAT_CE_Pin, GPIO_PIN_RESET);
+	}
+}
+
+void updateBat(void) {
+	charge = BQ27441_soc(FILTERED);
+//	printf("lcd charge: %d\r\n", charge);
+	if (bat_charging){
+		if (charge >= 99) {
+			HAL_GPIO_WritePin(BAT_CE_GPIO_Port, BAT_CE_Pin, GPIO_PIN_SET);
+		}
+		else {
+			HAL_GPIO_WritePin(BAT_CE_GPIO_Port, BAT_CE_Pin, GPIO_PIN_RESET);
+		}
+	}
+
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -284,18 +386,37 @@ int main(void)
   MX_TIM3_Init();
   MX_FATFS_Init();
   MX_USB_DEVICE_Init();
+  MX_I2C3_Init();
   /* USER CODE BEGIN 2 */
 
   // Initialize the screen
+  printf("\r\n~*~* PROTOTYPE *~*~\r\n");
   ILI9341_Init();
   ILI9341_FillScreen(ILI9341_BLACK);
+
+  // Disable charging
+  HAL_GPIO_WritePin(BAT_CE_GPIO_Port, BAT_CE_Pin, GPIO_PIN_SET);
+
+  // Connect to battery monitor
+  HAL_StatusTypeDef res;
+  uint8_t receiveBuffer[1];
+  printf("Connecting to battery monitor\r\n");
+  while (1) {
+	if (HAL_I2C_Master_Receive(&hi2c3, (uint16_t) BQ27441_I2C_ADDRESS << 1, receiveBuffer, sizeof(receiveBuffer), HAL_MAX_DELAY) == HAL_OK) {
+	  printf("Device found\r\n");
+	  break;
+	}
+  }
+
+  // Initialize Battery monitor
+  Bat_init(&BQ27441);
 
   // Let SD card settle
   HAL_Delay(1000);
 
   // Check if SD card is connected
   if (HAL_GPIO_ReadPin(SD_Detect_GPIO_Port, SD_Detect_Pin) == GPIO_PIN_RESET) {
-	  printf("Please check SD card connection");
+	  printf("Please check SD card connection\r\n");
 	  ILI9341_WriteString(65, 100, "Please check", Font_16x26, ILI9341_WHITE, ILI9341_BLACK);
 	  ILI9341_WriteString(100,  130,  "SD card", Font_16x26, ILI9341_WHITE, ILI9341_BLACK);
 	  while (1) {
@@ -322,8 +443,11 @@ int main(void)
   if (HAL_GPIO_ReadPin(USB_Detect_GPIO_Port, USB_Detect_Pin) == GPIO_PIN_SET) {
 	  // If USB
 	  // get battery percentage and status
+	  bat_charging = 1;
+	  updateBat();
 
 	  // show USB symbol, battery percentage
+	  printf("Connection status: USB\r\n");
 	  displayImage(USB, STATUS_X, STATUS_Y);
 	  dispBat();
 
@@ -333,8 +457,11 @@ int main(void)
   else {
 	  // If not USB
 	  // get battery percentage and status
+	  bat_charging = 0;
+	  updateBat();
 
 	  // show bluetooth symbol, battery percentage
+	  printf("Connection status: Bluetooth\r\n");
 	  displayImage(BLUETOOTH, STATUS_X, STATUS_Y);
 	  dispBat();
 
@@ -404,6 +531,40 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief I2C3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C3_Init(void)
+{
+
+  /* USER CODE BEGIN I2C3_Init 0 */
+
+  /* USER CODE END I2C3_Init 0 */
+
+  /* USER CODE BEGIN I2C3_Init 1 */
+
+  /* USER CODE END I2C3_Init 1 */
+  hi2c3.Instance = I2C3;
+  hi2c3.Init.ClockSpeed = 400000;
+  hi2c3.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c3.Init.OwnAddress1 = 0;
+  hi2c3.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c3.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c3.Init.OwnAddress2 = 0;
+  hi2c3.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c3.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C3_Init 2 */
+
+  /* USER CODE END I2C3_Init 2 */
+
 }
 
 /**
@@ -629,7 +790,7 @@ static void MX_GPIO_Init(void)
                           |Col3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LCD_DC_GPIO_Port, LCD_DC_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, BAT_CE_Pin|LCD_DC_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LCD_Reset_GPIO_Port, LCD_Reset_Pin, GPIO_PIN_RESET);
@@ -675,12 +836,18 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(SD_CS_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LCD_DC_Pin */
-  GPIO_InitStruct.Pin = LCD_DC_Pin;
+  /*Configure GPIO pins : BAT_CE_Pin LCD_DC_Pin */
+  GPIO_InitStruct.Pin = BAT_CE_Pin|LCD_DC_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LCD_DC_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : BAT_GPOUT_Pin */
+  GPIO_InitStruct.Pin = BAT_GPOUT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(BAT_GPOUT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LCD_Reset_Pin */
   GPIO_InitStruct.Pin = LCD_Reset_Pin;
@@ -695,17 +862,25 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
 }
 
 /* USER CODE BEGIN 4 */
 void dispBat(void) {
-	snprintf(buff, sizeof(buff), "%d", bat_percent);
+	snprintf(buff, sizeof(buff), "%d", charge);
+	printf("charge: %d", charge);
 	if (bat_charging){
 		displayImage(BATTERY_CHARGE, BATTERY_X, BATTERY_Y);
 		ILI9341_WriteString(BATTERY_X + 15, BATTERY_Y + 3, buff, Font_11x18, ILI9341_GREEN, ILI9341_BLACK);
 	}
 	else {
-		if (bat_percent >= 25) {
+		if (charge >= 25) {
 			displayImage(BATTERY_FULL, BATTERY_X, BATTERY_Y);
 			ILI9341_WriteString(BATTERY_X + 15, BATTERY_Y + 3, buff, Font_11x18, ILI9341_WHITE, ILI9341_BLACK);
 		}
@@ -735,19 +910,19 @@ void clean_buffer(void) {
 	cleaned_buffer[0] = buffer[0];
 	cleaned_buffer[1] = buffer[1];
 	cleaned_buffer[2] = buffer[2] & 0x01;
-	if ((cleaned_buffer[0] & 0x20) && (cleaned_buffer[1] & 0x20)) {
-		cleaned_buffer[1] &= ~0x20;
+	if (cleaned_buffer[0] & 0x01 && cleaned_buffer[0] & 0x04) {
+		cleaned_buffer[0] &= ~0x04;
 	}
-	if ((cleaned_buffer[1] & 0x10 && cleaned_buffer[1] & 0x40)) {
-		cleaned_buffer[1] &= ~0x50;
+	if (cleaned_buffer[0] & 0x02 && cleaned_buffer[0] & 0x08) {
+		cleaned_buffer[0] &= ~0x0A;
 	}
 	if (buffer[2] & 0x02) {
-//		printf("cleaning %X, ", cleaned_buffer[2]);
-//		printf("[0], %X, [1], %X, ", cleaned_buffer[0] & 0x20, cleaned_buffer[1] & 0x70);
-		cleaned_buffer[2] |= ((cleaned_buffer[0] & 0x20) >> 4) | ((cleaned_buffer[1] & 0x70) >> 2);
-//		printf("cleaned %X\r\n", cleaned_buffer[2]);
-		cleaned_buffer[0] &= ~0x20;
-		cleaned_buffer[1] &= ~0x70;
+		printf("cleaning %X, ", cleaned_buffer[2]);
+		printf("[0], %X\r\n", cleaned_buffer[0] & 0x0f);
+		cleaned_buffer[2] |= ((cleaned_buffer[0] & 0x0f) << 1);
+		printf("cleaned %X\r\n", cleaned_buffer[2]);
+		cleaned_buffer[0] &= ~0x0f;
+//		cleaned_buffer[1] &= ~0x70;
 	}
 }
 
@@ -765,6 +940,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 		clean_buffer();
 		USBD_HID_SendReport(&hUsbDeviceFS, cleaned_buffer, sizeof(cleaned_buffer));
 	}
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+	 if ((GPIO_Pin == B1_Pin || BAT_GPOUT_Pin)) {
+		 updateBat();
+		 dispBat();
+	 }
+	 else {
+		 __NOP();
+	 }
 }
 /* USER CODE END 4 */
 
@@ -785,13 +970,13 @@ void Error_Handler(void)
 
 #ifdef  USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source fil and the source line number
+  * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
-  * @param  fil: pointer to the source fil name
+  * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t *fil, uint32_t line)
+void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the fil name and line number,
