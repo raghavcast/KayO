@@ -61,6 +61,10 @@ void Error_Handler(void);
 #define HSE_OSC_IN_GPIO_Port GPIOH
 #define HSE_OSC_OUT_Pin GPIO_PIN_1
 #define HSE_OSC_OUT_GPIO_Port GPIOH
+#define DEBUG_LED1_Pin GPIO_PIN_0
+#define DEBUG_LED1_GPIO_Port GPIOA
+#define DEBUG_LED2_Pin GPIO_PIN_1
+#define DEBUG_LED2_GPIO_Port GPIOA
 #define BT_TX_Pin GPIO_PIN_2
 #define BT_TX_GPIO_Port GPIOA
 #define BT_RX_Pin GPIO_PIN_3

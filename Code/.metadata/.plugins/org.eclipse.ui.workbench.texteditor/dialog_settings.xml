@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="buttons_init"/>
+		<item key="selection" value="blue"/>
 		<list key="findhistory">
+			<item value="blue"/>
+			<item value="USBD_LL_Transmit"/>
 			<item value="buttons_init"/>
 			<item value="clean"/>
 			<item value="0xC0"/>
@@ -21,8 +23,6 @@
 			<item value="hi2c1"/>
 			<item value="num"/>
 			<item value="zero"/>
-			<item value="File opened"/>
-			<item value="file"/>
 		</list>
 		<list key="replacehistory">
 			<item value="charge"/>

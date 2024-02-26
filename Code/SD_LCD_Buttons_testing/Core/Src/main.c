@@ -31,6 +31,7 @@
 #include "integer.h"
 #include "battbaby.h"
 #include "BQ27441_Definitions.h"
+#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,6 +100,8 @@ UART_HandleTypeDef huart2;
 //	0xC0, // END_COLLECTION
 //0xC0 // END_COLLECTION
 
+bool bluetooth_mode = false;
+
 // ILI9341 Variables
 int16_t x, y;
 char buff[64];
@@ -146,6 +149,7 @@ extern USBD_HandleTypeDef hUsbDeviceFS;
 volatile int col = 0;
 uint8_t buffer[] = {0, 0, 0};
 uint8_t cleaned_buffer[] = {0, 0, 0};
+uint8_t bluetooth_buffer[] = {0x00, 0x01, 0x02};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -163,6 +167,8 @@ void buttons_init(void);
 void drive_column(void);
 uint8_t read_rows(void);
 void clean_buffer(void);
+void clean_buffer_bt(void);
+void right_stick_emulate(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -451,8 +457,8 @@ int main(void)
 	  displayImage(USB, STATUS_X, STATUS_Y);
 	  dispBat();
 
-	  // Enable USB timer interrupt
-	  HAL_TIM_Base_Start_IT(&htim3);
+//	  // Enable USB timer interrupt
+//	  HAL_TIM_Base_Start_IT(&htim3);
   }
   else {
 	  // If not USB
@@ -466,11 +472,14 @@ int main(void)
 	  dispBat();
 
 	  // Enable Bluetooth
+	  bluetooth_mode = true;
+
   }
 
 //  ILI9341_WriteString(80, 120, "LOGO", Font_16x26, ILI9341_WHITE, ILI9341_BLACK);
-  // Enable buttons interrupt
+  // Enable buttons interrupt, and data timer interrupt
   HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_Base_Start_IT(&htim3);
 
   // Enable battery baby timer interrupt
 
@@ -916,6 +925,9 @@ void clean_buffer(void) {
 	if (cleaned_buffer[0] & 0x02 && cleaned_buffer[0] & 0x08) {
 		cleaned_buffer[0] &= ~0x0A;
 	}
+}
+
+void right_stick_emulate(void) {
 	if (buffer[2] & 0x02) {
 		printf("cleaning %X, ", cleaned_buffer[2]);
 		printf("[0], %X\r\n", cleaned_buffer[0] & 0x0f);
@@ -924,6 +936,15 @@ void clean_buffer(void) {
 		cleaned_buffer[0] &= ~0x0f;
 //		cleaned_buffer[1] &= ~0x70;
 	}
+}
+
+void clean_buffer_bt(void) {
+	bluetooth_buffer[0] &= ~0xf3;
+	bluetooth_buffer[1] &= ~0xf3;
+	bluetooth_buffer[2] &= ~0xf3;
+	bluetooth_buffer[0] |= (buffer[0] & 0x3f) << 2;
+	bluetooth_buffer[1] |= ((buffer[0] & 0xc0) >> 4) | ((buffer[1] & 0x0f) << 4);
+	bluetooth_buffer[2] |= ((buffer[1] & 0xf0) >> 2) | ((buffer[2] & 0x3) << 6);
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
@@ -938,7 +959,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
 	if (htim == &htim3) {
 		clean_buffer();
-		USBD_HID_SendReport(&hUsbDeviceFS, cleaned_buffer, sizeof(cleaned_buffer));
+		if (bluetooth_mode) {
+			clean_buffer_bt();
+			HAL_UART_Transmit(&huart1, bluetooth_buffer, sizeof(bluetooth_buffer), 100);
+		}
+		else {
+			right_stick_emulate();
+			USBD_HID_SendReport(&hUsbDeviceFS, cleaned_buffer, sizeof(cleaned_buffer));
+		}
 	}
 }
 
