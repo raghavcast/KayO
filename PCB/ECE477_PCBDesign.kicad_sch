@@ -83,9 +83,9 @@
       (effects (font (size 1.27 1.27)) (justify right))
       (uuid 4994bb0d-17ba-4402-8af6-5b69e41d6e7a)
     )
-    (pin "BAT{~{CE}, TMR, EN1, EN2, GPOUT}" bidirectional (at 162.56 118.11 0)
+    (pin "BAT{~{CE}, GPOUT}" bidirectional (at 162.56 118.11 0)
       (effects (font (size 1.27 1.27)) (justify right))
-      (uuid b8ecc8fa-8394-45ac-a265-0eb4f31dda8b)
+      (uuid c27ad9f7-6cd3-4da7-b652-8f6c06fda698)
     )
     (instances
       (project "ECE477_PCBDesign"
@@ -145,10 +145,6 @@
       (effects (font (size 1.27 1.27)) (justify right))
       (uuid 002a7ea7-bfaa-408f-bafc-e87d72ce8252)
     )
-    (pin "BAT{~{CE}, TMR, EN1, EN2, GPOUT}" bidirectional (at 170.18 118.11 180)
-      (effects (font (size 1.27 1.27)) (justify left))
-      (uuid 4909f6e0-4daf-4e53-aec5-fe15330f5869)
-    )
     (pin "LCD{SCLK, MOSI, ~{CS}, DC, ~{RST}}" bidirectional (at 236.22 118.11 0)
       (effects (font (size 1.27 1.27)) (justify right))
       (uuid 2cca4130-4585-490f-bf48-04e9bfcc443c)
@@ -160,6 +156,10 @@
     (pin "KEY{COL[0..3], ROW[0..3], B17, B18}" bidirectional (at 236.22 152.4 0)
       (effects (font (size 1.27 1.27)) (justify right))
       (uuid 743b5dcd-1c62-4732-976d-508b4eeea588)
+    )
+    (pin "BAT{~{CE}, GPOUT}" bidirectional (at 170.18 118.11 180)
+      (effects (font (size 1.27 1.27)) (justify left))
+      (uuid 694df469-8fa6-4193-8c7b-f42ec65a71d3)
     )
     (instances
       (project "ECE477_PCBDesign"
