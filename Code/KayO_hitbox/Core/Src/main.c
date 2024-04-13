@@ -402,6 +402,14 @@ void startup_init(void) {
 		bluetooth_mode = true;
 		HAL_GPIO_WritePin(BT_EN_GPIO_Port, BT_EN_Pin, GPIO_PIN_SET);
 	}
+	if (HAL_GPIO_ReadPin(Button18_GPIO_Port, Button18_Pin) == GPIO_PIN_SET) {
+		neutral_SOCD_mode = true;
+	 	displayImage(NEUTRAL_SOCD, SOCD_X, SOCD_Y);
+	}
+	else {
+		neutral_SOCD_mode = false;
+		displayImage(UP_SOCD, SOCD_X, SOCD_Y);
+	}
 }
 
 void dispBat(void) {
@@ -444,6 +452,17 @@ void clean_buffer(void) {
 	cleaned_buffer[0] = buffer[0];
 	cleaned_buffer[1] = buffer[1];
 	cleaned_buffer[2] = buffer[2] & 0x01;
+	if (cleaned_buffer[0] & 0x01 && cleaned_buffer[0] & 0x04) {
+		if (neutral_SOCD_mode) {
+			cleaned_buffer[0] &= ~0x05;
+		}
+		else {
+			cleaned_buffer[0] &= ~0x04;
+		}
+	}
+	if (cleaned_buffer[0] & 0x02 && cleaned_buffer[0] & 0x08) {
+		cleaned_buffer[0] &= ~0x0A;
+	}
 }
 
 void right_stick_emulate(void) {
