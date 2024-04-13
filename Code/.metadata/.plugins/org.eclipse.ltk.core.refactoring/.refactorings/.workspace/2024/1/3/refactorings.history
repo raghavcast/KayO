@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete 2 resources" deleteContents="false" description="Delete 2 resources" element1="/stm_hid_tutorial" element2="/testing" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="2" stamp="1705355559402"/>&#x0A;<refactoring comment="Delete resource &apos;STM32F411_Blackpill_Serial_USB_CDC_Example&apos;" deleteContents="true" description="Delete resource &apos;STM32F411_Blackpill_Serial_USB_CDC_Example&apos;" element1="/STM32F411_Blackpill_Serial_USB_CDC_Example" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1705534074621"/>
-</session>
