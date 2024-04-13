@@ -43,7 +43,8 @@ UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-uint8_t data[8] = {0xFD, 0x06, 0x00, 0x00, 0x7f, 0x00, 0x00, 0x00};
+uint8_t data[] = {0xFD, 0x55, 0x55, 0x55};
+uint8_t data_1[] = {0xFD, 0xAA, 0xAA, 0xAA};
 uint8_t zero[8] = {0xFD, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 /* USER CODE END PV */
 
@@ -93,7 +94,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -104,10 +105,10 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	  HAL_UART_Transmit(&huart1, data, sizeof(data), HAL_MAX_DELAY);
-	  HAL_Delay(1000);
-	  HAL_UART_Transmit(&huart1, zero, sizeof(zero), HAL_MAX_DELAY);
-	  HAL_Delay(1000);
+	  HAL_UART_Transmit(&huart2, data, sizeof(data), HAL_MAX_DELAY);
+	  HAL_Delay(500);
+	  HAL_UART_Transmit(&huart2, data_1, sizeof(data_1), HAL_MAX_DELAY);
+	  HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }
@@ -240,7 +241,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_Pin|LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -248,12 +249,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LD2_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin;
+  /*Configure GPIO pins : LED_Pin LD2_Pin */
+  GPIO_InitStruct.Pin = LED_Pin|LD2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }
 

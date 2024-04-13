@@ -1,17 +1,10 @@
-18:52:48 **** Incremental Build of configuration Debug for project esp_bluetoot ****
+16:21:03 **** Incremental Build of configuration Debug for project esp_bluetoot ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F042x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "esp_bluetoot.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\esp_bluetoot\STM32F042K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="esp_bluetoot.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: esp_bluetoot.elf
- 
 arm-none-eabi-size   esp_bluetoot.elf 
-arm-none-eabi-objdump -h -S  esp_bluetoot.elf  > "esp_bluetoot.list"
    text	   data	    bss	    dec	    hex	filename
    8388	     28	   1844	  10260	   2814	esp_bluetoot.elf
 Finished building: default.size.stdout
  
-Finished building: esp_bluetoot.list
- 
 
-18:52:49 Build Finished. 0 errors, 0 warnings. (took 1s.356ms)
+16:21:04 Build Finished. 0 errors, 0 warnings. (took 407ms)
 

@@ -1,8 +1,6 @@
-19:33:54 **** Incremental Build of configuration Debug for project battbaby_f4 ****
+15:45:11 **** Incremental Build of configuration Debug for project battbaby_f4 ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
-arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
 ../Core/Src/main.c:53:25: warning: initialization of 'int16_t (*)(uint8_t,  uint8_t,  uint8_t *, uint8_t)' {aka 'short int (*)(unsigned char,  unsigned char,  unsigned char *, unsigned char)'} from incompatible pointer type 'HAL_StatusTypeDef (*)(uint16_t,  uint8_t *, uint16_t)' {aka 'HAL_StatusTypeDef (*)(short unsigned int,  unsigned char *, short unsigned int)'} [-Wincompatible-pointer-types]
    53 |             .read_reg = BQ27441_i2cReadBytes,
       |                         ^~~~~~~~~~~~~~~~~~~~
@@ -23,23 +21,20 @@ arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -D
   184 |  check_charging();
       |  ^~~~~~~~~~~~~~
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:290:15: warning: unused variable 'socValue' [-Wunused-variable]
-  290 |      uint16_t socValue = BQ27441_soc(FILTERED);
+../Core/Src/main.c:288:15: warning: unused variable 'socValue' [-Wunused-variable]
+  288 |      uint16_t socValue = BQ27441_soc(FILTERED);
       |               ^~~~~~~~
-../Core/Src/main.c:271:22: warning: unused variable 'res' [-Wunused-variable]
-  271 |    HAL_StatusTypeDef res;
-      |                      ^~~
 arm-none-eabi-gcc -o "battbaby_f4.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\battbaby_f4\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="battbaby_f4.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: battbaby_f4.elf
  
 arm-none-eabi-size   battbaby_f4.elf 
 arm-none-eabi-objdump -h -S  battbaby_f4.elf  > "battbaby_f4.list"
    text	   data	    bss	    dec	    hex	filename
-  20420	    132	   1820	  22372	   5764	battbaby_f4.elf
+  20652	    132	   1820	  22604	   584c	battbaby_f4.elf
 Finished building: default.size.stdout
  
 Finished building: battbaby_f4.list
  
 
-19:33:55 Build Finished. 0 errors, 6 warnings. (took 1s.54ms)
+15:45:12 Build Finished. 0 errors, 5 warnings. (took 1s.593ms)
 

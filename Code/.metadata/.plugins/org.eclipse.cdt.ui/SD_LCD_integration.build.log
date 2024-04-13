@@ -1,10 +1,17 @@
-15:53:58 **** Incremental Build of configuration Debug for project SD_LCD_integration ****
+16:08:04 **** Incremental Build of configuration Debug for project SD_LCD_integration ****
 make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../FATFS/Target -I../FATFS/App -I../Middlewares/Third_Party/FatFs/src -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "SD_LCD_integration.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ragha.000\OneDrive\Desktop\Purdue\Spring 2024\ECE 47700\Code\SD_LCD_integration\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SD_LCD_integration.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: SD_LCD_integration.elf
+ 
 arm-none-eabi-size   SD_LCD_integration.elf 
+arm-none-eabi-objdump -h -S  SD_LCD_integration.elf  > "SD_LCD_integration.list"
    text	   data	    bss	    dec	    hex	filename
-  36300	    152	   2528	  38980	   9844	SD_LCD_integration.elf
+  35572	    152	   2600	  38324	   95b4	SD_LCD_integration.elf
 Finished building: default.size.stdout
  
+Finished building: SD_LCD_integration.list
+ 
 
-15:53:58 Build Finished. 0 errors, 0 warnings. (took 421ms)
+16:08:05 Build Finished. 0 errors, 0 warnings. (took 927ms)
 

@@ -78,7 +78,7 @@ static void MX_USART1_UART_Init(void);
 
 PUTCHAR_PROTOTYPE
 {
-  HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
   return ch;
 }
 /*
@@ -249,27 +249,25 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   // Making sure charging is disabled.
-  HAL_GPIO_WritePin(BAT_CE_GPIO_Port, BAT_CE_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(BAT_CE_GPIO_Port, BAT_CE_Pin, GPIO_PIN_RESET);
 
-//  printf("Starting I2C device scan...\r\n");
-//  	HAL_StatusTypeDef res;
-//  	uint8_t receiveBuffer[1];
-//  	for(uint16_t i = 0; i < 128; i++) {
-//  		res = HAL_I2C_Master_Receive(&hi2c3, (uint16_t)i << 1, receiveBuffer, sizeof(receiveBuffer), HAL_MAX_DELAY);
-//  		if(res == HAL_OK) {
-//  			printf("Device found at address 0x%02X\r\n", i);
-//  			fflush(stdout);
-//  			break;
-//  		} else {
-//  			printf(" - ");
-//  			fflush(stdout);
-//  		}
-//  	}
+  printf("Starting I2C device scan...\r\n");
+  	HAL_StatusTypeDef res;
+  	uint8_t receiveBuffer[1];
+  	for(uint16_t i = 0; i < 128; i++) {
+  		res = HAL_I2C_Master_Receive(&hi2c3, (uint16_t)i << 1, receiveBuffer, sizeof(receiveBuffer), HAL_MAX_DELAY);
+  		if(res == HAL_OK) {
+  			printf("Device found at address 0x%02X\r\n", i);
+  			fflush(stdout);
+  			break;
+  		} else {
+  			printf(" - ");
+  			fflush(stdout);
+  		}
+  	}
 
   	printf("\r\n~*BATTBABY*~\r\n");
   	// Checking for connection
-  	HAL_StatusTypeDef res;
-  	uint8_t receiveBuffer[1];
   	while (1) {
   		if (HAL_I2C_Master_Receive(&hi2c3, (uint16_t) BQ27441_I2C_ADDRESS << 1, receiveBuffer, sizeof(receiveBuffer), HAL_MAX_DELAY) == HAL_OK) {
   			printf("Device found\r\n");
@@ -519,6 +517,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	 if ((GPIO_Pin == B1_Pin || BAT_GPOUT_Pin)) {
+		 check_charging();
 		 updateBat();
 	 }
 	 else {

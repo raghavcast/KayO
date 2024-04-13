@@ -47,21 +47,27 @@
 #define BITMAP_HEADER_SIZE sizeof(BmpHeader)
 
 // Image position defines
-#define LOGO_X 10
-#define LOGO_Y 60
-#define STATUS_X 200
-#define STATUS_Y 120
-#define BATTERY_X 200
-#define BATTERY_Y 60
+#define LOGO_X 15
+#define LOGO_Y 55
+#define STATUS_X 215
+#define STATUS_Y 110
+#define BATTERY_X 210
+#define BATTERY_Y 40
+#define SOCD_X 280
+#define SOCD_Y 200
+#define PERCENT_X BATTERY_X + 15
+#define PERCENT_Y BATTERY_Y + 7
 
 // image filename defines
 #define BLUETOOTH "blue.bmp"
 #define USB "usb.bmp"
 #define BATTERY_FULL "full.bmp"
-#define BATTERY_HALF "half.bmp"
+#define BATTERY_NORM "norm.bmp"
 #define BATTERY_LOW "low.bmp"
 #define BATTERY_CHARGE "charg.bmp"
 #define LOGO "logo.bmp"
+#define NEUTRAL_SOCD "star.bmp"
+#define UP_SOCD "up.bmp"
 
 /* USER CODE END PD */
 
@@ -79,6 +85,7 @@ SPI_HandleTypeDef hspi3;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 
+UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
@@ -101,6 +108,7 @@ UART_HandleTypeDef huart2;
 //0xC0 // END_COLLECTION
 
 bool bluetooth_mode = false;
+bool neutral_SOCD_mode = false;
 
 // ILI9341 Variables
 int16_t x, y;
@@ -149,7 +157,7 @@ extern USBD_HandleTypeDef hUsbDeviceFS;
 volatile int col = 0;
 uint8_t buffer[] = {0, 0, 0};
 uint8_t cleaned_buffer[] = {0, 0, 0};
-uint8_t bluetooth_buffer[] = {0x00, 0x01, 0x02};
+uint8_t bluetooth_buffer[] = {0xFD, 0x00, 0x00, 0x00};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -161,6 +169,7 @@ static void MX_SPI3_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_I2C3_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 void dispBat(void);
 void buttons_init(void);
@@ -185,7 +194,7 @@ int fputc(int ch, FILE *f)
 {
   /* Place your implementation of fputc here */
   /* e.g. write a character to the UART3 and Loop until the end of transmission */
-  HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
   return ch;
 }
 
@@ -193,7 +202,7 @@ int fputc(int ch, FILE *f)
 int displayImage(const char*fname, uint32_t startx, uint32_t starty) {
 	    FRESULT res = f_open(&fil, fname, FA_READ);
 	    if(res != FR_OK) {
-	    	printf("f_open() failed, res = %d\r\n", res);
+	    	printf("f_open() failed, res = %d, %s\r\n", res, fname);
 	        return -1;
 	    }
 
@@ -332,6 +341,18 @@ bool BQ27441_init(BQ27441_ctx_t *dev) {
         return false;
 }
 
+
+void check_charging(void) {
+	uint16_t pow = BQ27441_power();
+	printf("pow: %d\r\n", pow);
+	if (pow > 15000) {
+		bat_charging = 0;
+	}
+	else {
+		bat_charging = 1;
+	}
+}
+
 void Bat_init(BQ27441_ctx_t * dev) {
 	BQ27441_init(dev);
 	charge = BQ27441_soc(FILTERED);
@@ -343,7 +364,7 @@ void Bat_init(BQ27441_ctx_t * dev) {
 
 void updateBat(void) {
 	charge = BQ27441_soc(FILTERED);
-//	printf("lcd charge: %d\r\n", charge);
+	printf("lcd charge: %d\r\n", charge);
 	if (bat_charging){
 		if (charge >= 99) {
 			HAL_GPIO_WritePin(BAT_CE_GPIO_Port, BAT_CE_Pin, GPIO_PIN_SET);
@@ -353,6 +374,52 @@ void updateBat(void) {
 		}
 	}
 
+}
+
+void startup_init(void) {
+	ILI9341_FillScreen(ILI9341_BLACK);
+	  displayImage(LOGO, LOGO_X, LOGO_Y);
+	  // Check USB connection
+	  if (HAL_GPIO_ReadPin(USB_Detect_GPIO_Port, USB_Detect_Pin) == GPIO_PIN_SET) {
+		  // If USB
+		  // get battery percentage and status
+		  bat_charging = 1;
+//		  check_charging();
+		  updateBat();
+
+		  // show USB symbol, battery percentage
+		  printf("Connection status: USB\r\n");
+		  displayImage(USB, STATUS_X, STATUS_Y);
+		  dispBat();
+
+	//	  // Enable USB timer interrupt
+	//	  HAL_TIM_Base_Start_IT(&htim3);
+		  bluetooth_mode = false;
+		  HAL_GPIO_WritePin(BT_EN_GPIO_Port, BT_EN_Pin, GPIO_PIN_RESET);
+	  }
+	  else {
+		  // If not USB
+		  // get battery percentage and status
+		  bat_charging = 0;
+		  updateBat();
+
+		  // show bluetooth symbol, battery percentage
+		  printf("Connection status: Bluetooth\r\n");
+		  displayImage(BLUETOOTH, STATUS_X, STATUS_Y);
+		  dispBat();
+
+		  // Enable Bluetooth
+		  bluetooth_mode = true;
+		  HAL_GPIO_WritePin(BT_EN_GPIO_Port, BT_EN_Pin, GPIO_PIN_SET);
+	  }
+//	  if (HAL_GPIO_ReadPin(Button18_GPIO_Port, Button18_Pin) == GPIO_PIN_SET) {
+//	  	neutral_SOCD_mode = true;
+//	  	displayImage(NEUTRAL_SOCD, SOCD_X, SOCD_Y);
+//	  }
+//	  else {
+//		neutral_SOCD_mode = false;
+//		displayImage(UP_SOCD, SOCD_X, SOCD_Y);
+//	  }
 }
 
 /* USER CODE END 0 */
@@ -393,10 +460,12 @@ int main(void)
   MX_FATFS_Init();
   MX_USB_DEVICE_Init();
   MX_I2C3_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
   // Initialize the screen
   printf("\r\n~*~* PROTOTYPE *~*~\r\n");
+  HAL_GPIO_WritePin(Debug_LED_GPIO_Port, Debug_LED_Pin, GPIO_PIN_SET);
   ILI9341_Init();
   ILI9341_FillScreen(ILI9341_BLACK);
 
@@ -407,12 +476,18 @@ int main(void)
   HAL_StatusTypeDef res;
   uint8_t receiveBuffer[1];
   printf("Connecting to battery monitor\r\n");
-  while (1) {
-	if (HAL_I2C_Master_Receive(&hi2c3, (uint16_t) BQ27441_I2C_ADDRESS << 1, receiveBuffer, sizeof(receiveBuffer), HAL_MAX_DELAY) == HAL_OK) {
-	  printf("Device found\r\n");
-	  break;
-	}
+  if (HAL_I2C_Master_Receive(&hi2c3, (uint16_t) BQ27441_I2C_ADDRESS << 1, receiveBuffer, sizeof(receiveBuffer), HAL_MAX_DELAY) != HAL_OK) {
+	  ILI9341_WriteString(65, 100, "Battery missing", Font_16x26, ILI9341_WHITE, ILI9341_BLACK);
+	  ILI9341_WriteString(100, 130, "or damaged", Font_16x26, ILI9341_WHITE, ILI9341_BLACK);
+	  while (1) {
+		if (HAL_I2C_Master_Receive(&hi2c3, (uint16_t) BQ27441_I2C_ADDRESS << 1, receiveBuffer, sizeof(receiveBuffer), HAL_MAX_DELAY) == HAL_OK) {
+		  printf("Device found\r\n");
+		  break;
+		}
+	  }
   }
+  ILI9341_FillScreen(ILI9341_BLACK);
+
 
   // Initialize Battery monitor
   Bat_init(&BQ27441);
@@ -442,39 +517,18 @@ int main(void)
   fres = f_mount(&fs, "", 1);
   if (fres != FR_OK) {
 	printf("f_mount error (%i)\r\n", fres);
-	while(1);
+	ILI9341_WriteString(90, 110, "SD card", Font_16x26, ILI9341_WHITE, ILI9341_BLACK);
+	ILI9341_WriteString(75, 130, "mounting error", Font_16x26, ILI9341_WHITE, ILI9341_BLACK);
+	while(1) {
+		fres = f_mount(&fs, "", 1);
+		if (fres == FR_OK) {
+			break;
+		}
+	}
   }
-  displayImage(LOGO, LOGO_X, LOGO_Y);
-  // Check USB connection
-  if (HAL_GPIO_ReadPin(USB_Detect_GPIO_Port, USB_Detect_Pin) == GPIO_PIN_SET) {
-	  // If USB
-	  // get battery percentage and status
-	  bat_charging = 1;
-	  updateBat();
 
-	  // show USB symbol, battery percentage
-	  printf("Connection status: USB\r\n");
-	  displayImage(USB, STATUS_X, STATUS_Y);
-	  dispBat();
+  startup_init();
 
-//	  // Enable USB timer interrupt
-//	  HAL_TIM_Base_Start_IT(&htim3);
-  }
-  else {
-	  // If not USB
-	  // get battery percentage and status
-	  bat_charging = 0;
-	  updateBat();
-
-	  // show bluetooth symbol, battery percentage
-	  printf("Connection status: Bluetooth\r\n");
-	  displayImage(BLUETOOTH, STATUS_X, STATUS_Y);
-	  dispBat();
-
-	  // Enable Bluetooth
-	  bluetooth_mode = true;
-
-  }
 
 //  ILI9341_WriteString(80, 120, "LOGO", Font_16x26, ILI9341_WHITE, ILI9341_BLACK);
   // Enable buttons interrupt, and data timer interrupt
@@ -743,6 +797,39 @@ static void MX_TIM3_Init(void)
 }
 
 /**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
+}
+
+/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
@@ -792,7 +879,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LD2_Pin|LCD_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, Debug_LED_Pin|BT_EN_Pin|LCD_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, Col0_Pin|Col1_Pin|Col2_Pin|SD_CS_Pin
@@ -804,39 +891,44 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LCD_Reset_GPIO_Port, LCD_Reset_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : B1_Pin */
-  GPIO_InitStruct.Pin = B1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  /*Configure GPIO pin : New_Button18_Pin */
+  GPIO_InitStruct.Pin = New_Button18_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(New_Button18_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LD2_Pin LCD_CS_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin|LCD_CS_Pin;
+  /*Configure GPIO pins : Debug_LED_Pin LCD_CS_Pin */
+  GPIO_InitStruct.Pin = Debug_LED_Pin|LCD_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : BT_EN_Pin */
+  GPIO_InitStruct.Pin = BT_EN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(BT_EN_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pin : USB_Detect_Pin */
   GPIO_InitStruct.Pin = USB_Detect_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(USB_Detect_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : Col0_Pin Col1_Pin Col2_Pin Col3_Pin */
   GPIO_InitStruct.Pin = Col0_Pin|Col1_Pin|Col2_Pin|Col3_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SD_Detect_Pin Row0_Pin Row1_Pin Row2_Pin
-                           Row3_Pin */
-  GPIO_InitStruct.Pin = SD_Detect_Pin|Row0_Pin|Row1_Pin|Row2_Pin
-                          |Row3_Pin;
+  /*Configure GPIO pin : SD_Detect_Pin */
+  GPIO_InitStruct.Pin = SD_Detect_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(SD_Detect_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : SD_CS_Pin */
   GPIO_InitStruct.Pin = SD_CS_Pin;
@@ -865,8 +957,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LCD_Reset_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Button17_Pin Button18_Pin */
-  GPIO_InitStruct.Pin = Button17_Pin|Button18_Pin;
+  /*Configure GPIO pins : Row0_Pin Row1_Pin Row2_Pin Row3_Pin
+                           Button17_Pin Button18_Pin */
+  GPIO_InitStruct.Pin = Row0_Pin|Row1_Pin|Row2_Pin|Row3_Pin
+                          |Button17_Pin|Button18_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -875,76 +969,80 @@ static void MX_GPIO_Init(void)
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-
 }
 
 /* USER CODE BEGIN 4 */
 void dispBat(void) {
 	snprintf(buff, sizeof(buff), "%d", charge);
-	printf("charge: %d", charge);
+//	printf("charge: %d", charge);
 	if (bat_charging){
 		displayImage(BATTERY_CHARGE, BATTERY_X, BATTERY_Y);
-		ILI9341_WriteString(BATTERY_X + 15, BATTERY_Y + 3, buff, Font_11x18, ILI9341_GREEN, ILI9341_BLACK);
+		ILI9341_WriteString(PERCENT_X, PERCENT_Y, buff, Font_16x26, ILI9341_GREEN, ILI9341_BLACK);
 	}
 	else {
 		if (charge >= 25) {
-			displayImage(BATTERY_FULL, BATTERY_X, BATTERY_Y);
-			ILI9341_WriteString(BATTERY_X + 15, BATTERY_Y + 3, buff, Font_11x18, ILI9341_WHITE, ILI9341_BLACK);
+			displayImage(BATTERY_NORM, BATTERY_X, BATTERY_Y);
+			ILI9341_WriteString(PERCENT_X, PERCENT_Y, buff, Font_16x26, ILI9341_WHITE, ILI9341_BLACK);
 		}
 		else {
 			displayImage(BATTERY_LOW, BATTERY_X, BATTERY_Y);
-			ILI9341_WriteString(BATTERY_X + 15, BATTERY_Y + 3, buff, Font_11x18, ILI9341_RED, ILI9341_BLACK);
+			ILI9341_WriteString(PERCENT_X, PERCENT_Y, buff, Font_16x26, ILI9341_RED, ILI9341_BLACK);
 		}
 	}
 }
 
 void buttons_init(void) {
-	  GPIOB->BSRR = 0xf;
-	  GPIOB->BSRR = 0x1 << 16;
+	  GPIOB->BSRR = 0xf << 16;
+	  GPIOB->BSRR = 0x1;
 }
 
 void drive_column(void) {
 	col = (col + 1) & 0x3;
-	GPIOB->BSRR = 0xf;
-	GPIOB->BSRR = 0x1 << (col + 16);
+	GPIOB->BSRR = 0xf << 16;
+	GPIOB->BSRR = 0x1 << (col);
 }
 
 uint8_t read_rows(void) {
-	return ~((GPIOB->IDR & 0xf0) >> 4) & 0xf;
+	return ((GPIOB->IDR & 0xf0) >> 4) & 0xf;
 }
 
 void clean_buffer(void) {
+	if (((buffer[2] & 0x3) == 0x3) && ((buffer[1] & 0x08) == 0x08)) {
+		HAL_NVIC_SystemReset();
+	}
 	cleaned_buffer[0] = buffer[0];
 	cleaned_buffer[1] = buffer[1];
 	cleaned_buffer[2] = buffer[2] & 0x01;
-	if (cleaned_buffer[0] & 0x01 && cleaned_buffer[0] & 0x04) {
-		cleaned_buffer[0] &= ~0x04;
-	}
-	if (cleaned_buffer[0] & 0x02 && cleaned_buffer[0] & 0x08) {
-		cleaned_buffer[0] &= ~0x0A;
-	}
+//	if (cleaned_buffer[0] & 0x01 && cleaned_buffer[0] & 0x04) {
+//		if (neutral_SOCD_mode) {
+//			cleaned_buffer[0] &= ~0x05;
+//		}
+//		else {
+//			cleaned_buffer[0] &= ~0x04;
+//		}
+//	}
+//	if (cleaned_buffer[0] & 0x02 && cleaned_buffer[0] & 0x08) {
+//		cleaned_buffer[0] &= ~0x0A;
+//	}
+//	printf("cleaned: %X\r\n", cleaned_buffer[0]);
 }
 
 void right_stick_emulate(void) {
 	if (buffer[2] & 0x02) {
-		printf("cleaning %X, ", cleaned_buffer[2]);
-		printf("[0], %X\r\n", cleaned_buffer[0] & 0x0f);
+//		cleaned_buffer[2] &= ~0x02;
+//		printf("cleaning %X, ", cleaned_buffer[2]);
+//		printf("[0], %X\r\n", cleaned_buffer[0] & 0x0f);
 		cleaned_buffer[2] |= ((cleaned_buffer[0] & 0x0f) << 1);
-		printf("cleaned %X\r\n", cleaned_buffer[2]);
+//		printf("cleaned %X\r\n", cleaned_buffer[2]);
 		cleaned_buffer[0] &= ~0x0f;
 //		cleaned_buffer[1] &= ~0x70;
 	}
 }
 
 void clean_buffer_bt(void) {
-	bluetooth_buffer[0] &= ~0xf3;
-	bluetooth_buffer[1] &= ~0xf3;
-	bluetooth_buffer[2] &= ~0xf3;
-	bluetooth_buffer[0] |= (buffer[0] & 0x3f) << 2;
-	bluetooth_buffer[1] |= ((buffer[0] & 0xc0) >> 4) | ((buffer[1] & 0x0f) << 4);
-	bluetooth_buffer[2] |= ((buffer[1] & 0xf0) >> 2) | ((buffer[2] & 0x3) << 6);
+	bluetooth_buffer[1] = cleaned_buffer[0];
+	bluetooth_buffer[2] = cleaned_buffer[1];
+	bluetooth_buffer[3] = cleaned_buffer[2];
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
@@ -958,22 +1056,27 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	}
 
 	if (htim == &htim3) {
+//		printf("buffer: %X, %X, %X\r\n", buffer[2], buffer[1], buffer[0]);
 		clean_buffer();
+		right_stick_emulate();
 		if (bluetooth_mode) {
 			clean_buffer_bt();
-			HAL_UART_Transmit(&huart1, bluetooth_buffer, sizeof(bluetooth_buffer), 100);
+			HAL_UART_Transmit(&huart2, bluetooth_buffer, sizeof(bluetooth_buffer), 100);
 		}
 		else {
-			right_stick_emulate();
 			USBD_HID_SendReport(&hUsbDeviceFS, cleaned_buffer, sizeof(cleaned_buffer));
 		}
 	}
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-	 if ((GPIO_Pin == B1_Pin || BAT_GPOUT_Pin)) {
+	 if ((GPIO_Pin == BAT_GPOUT_Pin)) {
+//		 check_charging();
 		 updateBat();
 		 dispBat();
+	 }
+	 else if ((GPIO_Pin == USB_Detect_Pin)) {
+		 startup_init();
 	 }
 	 else {
 		 __NOP();

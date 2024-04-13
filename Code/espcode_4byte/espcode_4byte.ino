@@ -34,7 +34,7 @@ BLEHIDDevice* hid;
 BLECharacteristic* input;
 
 bool isBleConnected = false;
-uint8_t uart_msg = 0;
+uint8_t uart_msg[] = {0,0,0,0};
 bool is_section = true;
 bool is_button = false;
 int section = 0;
@@ -73,7 +73,8 @@ void setup() {
   BLEDevice::init(DEVICE_NAME);
   BLEServer* pServer = BLEDevice::createServer();
   pServer->setCallbacks(new MyCallbacks());
-
+  pinMode(21, OUTPUT);
+  digitalWrite(21, HIGH);
   hid = new BLEHIDDevice(pServer);
   input = hid->inputReport(REPORT_ID);  // Report ID
   hid->manufacturer()->setValue("Maker Community");
@@ -97,7 +98,7 @@ void setup() {
   pAdvertising->addServiceUUID(hid->deviceInfo()->getUUID());
   pAdvertising->start();
 
-  Serial.println("Waiting for a client connection to notify...");
+  // Serial.println("Waiting for a client connection to notify...");
 }
 
 void loop() {
@@ -105,51 +106,30 @@ void loop() {
   if (isBleConnected) {
     // Buttons 1, 2, and 3 pressed
     if (Serial.available()) {
-      uart_msg = Serial.read();
-      if (uart_msg == '?') {
+      for (int i = 0; i < 4; i++) {
+        uart_msg[i] = Serial.read();
+      }
+      if (uart_msg[0] == 0xFE) {
         if (is_return == true) {
           is_return = false;
-          Serial.println("OK:off");
+          // Serial.println("OK:off");
         } else {
           is_return = true;
-          Serial.println("OK:on");
+          // Serial.println("OK:on");
         }
-      } else if (uart_msg == '/') {
+      } else if (uart_msg[0] == 0xFF) {
         report.buttons[0] = 0;
         report.buttons[1] = 0;
         report.buttons[2] = 0;
         if (is_return == true) {
-          Serial.println("Reset");
+          // Serial.println("Reset");
         }
-      } else if ((uart_msg & 0x3) == 0) {
-        report.buttons[0] = (report.buttons[0] & ~0x3f) | (uart_msg >> 2);
-        if (is_return == true) {
-          Serial.print("OK1_6:");
-          Serial.println(report.buttons[0], HEX);
-        }
-      } else if ((uart_msg & 0x3) == 1) {
-        report.buttons[0] = (report.buttons[0] & ~0xc0) | ((uart_msg >> 2) << 6);
-        report.buttons[1] = (report.buttons[1] & ~0xf) | (uart_msg >> 4);
-        if (is_return == true) {
-          Serial.print("OK7_12:");
-          Serial.println((report.buttons[0] >> 6 | ((report.buttons[1] & 0x3f) << 2)), HEX);
-        }
-      } else if ((uart_msg & 0x3) == 2) {
-        report.buttons[1] = (report.buttons[1] & ~0xf0) | ((uart_msg >> 2) << 4);
-        report.buttons[2] = (report.buttons[2] & ~0x3) | (uart_msg >> 6);
-        if (is_return == true) {
-          Serial.print("OK13_18:");
-          Serial.println((report.buttons[1] >> 4 | (report.buttons[2] & 0x3) << 4), HEX);
-        }
-      } else if ((uart_msg & 0x3) == 3 && uart_msg != '?') {
-        report.buttons[2] = (report.buttons[2] & ~0x1c) | (uart_msg & 0x1c);
-        if (is_return == true) {
-          Serial.print("OK18_21:");
-          Serial.println(report.buttons[2] >> 2, HEX);
-        }
+      } else if (uart_msg[0] == 0xFD) {
+        report.buttons[0] = uart_msg[1];
+        report.buttons[1] = uart_msg[2];
+        report.buttons[2] = uart_msg[3];
       }
 
-      uart_msg = 0;
     }
 
     input->setValue((uint8_t*)&report, sizeof(report));

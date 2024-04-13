@@ -57,17 +57,19 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define B1_Pin GPIO_PIN_13
-#define B1_GPIO_Port GPIOC
-#define B1_EXTI_IRQn EXTI15_10_IRQn
+#define New_Button18_Pin GPIO_PIN_13
+#define New_Button18_GPIO_Port GPIOC
+#define Debug_LED_Pin GPIO_PIN_1
+#define Debug_LED_GPIO_Port GPIOA
 #define USART_TX_Pin GPIO_PIN_2
 #define USART_TX_GPIO_Port GPIOA
 #define USART_RX_Pin GPIO_PIN_3
 #define USART_RX_GPIO_Port GPIOA
-#define LD2_Pin GPIO_PIN_5
-#define LD2_GPIO_Port GPIOA
+#define BT_EN_Pin GPIO_PIN_6
+#define BT_EN_GPIO_Port GPIOA
 #define USB_Detect_Pin GPIO_PIN_5
 #define USB_Detect_GPIO_Port GPIOC
+#define USB_Detect_EXTI_IRQn EXTI9_5_IRQn
 #define Col0_Pin GPIO_PIN_0
 #define Col0_GPIO_Port GPIOB
 #define Col1_Pin GPIO_PIN_1
@@ -97,10 +99,10 @@ void Error_Handler(void);
 #define USB_DM_GPIO_Port GPIOA
 #define USB_DP_Pin GPIO_PIN_12
 #define USB_DP_GPIO_Port GPIOA
-#define TMS_Pin GPIO_PIN_13
-#define TMS_GPIO_Port GPIOA
-#define TCK_Pin GPIO_PIN_14
-#define TCK_GPIO_Port GPIOA
+#define SWDIO_Pin GPIO_PIN_13
+#define SWDIO_GPIO_Port GPIOA
+#define SWCLK_Pin GPIO_PIN_14
+#define SWCLK_GPIO_Port GPIOA
 #define LCD_CS_Pin GPIO_PIN_15
 #define LCD_CS_GPIO_Port GPIOA
 #define LCD_SCK_Pin GPIO_PIN_10

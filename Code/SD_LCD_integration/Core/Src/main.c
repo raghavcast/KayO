@@ -46,6 +46,7 @@
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
 
+UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
@@ -60,6 +61,7 @@ static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_SPI3_Init(void);
+static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -76,7 +78,7 @@ int fputc(int ch, FILE *f)
 {
   /* Place your implementation of fputc here */
   /* e.g. write a character to the UART3 and Loop until the end of transmission */
-  HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
   return ch;
 }
 
@@ -136,114 +138,188 @@ void bufclear (void)					// clears the global buffer variable for spi
     }
 }
 
-int displayImage(const char* fname) {
-//    UART_Printf("Openning %s...\r\n", fname);
-//    FIL file;
-    FRESULT res = f_open(&file, fname, FA_READ);
-    if(res != FR_OK) {
-    	snprintf(buff, sizeof(buff), "f_open() failed, res = %d\r\n", res);
-    	printf("f_open() failed, res = %d\r\n", res);
-        ILI9341_WriteString(0, 10, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
-        return -1;
-    }
-
-    printf("File opened, reading...\r\n");
-    ILI9341_WriteString(0, 20, "File opened, reading...\r\n", Font_7x10, ILI9341_RED, ILI9341_WHITE);
-
-    unsigned int bytesRead;
-    uint8_t header[34];
-    res = f_read(&file, header, sizeof(header), &bytesRead);
-    if(res != FR_OK) {
-    	printf("f_read() failed: %i\r\n", res);
-        ILI9341_WriteString(0, 30, "f_read() failed, res = %d\r\n", Font_7x10, ILI9341_RED, ILI9341_WHITE);
-        f_close(&file);
-        return -2;
-    }
-
-    if((header[0] != 0x42) || (header[1] != 0x4D)) {
-    	printf("Wrong BMP signature\r\n");
-        ILI9341_WriteString(0, 40, "Wrong BMP signature: 0x%02X 0x%02X\r\n", Font_7x10, ILI9341_RED, ILI9341_WHITE);
-        f_close(&file);
-        return -3;
-    }
-
-    uint32_t imageOffset = header[10] | (header[11] << 8) | (header[12] << 16) | (header[13] << 24);
-    uint32_t imageWidth = header[18] | (header[19] << 8) | (header[20] << 16) | (header[21] << 24);
-    uint32_t imageHeight = header[22] | (header[23] << 8) | (header[24] << 16) | (header[25] << 24);
-    uint16_t imagePlanes = header[26] | (header[27] << 8);
-    uint16_t imageBitsPerPixel = header[28] | (header[29] << 8);
-    uint32_t imageCompression = header[30] | (header[31] << 8) | (header[32] << 16) | (header[33] << 24);
-
-    printf("Pixels offset: %lu\r\n", imageOffset);
-    snprintf(buff, sizeof(buff), "Pixels offset: %lu\r\n ", imageOffset);
-	ILI9341_WriteString(0, 50, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
-    printf("WxH: %lux%lu\r\n", imageWidth, imageHeight);
-	snprintf(buff, sizeof(buff), "WxH: %lux%lu\r\n ", imageWidth, imageHeight);
-	ILI9341_WriteString(0, 60, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
-	printf("Planes: %d\r\n", imagePlanes);
-    snprintf(buff, sizeof(buff), "Planes: %d\r\n ", imagePlanes);
-	ILI9341_WriteString(0, 70, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
-	printf("Bits per pixel: %ld\r\n", imageBitsPerPixel);
-    snprintf(buff, sizeof(buff), "Bits per pixel: %d\r\n ", imageBitsPerPixel);
-	ILI9341_WriteString(0, 80, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
-	printf("Compression: %ld\r\n", imageCompression);
-    snprintf(buff, sizeof(buff), "Compression: %d\r\n ", imageCompression);
-	ILI9341_WriteString(0, 90, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
-
-//    if((imageWidth != ILI9341_WIDTH) || (imageHeight != ILI9341_HEIGHT)) {
-////        UART_Printf("Wrong BMP size, %dx%d expected\r\n", ST7735_WIDTH, ST7735_HEIGHT);
-//        ILI9341_WriteString(0, 100, "Wrong BMP size, %dx%d expected\r\n", Font_7x10, ILI9341_RED, ILI9341_WHITE);
-//        f_close(&file);
-//        return -4;
+//int displayImage(const char* fname) {
+////    UART_Printf("Openning %s...\r\n", fname);
+////    FIL file;
+//    FRESULT res = f_open(&file, fname, FA_READ);
+//    if(res != FR_OK) {
+//    	snprintf(buff, sizeof(buff), "f_open() failed, res = %d\r\n", res);
+//    	printf("f_open() failed, res = %d\r\n", res);
+//        ILI9341_WriteString(0, 10, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//        return -1;
 //    }
+//
+//    printf("File opened, reading...\r\n");
+//    ILI9341_WriteString(0, 20, "File opened, reading...\r\n", Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//
+//    unsigned int bytesRead;
+//    uint8_t header[34];
+//    res = f_read(&file, header, sizeof(header), &bytesRead);
+//    if(res != FR_OK) {
+//    	printf("f_read() failed: %i\r\n", res);
+//        ILI9341_WriteString(0, 30, "f_read() failed, res = %d\r\n", Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//        f_close(&file);
+//        return -2;
+//    }
+//
+//    if((header[0] != 0x42) || (header[1] != 0x4D)) {
+//    	printf("Wrong BMP signature\r\n");
+//        ILI9341_WriteString(0, 40, "Wrong BMP signature: 0x%02X 0x%02X\r\n", Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//        f_close(&file);
+//        return -3;
+//    }
+//
+//    uint32_t imageOffset = header[10] | (header[11] << 8) | (header[12] << 16) | (header[13] << 24);
+//    uint32_t imageWidth = header[18] | (header[19] << 8) | (header[20] << 16) | (header[21] << 24);
+//    uint32_t imageHeight = header[22] | (header[23] << 8) | (header[24] << 16) | (header[25] << 24);
+//    uint16_t imagePlanes = header[26] | (header[27] << 8);
+//    uint16_t imageBitsPerPixel = header[28] | (header[29] << 8);
+//    uint32_t imageCompression = header[30] | (header[31] << 8) | (header[32] << 16) | (header[33] << 24);
+//
+//    printf("Pixels offset: %lu\r\n", imageOffset);
+//    snprintf(buff, sizeof(buff), "Pixels offset: %lu\r\n ", imageOffset);
+//	ILI9341_WriteString(0, 50, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//    printf("WxH: %lux%lu\r\n", imageWidth, imageHeight);
+//	snprintf(buff, sizeof(buff), "WxH: %lux%lu\r\n ", imageWidth, imageHeight);
+//	ILI9341_WriteString(0, 60, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//	printf("Planes: %d\r\n", imagePlanes);
+//    snprintf(buff, sizeof(buff), "Planes: %d\r\n ", imagePlanes);
+//	ILI9341_WriteString(0, 70, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//	printf("Bits per pixel: %ld\r\n", imageBitsPerPixel);
+//    snprintf(buff, sizeof(buff), "Bits per pixel: %d\r\n ", imageBitsPerPixel);
+//	ILI9341_WriteString(0, 80, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//	printf("Compression: %ld\r\n", imageCompression);
+//    snprintf(buff, sizeof(buff), "Compression: %d\r\n ", imageCompression);
+//	ILI9341_WriteString(0, 90, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//
+////    if((imageWidth != ILI9341_WIDTH) || (imageHeight != ILI9341_HEIGHT)) {
+//////        UART_Printf("Wrong BMP size, %dx%d expected\r\n", ST7735_WIDTH, ST7735_HEIGHT);
+////        ILI9341_WriteString(0, 100, "Wrong BMP size, %dx%d expected\r\n", Font_7x10, ILI9341_RED, ILI9341_WHITE);
+////        f_close(&file);
+////        return -4;
+////    }
+//
+//    if((imagePlanes != 1) || (imageBitsPerPixel != 24) || (imageCompression != 0)) {
+//        ILI9341_WriteString(0, 110, "Unsupported image format\r\n", Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//        f_close(&file);
+//        return -5;
+//    }
+//
+//    res = f_lseek(&file, imageOffset);
+//    if(res != FR_OK) {
+//    	printf("f_lseek() failed, %i", res);
+//        snprintf(buff, sizeof(buff), "f_lseek() failed, res = %d\r\n ", res);
+//    	ILI9341_WriteString(0, 120, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//        f_close(&file);
+//        return -6;
+//    }
+//
+//    // row size is aligned to 4 bytes
+//    uint8_t imageRow[(imageWidth * 3 + 3) & ~3];
+//    for(uint32_t y = 0; y < imageHeight; y++) {
+//        uint32_t rowIdx = 0;
+//        res = f_read(&file, imageRow, sizeof(imageRow), &bytesRead);
+//        if(res != FR_OK) {
+//        	printf("f_read() failed, %i", res);
+//            snprintf(buff, sizeof(buff), "f_read() failed, res = %d\r\n", res);
+//        	ILI9341_WriteString(0, 130, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//            f_close(&file);
+//            return -7;
+//        }
+//
+//        for(uint32_t x = ILI9341_WIDTH - imageWidth; x < ILI9341_WIDTH; x++) {
+//            uint8_t b = imageRow[rowIdx++];
+//            uint8_t g = imageRow[rowIdx++];
+//            uint8_t r = imageRow[rowIdx++];
+//            uint16_t color565 = ILI9341_COLOR565(r, g, b);
+//            ILI9341_DrawPixel(x, ILI9341_HEIGHT - y - 1, color565);
+//        }
+//    }
+//
+//    res = f_close(&file);
+//    if(res != FR_OK) {
+////        UART_Printf("f_close() failed, res = %d\r\n", res);
+//    	printf("f_close() failed %i", res);
+//        snprintf(buff, sizeof(buff), "f_close() failed, res = %d\r\n", res);
+//    	ILI9341_WriteString(0, 140, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
+//        return -8;
+//    }
+//
+//    return 0;
+//}
 
-    if((imagePlanes != 1) || (imageBitsPerPixel != 24) || (imageCompression != 0)) {
-        ILI9341_WriteString(0, 110, "Unsupported image format\r\n", Font_7x10, ILI9341_RED, ILI9341_WHITE);
-        f_close(&file);
-        return -5;
-    }
+int displayImage(const char*fname, uint32_t startx, uint32_t starty) {
+	    FRESULT res = f_open(&file, fname, FA_READ);
+	    if(res != FR_OK) {
+	    	printf("f_open() failed, res = %d, %s\r\n", res, fname);
+	        return -1;
+	    }
 
-    res = f_lseek(&file, imageOffset);
-    if(res != FR_OK) {
-    	printf("f_lseek() failed, %i", res);
-        snprintf(buff, sizeof(buff), "f_lseek() failed, res = %d\r\n ", res);
-    	ILI9341_WriteString(0, 120, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
-        f_close(&file);
-        return -6;
-    }
+	    printf("File opened, reading...\r\n");
 
-    // row size is aligned to 4 bytes
-    uint8_t imageRow[(imageWidth * 3 + 3) & ~3];
-    for(uint32_t y = 0; y < imageHeight; y++) {
-        uint32_t rowIdx = 0;
-        res = f_read(&file, imageRow, sizeof(imageRow), &bytesRead);
-        if(res != FR_OK) {
-        	printf("f_read() failed, %i", res);
-            snprintf(buff, sizeof(buff), "f_read() failed, res = %d\r\n", res);
-        	ILI9341_WriteString(0, 130, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
-            f_close(&file);
-            return -7;
-        }
+	    unsigned int bytesRead;
+	    uint8_t header[34];
+	    res = f_read(&file, header, sizeof(header), &bytesRead);
+	    if(res != FR_OK) {
+	    	printf("f_read() failed: %i\r\n", res);
+	        f_close(&file);
+	        return -2;
+	    }
 
-        for(uint32_t x = ILI9341_WIDTH - imageWidth; x < ILI9341_WIDTH; x++) {
-            uint8_t b = imageRow[rowIdx++];
-            uint8_t g = imageRow[rowIdx++];
-            uint8_t r = imageRow[rowIdx++];
-            uint16_t color565 = ILI9341_COLOR565(r, g, b);
-            ILI9341_DrawPixel(x, ILI9341_HEIGHT - y - 1, color565);
-        }
-    }
+	    if((header[0] != 0x42) || (header[1] != 0x4D)) {
+	    	printf("Wrong BMP signature\r\n");
+	        f_close(&file);
+	        return -3;
+	    }
 
-    res = f_close(&file);
-    if(res != FR_OK) {
-//        UART_Printf("f_close() failed, res = %d\r\n", res);
-    	printf("f_close() failed %i", res);
-        snprintf(buff, sizeof(buff), "f_close() failed, res = %d\r\n", res);
-    	ILI9341_WriteString(0, 140, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
-        return -8;
-    }
+	    uint32_t imageOffset = header[10] | (header[11] << 8) | (header[12] << 16) | (header[13] << 24);
+	    uint32_t imageWidth = header[18] | (header[19] << 8) | (header[20] << 16) | (header[21] << 24);
+	    uint32_t imageHeight = header[22] | (header[23] << 8) | (header[24] << 16) | (header[25] << 24);
+	    uint16_t imagePlanes = header[26] | (header[27] << 8);
+	    uint16_t imageBitsPerPixel = header[28] | (header[29] << 8);
+	    uint32_t imageCompression = header[30] | (header[31] << 8) | (header[32] << 16) | (header[33] << 24);
 
-    return 0;
+	    if((imagePlanes != 1) || (imageBitsPerPixel != 24) || (imageCompression != 0)) {
+	        f_close(&file);
+	        return -5;
+	    }
+
+	    res = f_lseek(&file, imageOffset);
+	    if(res != FR_OK) {
+	    	printf("f_lseek() failed, %i", res);
+	        snprintf(buff, sizeof(buff), "f_lseek() failed, res = %d\r\n ", res);
+	    	ILI9341_WriteString(0, 120, buff, Font_7x10, ILI9341_RED, ILI9341_WHITE);
+	        f_close(&file);
+	        return -6;
+	    }
+
+	    // row size is aligned to 4 bytes
+	    uint8_t imageRow[(imageWidth * 3 + 3) & ~3];
+	    for(uint32_t y = starty; y < starty + imageHeight; y++) {
+	        uint32_t rowIdx = 0;
+	        res = f_read(&file, imageRow, sizeof(imageRow), &bytesRead);
+	        if(res != FR_OK) {
+	        	printf("f_read() failed, %i", res);
+	            f_close(&file);
+	            return -7;
+	        }
+
+	        for(uint32_t x = startx; x < startx + imageWidth; x++) {
+	            uint8_t b = imageRow[rowIdx++];
+	            uint8_t g = imageRow[rowIdx++];
+	            uint8_t r = imageRow[rowIdx++];
+	            uint16_t color565 = ILI9341_COLOR565(r, g, b);
+	            ILI9341_DrawPixel(x, (2*starty) + imageHeight - y - 1, color565);
+	        }
+	    }
+
+	    res = f_close(&file);
+	    if(res != FR_OK) {
+	    	printf("f_close() failed %i", res);
+	        return -8;
+	    }
+
+	    return 0;
 }
 
 /* USER CODE END 0 */
@@ -280,6 +356,7 @@ int main(void)
   MX_SPI2_Init();
   MX_SPI3_Init();
   MX_FATFS_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
   ILI9341_Init();
@@ -300,7 +377,7 @@ int main(void)
 
   //some variables for FatFs
   FATFS FatFs; 	//Fatfs handle
-  FIL fil; 		//File handle
+  FIL file; 		//File handle
   FRESULT fres; //Result after operations
 
   //Open the file system
@@ -328,7 +405,7 @@ int main(void)
   printf("SD card stats:\r\n%10lu KiB total drive space.\r\n%10lu KiB available.\r\n", total_sectors / 2, free_sectors / 2);
 
   //Now let's try to open file "test.txt"
-  fres = f_open(&fil, "test.txt", FA_READ);
+  fres = f_open(&file, "test.txt", FA_READ);
   if (fres != FR_OK) {
 	printf("f_open error (%i)\r\n", fres);
 	while(1);
@@ -340,7 +417,7 @@ int main(void)
 
   //We can either use f_read OR f_gets to get data out of files
   //f_gets is a wrapper on f_read that does some string formatting for us
-  TCHAR* rres = f_gets((TCHAR*)readBuf, 30, &fil);
+  TCHAR* rres = f_gets((TCHAR*)readBuf, 30, &file);
   if(rres != 0) {
 	printf("Read string from 'test.txt' contents: %s\r\n", readBuf);
   } else {
@@ -348,11 +425,11 @@ int main(void)
   }
 
   //Be a tidy kiwi - don't forget to close your file!
-  f_close(&fil);
+  f_close(&file);
 //
 //  //We're done, so de-mount the drive
 //  f_mount(NULL, "", 0);
-  displayImage("blue.bmp");
+  displayImage("full.bmp", 20, 0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -486,6 +563,39 @@ static void MX_SPI3_Init(void)
   /* USER CODE BEGIN SPI3_Init 2 */
 
   /* USER CODE END SPI3_Init 2 */
+
+}
+
+/**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
 
 }
 
