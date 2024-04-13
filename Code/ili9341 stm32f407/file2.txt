@@ -1,2 +1,0 @@
-This is File2.txt, written using ...f_write... and it says Hello from Controllerstech
-STM32 SD Card I/O Example via SPI
