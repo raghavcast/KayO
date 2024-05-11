@@ -2821,7 +2821,7 @@
     (property "Value" "3757-SS12L_R1_00001CT-ND" (at 196.85 59.055 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Diode_SMD:D_SMA" (at 196.85 62.23 0)
+    (property "Footprint" "Diode_SMD:D_SOD-123F" (at 196.85 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://www.digikey.com/en/products/detail/nexperia-usa-inc/PMEG4010BEA-115/2531810" (at 196.85 62.23 0)
